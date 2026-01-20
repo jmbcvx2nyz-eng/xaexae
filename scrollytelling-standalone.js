@@ -42,72 +42,160 @@
     window.addEventListener('resize', resize);
   }
 
-  // Load all images
+  // Load all images with optimization
   function loadImages() {
     const loadingEl = document.getElementById('scrollytelling-loading');
     const loadingText = loadingEl ? loadingEl.querySelector('p') : null;
     let loaded = 0;
+    const CONCURRENT_LOADS = 6; // Browser typically allows 6 concurrent connections
+    // Reduce priority frames on mobile for faster initial load
+    const isMobile = window.innerWidth <= 768;
+    const PRIORITY_FRAMES = isMobile ? 10 : 20; // Load fewer frames on mobile
+    let currentBatch = 0;
+    const BATCH_SIZE = isMobile ? 20 : 30; // Smaller batches on mobile
 
-    for (let i = 1; i <= TOTAL_FRAMES; i++) {
-      const img = new Image();
-      const frameNum = i.toString().padStart(3, '0');
-      
-      img.onload = () => {
-        loaded++;
-        if (loadingText) {
-          loadingText.textContent = `Loading... ${Math.round((loaded / TOTAL_FRAMES) * 100)}%`;
-        }
-        if (loaded === TOTAL_FRAMES) {
-          imagesLoaded = true;
-          if (loadingEl) loadingEl.style.display = 'none';
-          drawFrame(0);
-        }
-      };
-      
-      img.onerror = () => {
-        loaded++;
-        if (loadingText) {
-          loadingText.textContent = `Loading... ${Math.round((loaded / TOTAL_FRAMES) * 100)}%`;
-        }
-        if (loaded === TOTAL_FRAMES) {
-          imagesLoaded = true;
-          if (loadingEl) loadingEl.style.display = 'none';
-          drawFrame(0);
-        }
-      };
+    // Initialize images array
+    images = new Array(TOTAL_FRAMES);
 
-      img.src = `sequence/ezgif-frame-${frameNum}.png`;
-      images.push(img);
+    function updateProgress() {
+      if (loadingText) {
+        loadingText.textContent = `Loading... ${Math.round((loaded / TOTAL_FRAMES) * 100)}%`;
+      }
+      
+      // Show animation once we have enough frames to start
+      if (loaded >= PRIORITY_FRAMES && !imagesLoaded) {
+        imagesLoaded = true;
+        if (loadingEl) loadingEl.style.display = 'none';
+        drawFrame(0);
+      }
+      
+      if (loaded === TOTAL_FRAMES) {
+        imagesLoaded = true;
+        if (loadingEl) loadingEl.style.display = 'none';
+        drawFrame(currentFrame);
+      }
     }
+
+    function loadImage(index) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        const frameNum = (index + 1).toString().padStart(3, '0');
+        
+        img.onload = () => {
+          loaded++;
+          updateProgress();
+          resolve();
+        };
+        
+        img.onerror = () => {
+          loaded++;
+          updateProgress();
+          resolve(); // Continue even if image fails
+        };
+
+        img.src = `sequence/ezgif-frame-${frameNum}.png`;
+        images[index] = img;
+      });
+    }
+
+    // Load priority frames first (first 20 frames)
+    async function loadPriorityFrames() {
+      const priorityPromises = [];
+      for (let i = 0; i < Math.min(PRIORITY_FRAMES, TOTAL_FRAMES); i++) {
+        priorityPromises.push(loadImage(i));
+      }
+      await Promise.all(priorityPromises);
+    }
+
+    // Load remaining frames in batches
+    async function loadBatches() {
+      for (let start = PRIORITY_FRAMES; start < TOTAL_FRAMES; start += BATCH_SIZE) {
+        const end = Math.min(start + BATCH_SIZE, TOTAL_FRAMES);
+        const batchPromises = [];
+        
+        // Load batch with concurrency limit
+        for (let i = start; i < end; i++) {
+          batchPromises.push(loadImage(i));
+          
+          // Limit concurrent loads
+          if (batchPromises.length >= CONCURRENT_LOADS) {
+            await Promise.all(batchPromises);
+            batchPromises.length = 0;
+          }
+        }
+        
+        // Load remaining in batch
+        if (batchPromises.length > 0) {
+          await Promise.all(batchPromises);
+        }
+        
+        // Small delay between batches to prevent blocking
+        await new Promise(resolve => setTimeout(resolve, 10));
+      }
+    }
+
+    // Start loading
+    (async () => {
+      await loadPriorityFrames();
+      loadBatches(); // Continue loading in background
+    })();
   }
 
-  // Draw frame to canvas
+  // Draw frame to canvas (optimized)
+  let rafId = null;
   function drawFrame(index) {
     if (!ctx || images.length === 0) return;
     
     const clamped = Math.max(0, Math.min(Math.floor(index), images.length - 1));
     const img = images[clamped];
-    if (!img || !img.complete) return;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    const imgAspect = img.width / img.height;
-    const canvasAspect = canvas.width / canvas.height;
-    let w, h, x, y;
-
-    if (imgAspect > canvasAspect) {
-      h = canvas.height;
-      w = h * imgAspect;
-      x = (canvas.width - w) / 2;
-      y = 0;
-    } else {
-      w = canvas.width;
-      h = w / imgAspect;
-      x = 0;
-      y = (canvas.height - h) / 2;
+    
+    // If image not loaded, try to find nearest loaded frame
+    if (!img || !img.complete) {
+      // Find nearest loaded frame
+      for (let offset = 1; offset < 20; offset++) {
+        const prevFrame = images[clamped - offset];
+        const nextFrame = images[clamped + offset];
+        
+        if (prevFrame && prevFrame.complete) {
+          drawFrame(clamped - offset);
+          return;
+        }
+        if (nextFrame && nextFrame.complete) {
+          drawFrame(clamped + offset);
+          return;
+        }
+      }
+      return; // No nearby frames loaded
     }
 
-    ctx.drawImage(img, x, y, w, h);
+    // Cancel previous animation frame if pending
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+    }
+
+    // Use requestAnimationFrame for smooth rendering
+    rafId = requestAnimationFrame(() => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const imgAspect = img.width / img.height;
+      const canvasAspect = canvas.width / canvas.height;
+      let w, h, x, y;
+
+      if (imgAspect > canvasAspect) {
+        h = canvas.height;
+        w = h * imgAspect;
+        x = (canvas.width - w) / 2;
+        y = 0;
+      } else {
+        w = canvas.width;
+        h = w / imgAspect;
+        x = 0;
+        y = (canvas.height - h) / 2;
+      }
+
+      ctx.drawImage(img, x, y, w, h);
+      rafId = null;
+    });
   }
 
   // Setup scroll tracking
