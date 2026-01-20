@@ -45,6 +45,7 @@
   // Load all images
   function loadImages() {
     const loadingEl = document.getElementById('scrollytelling-loading');
+    const loadingText = loadingEl ? loadingEl.querySelector('p') : null;
     let loaded = 0;
 
     for (let i = 1; i <= TOTAL_FRAMES; i++) {
@@ -53,26 +54,29 @@
       
       img.onload = () => {
         loaded++;
-        if (loadingEl) {
-          loadingEl.textContent = `Loading... ${Math.round((loaded / TOTAL_FRAMES) * 100)}%`;
+        if (loadingText) {
+          loadingText.textContent = `Loading... ${Math.round((loaded / TOTAL_FRAMES) * 100)}%`;
         }
         if (loaded === TOTAL_FRAMES) {
           imagesLoaded = true;
-          if (loadingEl) loadingEl.parentElement.style.display = 'none';
+          if (loadingEl) loadingEl.style.display = 'none';
           drawFrame(0);
         }
       };
       
       img.onerror = () => {
         loaded++;
+        if (loadingText) {
+          loadingText.textContent = `Loading... ${Math.round((loaded / TOTAL_FRAMES) * 100)}%`;
+        }
         if (loaded === TOTAL_FRAMES) {
           imagesLoaded = true;
-          if (loadingEl) loadingEl.parentElement.style.display = 'none';
+          if (loadingEl) loadingEl.style.display = 'none';
           drawFrame(0);
         }
       };
 
-      img.src = `/sequence/ezgif-frame-${frameNum}.png`;
+      img.src = `sequence/ezgif-frame-${frameNum}.png`;
       images.push(img);
     }
   }
@@ -163,32 +167,32 @@
         textElements.title.style.filter = `blur(${titleBlur}px)`;
       }
 
-      // Params (0.2-0.5)
+      // Params (0.35-0.65) - delayed to appear later
       if (textElements.params) {
-        const paramsOpacity = progress < 0.2 ? 0 : progress < 0.3 ? (progress - 0.2) * 10 : progress < 0.4 ? 1 : progress < 0.5 ? 1 - (progress - 0.4) * 10 : 0;
-        const paramsY = progress < 0.2 ? 30 : progress < 0.3 ? 30 - (progress - 0.2) * 300 : 0;
-        const paramsBlur = progress < 0.2 ? 10 : progress < 0.3 ? 10 - (progress - 0.2) * 100 : progress < 0.4 ? 0 : progress < 0.5 ? (progress - 0.4) * 100 : 10;
+        const paramsOpacity = progress < 0.35 ? 0 : progress < 0.45 ? (progress - 0.35) * 10 : progress < 0.55 ? 1 : progress < 0.65 ? 1 - (progress - 0.55) * 10 : 0;
+        const paramsY = progress < 0.35 ? 30 : progress < 0.45 ? 30 - (progress - 0.35) * 300 : progress < 0.55 ? 0 : progress < 0.65 ? (progress - 0.55) * 100 : 10;
+        const paramsBlur = progress < 0.35 ? 10 : progress < 0.45 ? 10 - (progress - 0.35) * 100 : progress < 0.55 ? 0 : progress < 0.65 ? (progress - 0.55) * 100 : 10;
         textElements.params.style.opacity = paramsOpacity;
         textElements.params.style.transform = `translateY(${paramsY}px)`;
         textElements.params.style.filter = `blur(${paramsBlur}px)`;
       }
 
-      // Speed (0.5-0.8)
+      // Speed (0.65-0.85) - adjusted to follow params
       if (textElements.speed) {
-        const speedOpacity = progress < 0.5 ? 0 : progress < 0.6 ? (progress - 0.5) * 10 : progress < 0.7 ? 1 : progress < 0.8 ? 1 - (progress - 0.7) * 10 : 0;
-        const speedY = progress < 0.5 ? 30 : progress < 0.6 ? 30 - (progress - 0.5) * 300 : 0;
-        const speedBlur = progress < 0.5 ? 10 : progress < 0.6 ? 10 - (progress - 0.5) * 100 : progress < 0.7 ? 0 : progress < 0.8 ? (progress - 0.7) * 100 : 10;
+        const speedOpacity = progress < 0.65 ? 0 : progress < 0.72 ? (progress - 0.65) * 14.3 : progress < 0.78 ? 1 : progress < 0.85 ? 1 - (progress - 0.78) * 14.3 : 0;
+        const speedY = progress < 0.65 ? 30 : progress < 0.72 ? 30 - (progress - 0.65) * 428 : progress < 0.78 ? 0 : progress < 0.85 ? (progress - 0.78) * 142 : 10;
+        const speedBlur = progress < 0.65 ? 10 : progress < 0.72 ? 10 - (progress - 0.65) * 143 : progress < 0.78 ? 0 : progress < 0.85 ? (progress - 0.78) * 143 : 10;
         textElements.speed.style.opacity = speedOpacity;
         textElements.speed.style.transform = `translateY(${speedY}px)`;
         textElements.speed.style.filter = `blur(${speedBlur}px)`;
       }
 
-      // CTA (0.8-1)
+      // CTA (0.85-1) - adjusted to follow speed
       if (textElements.cta) {
-        const ctaOpacity = progress < 0.8 ? 0 : progress < 0.9 ? (progress - 0.8) * 10 : 1;
-        const ctaY = progress < 0.8 ? 30 : progress < 0.9 ? 30 - (progress - 0.8) * 300 : 0;
-        const ctaScale = progress < 0.8 ? 0.95 : progress < 0.9 ? 0.95 + (progress - 0.8) * 0.5 : 1;
-        const ctaBlur = progress < 0.8 ? 10 : progress < 0.9 ? 10 - (progress - 0.8) * 100 : 0;
+        const ctaOpacity = progress < 0.85 ? 0 : progress < 0.92 ? (progress - 0.85) * 14.3 : 1;
+        const ctaY = progress < 0.85 ? 30 : progress < 0.92 ? 30 - (progress - 0.85) * 428 : 0;
+        const ctaScale = progress < 0.85 ? 0.95 : progress < 0.92 ? 0.95 + (progress - 0.85) * 0.71 : 1;
+        const ctaBlur = progress < 0.85 ? 10 : progress < 0.92 ? 10 - (progress - 0.85) * 143 : 0;
         textElements.cta.style.opacity = ctaOpacity;
         textElements.cta.style.transform = `translateY(${ctaY}px) scale(${ctaScale})`;
         textElements.cta.style.filter = `blur(${ctaBlur}px)`;

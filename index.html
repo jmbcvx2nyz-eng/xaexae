@@ -18,19 +18,25 @@
         }
 
         body.light-mode {
-            --bg-color: #ffffff;
-            --text-color: #000000;
+            --bg-color: #FAF8F3;
+            --text-color: #2C2C2C;
             --border-color: rgba(0, 0, 0, 0.1);
+            background-image: 
+                radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.03) 1px, transparent 0),
+                radial-gradient(circle at 2px 2px, rgba(0, 0, 0, 0.02) 1px, transparent 0);
+            background-size: 40px 40px, 60px 60px;
+            background-position: 0 0, 20px 20px;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
             font-family: 'Rajdhani', sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease, background-image 0.3s ease;
             margin: 0;
             overflow-x: hidden;
             width: 100vw;
+            min-height: 100vh;
         }
 
         .logo-font { font-family: 'Orbitron', sans-serif; }
@@ -48,6 +54,16 @@
             z-index: 1000;
             width: 100%;
             box-sizing: border-box;
+            transition: background-color 0.3s ease, background-image 0.3s ease;
+        }
+
+        body.light-mode nav {
+            background-color: #FAF8F3;
+            background-image: 
+                radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.03) 1px, transparent 0),
+                radial-gradient(circle at 2px 2px, rgba(0, 0, 0, 0.02) 1px, transparent 0);
+            background-size: 40px 40px, 60px 60px;
+            background-position: 0 0, 20px 20px;
         }
 
         /* Mobile Layout (< 1024px) */
@@ -70,6 +86,21 @@
             .desktop-nav { display: flex; justify-content: center; }
             .nav-logo-container { display: flex; justify-content: flex-start; }
             .nav-right { display: flex; justify-content: flex-end; }
+        }
+
+        .nav-logo-container {
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, background-image 0.3s ease;
+        }
+
+        body.light-mode .nav-logo-container {
+            background-color: #FAF8F3;
+            background-image: 
+                radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.03) 1px, transparent 0),
+                radial-gradient(circle at 2px 2px, rgba(0, 0, 0, 0.02) 1px, transparent 0);
+            background-size: 40px 40px, 60px 60px;
+            background-position: 0 0, 20px 20px;
         }
 
         .logo-img {
@@ -121,6 +152,80 @@
         .use-case-card:hover .grayscale-img, .hover-box:hover .grayscale-img { filter: grayscale(0%) contrast(1); }
 
         html { scroll-behavior: smooth; }
+
+        /* --- SCROLLYTELLING STYLES --- */
+        #scrollytelling-container {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        #scrollytelling-loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            color: white;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--accent-teal);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        #scrollytelling-scroll {
+            position: relative;
+            width: 100%;
+            height: 500vh; /* 5x viewport height for more scroll space */
+            margin-top: 100px; /* More space below the nav header */
+        }
+
+        #scrollytelling-frame {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #scrollytelling-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .scrollytelling-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .scrollytelling-text * {
+            pointer-events: auto;
+        }
     </style>
 </head>
 <body>
@@ -139,11 +244,11 @@
             </button>
         </div>
         <div class="hidden lg:flex nav-logo-container">
-            <img src="Logo.jpg" alt="XAEROVA" class="logo-img">
+            <img src="Logo.jpg?v=20260120" alt="XAEROVA" class="logo-img">
         </div>
         
         <div class="nav-logo-container lg:hidden">
-            <img src="Logo.jpg" alt="XAEROVA" class="logo-img">
+            <img src="Logo.jpg?v=20260120" alt="XAEROVA" class="logo-img">
         </div>
         <div class="hidden lg:flex desktop-nav gap-12 text-[10px] font-bold uppercase tracking-[0.4em] opacity-60">
             <a href="#residential" class="hover:text-[var(--accent-teal)] transition">Residential</a>
@@ -165,7 +270,7 @@
 <div id="scrollytelling-container">
     <div id="scrollytelling-loading">
         <div class="loading-spinner"></div>
-        <p class="text-sm text-white/60" id="scrollytelling-loading">Loading... 0%</p>
+        <p class="text-sm text-white/60">Loading... 0%</p>
     </div>
 
     <div id="scrollytelling-scroll">
@@ -282,7 +387,7 @@
                 <a href="#">Specs</a>
             </div>
             <div class="flex flex-col items-center md:items-end">
-                <img src="Logo.jpg" alt="XAEROVA" class="logo-img mb-4">
+                <img src="Logo.jpg?v=20260120" alt="XAEROVA" class="logo-img mb-4">
                 <p class="text-[9px] uppercase tracking-widest opacity-30 mt-8">©2026 XAEROVA ROBOTICS. ALL RIGHTS RESERVED.</p>
             </div>
         </div>
