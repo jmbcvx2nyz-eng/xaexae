@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XAEROVA | Autonomous Drone Infrastructure</title>
     
-    <!-- Preload critical scrollytelling frames for faster initial load (WebP format) -->
-    <link rel="preload" as="image" href="sequence/ezgif-frame-001.webp" type="image/webp">
-    <link rel="preload" as="image" href="sequence/ezgif-frame-002.webp" type="image/webp">
-    <link rel="preload" as="image" href="sequence/ezgif-frame-003.webp" type="image/webp">
-    <link rel="preload" as="image" href="sequence/ezgif-frame-004.webp" type="image/webp">
-    <link rel="preload" as="image" href="sequence/ezgif-frame-005.webp" type="image/webp">
-    <link rel="preload" as="image" href="sequence/ezgif-frame-010.webp" type="image/webp">
-    <link rel="preload" as="image" href="sequence/ezgif-frame-020.webp" type="image/webp">
+    <!-- Preload critical scrollytelling frames for faster initial load -->
+    <link rel="preload" as="image" href="sequence/ezgif-frame-001.png">
+    <link rel="preload" as="image" href="sequence/ezgif-frame-002.png">
+    <link rel="preload" as="image" href="sequence/ezgif-frame-003.png">
+    <link rel="preload" as="image" href="sequence/ezgif-frame-004.png">
+    <link rel="preload" as="image" href="sequence/ezgif-frame-005.png">
+    <link rel="preload" as="image" href="sequence/ezgif-frame-010.png">
+    <link rel="preload" as="image" href="sequence/ezgif-frame-020.png">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
@@ -46,6 +46,35 @@
             overflow-x: hidden;
             width: 100vw;
             min-height: 100vh;
+        }
+
+        /* Hide website content until scrollytelling is loaded */
+        body.scrollytelling-loading {
+            overflow: hidden;
+        }
+
+        body.scrollytelling-loading nav,
+        body.scrollytelling-loading header,
+        body.scrollytelling-loading section,
+        body.scrollytelling-loading footer {
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        body.scrollytelling-ready nav,
+        body.scrollytelling-ready header,
+        body.scrollytelling-ready section,
+        body.scrollytelling-ready footer {
+            visibility: visible;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Always show scrollytelling container and loading */
+        #scrollytelling-container,
+        #scrollytelling-loading {
+            visibility: visible !important;
+            opacity: 1 !important;
         }
 
         .logo-font { font-family: 'Orbitron', sans-serif; }
@@ -171,13 +200,16 @@
 
         #scrollytelling-loading {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
             z-index: 10000;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             gap: 1rem;
             color: white;
         }

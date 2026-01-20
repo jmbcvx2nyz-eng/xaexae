@@ -12,6 +12,9 @@
 
   // Initialize
   function init() {
+    // Mark body as loading to hide content
+    document.body.classList.add('scrollytelling-loading');
+    
     container = document.getElementById('scrollytelling-container');
     if (!container) {
       console.error('Scrollytelling container not found');
@@ -47,10 +50,10 @@
     const loadingEl = document.getElementById('scrollytelling-loading');
     const loadingText = loadingEl ? loadingEl.querySelector('p') : null;
     let loaded = 0;
-    const CONCURRENT_LOADS = 6; // Browser typically allows 6 concurrent connections
+    const CONCURRENT_LOADS = 8; // Increased for faster loading
     // Optimize batch size based on device
     const isMobile = window.innerWidth <= 768;
-    const BATCH_SIZE = isMobile ? 20 : 30; // Smaller batches on mobile
+    const BATCH_SIZE = isMobile ? 25 : 40; // Larger batches for faster loading
 
     // Initialize images array
     images = new Array(TOTAL_FRAMES);
@@ -60,11 +63,19 @@
         loadingText.textContent = `Loading... ${Math.round((loaded / TOTAL_FRAMES) * 100)}%`;
       }
       
-      // Wait for ALL frames to load before showing animation
+      // Wait for ALL frames to load before showing animation and website
       if (loaded === TOTAL_FRAMES) {
         imagesLoaded = true;
         if (loadingEl) loadingEl.style.display = 'none';
-        drawFrame(0);
+        
+        // Show website content
+        document.body.classList.remove('scrollytelling-loading');
+        document.body.classList.add('scrollytelling-ready');
+        
+        // Small delay to ensure smooth transition
+        setTimeout(() => {
+          drawFrame(0);
+        }, 100);
       }
     }
 
@@ -73,10 +84,6 @@
         const img = new Image();
         const frameNum = (index + 1).toString().padStart(3, '0');
         
-        // Try WebP first, fallback to PNG
-        const webpSrc = `sequence/ezgif-frame-${frameNum}.webp`;
-        const pngSrc = `sequence/ezgif-frame-${frameNum}.png`;
-        
         img.onload = () => {
           loaded++;
           updateProgress();
@@ -84,19 +91,12 @@
         };
         
         img.onerror = () => {
-          // If WebP fails, try PNG
-          if (img.src.includes('.webp')) {
-            img.src = pngSrc;
-          } else {
-            // Both failed, but continue
-            loaded++;
-            updateProgress();
-            resolve();
-          }
+          loaded++;
+          updateProgress();
+          resolve(); // Continue even if image fails
         };
 
-        // Start with WebP
-        img.src = webpSrc;
+        img.src = `sequence/ezgif-frame-${frameNum}.png`;
         images[index] = img;
       });
     }
@@ -123,8 +123,8 @@
           await Promise.all(batchPromises);
         }
         
-        // Small delay between batches to prevent blocking
-        await new Promise(resolve => setTimeout(resolve, 5));
+        // Minimal delay between batches for faster loading
+        await new Promise(resolve => setTimeout(resolve, 2));
       }
     }
 
