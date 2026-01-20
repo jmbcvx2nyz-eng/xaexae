@@ -48,10 +48,8 @@
     const loadingText = loadingEl ? loadingEl.querySelector('p') : null;
     let loaded = 0;
     const CONCURRENT_LOADS = 6; // Browser typically allows 6 concurrent connections
-    // Reduce priority frames on mobile for faster initial load
+    // Optimize batch size based on device
     const isMobile = window.innerWidth <= 768;
-    const PRIORITY_FRAMES = isMobile ? 10 : 20; // Load fewer frames on mobile
-    let currentBatch = 0;
     const BATCH_SIZE = isMobile ? 20 : 30; // Smaller batches on mobile
 
     // Initialize images array
@@ -62,17 +60,11 @@
         loadingText.textContent = `Loading... ${Math.round((loaded / TOTAL_FRAMES) * 100)}%`;
       }
       
-      // Show animation once we have enough frames to start
-      if (loaded >= PRIORITY_FRAMES && !imagesLoaded) {
-        imagesLoaded = true;
-        if (loadingEl) loadingEl.style.display = 'none';
-        drawFrame(0);
-      }
-      
+      // Wait for ALL frames to load before showing animation
       if (loaded === TOTAL_FRAMES) {
         imagesLoaded = true;
         if (loadingEl) loadingEl.style.display = 'none';
-        drawFrame(currentFrame);
+        drawFrame(0);
       }
     }
 
@@ -81,6 +73,10 @@
         const img = new Image();
         const frameNum = (index + 1).toString().padStart(3, '0');
         
+        // Try WebP first, fallback to PNG
+        const webpSrc = `sequence/ezgif-frame-${frameNum}.webp`;
+        const pngSrc = `sequence/ezgif-frame-${frameNum}.png`;
+        
         img.onload = () => {
           loaded++;
           updateProgress();
@@ -88,28 +84,26 @@
         };
         
         img.onerror = () => {
-          loaded++;
-          updateProgress();
-          resolve(); // Continue even if image fails
+          // If WebP fails, try PNG
+          if (img.src.includes('.webp')) {
+            img.src = pngSrc;
+          } else {
+            // Both failed, but continue
+            loaded++;
+            updateProgress();
+            resolve();
+          }
         };
 
-        img.src = `sequence/ezgif-frame-${frameNum}.png`;
+        // Start with WebP
+        img.src = webpSrc;
         images[index] = img;
       });
     }
 
-    // Load priority frames first (first 20 frames)
-    async function loadPriorityFrames() {
-      const priorityPromises = [];
-      for (let i = 0; i < Math.min(PRIORITY_FRAMES, TOTAL_FRAMES); i++) {
-        priorityPromises.push(loadImage(i));
-      }
-      await Promise.all(priorityPromises);
-    }
-
-    // Load remaining frames in batches
-    async function loadBatches() {
-      for (let start = PRIORITY_FRAMES; start < TOTAL_FRAMES; start += BATCH_SIZE) {
+    // Load all frames in optimized batches
+    async function loadAllFrames() {
+      for (let start = 0; start < TOTAL_FRAMES; start += BATCH_SIZE) {
         const end = Math.min(start + BATCH_SIZE, TOTAL_FRAMES);
         const batchPromises = [];
         
@@ -117,7 +111,7 @@
         for (let i = start; i < end; i++) {
           batchPromises.push(loadImage(i));
           
-          // Limit concurrent loads
+          // Limit concurrent loads to avoid overwhelming browser
           if (batchPromises.length >= CONCURRENT_LOADS) {
             await Promise.all(batchPromises);
             batchPromises.length = 0;
@@ -130,15 +124,12 @@
         }
         
         // Small delay between batches to prevent blocking
-        await new Promise(resolve => setTimeout(resolve, 10));
+        await new Promise(resolve => setTimeout(resolve, 5));
       }
     }
 
-    // Start loading
-    (async () => {
-      await loadPriorityFrames();
-      loadBatches(); // Continue loading in background
-    })();
+    // Start loading all frames
+    loadAllFrames();
   }
 
   // Draw frame to canvas (optimized)
