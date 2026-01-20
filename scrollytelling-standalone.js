@@ -48,7 +48,8 @@
   // Load all images with optimization
   function loadImages() {
     const loadingEl = document.getElementById('scrollytelling-loading');
-    const loadingText = loadingEl ? loadingEl.querySelector('p') : null;
+    const loadingPercentage = document.getElementById('loading-percentage');
+    const loadingTime = document.getElementById('loading-time');
     let loaded = 0;
     const CONCURRENT_LOADS = 8; // Increased for faster loading
     // Optimize batch size based on device
@@ -58,24 +59,41 @@
     // Initialize images array
     images = new Array(TOTAL_FRAMES);
 
+    // Start timer
+    const startTime = performance.now();
+
     function updateProgress() {
-      if (loadingText) {
-        loadingText.textContent = `Loading... ${Math.round((loaded / TOTAL_FRAMES) * 100)}%`;
+      const percentage = Math.round((loaded / TOTAL_FRAMES) * 100);
+      
+      if (loadingPercentage) {
+        loadingPercentage.textContent = `${percentage}%`;
+      }
+      
+      // Update timer
+      if (loadingTime && loaded < TOTAL_FRAMES) {
+        const elapsed = ((performance.now() - startTime) / 1000).toFixed(1);
+        loadingTime.textContent = `${elapsed}s`;
       }
       
       // Wait for ALL frames to load before showing animation and website
       if (loaded === TOTAL_FRAMES) {
         imagesLoaded = true;
-        if (loadingEl) loadingEl.style.display = 'none';
+        const totalTime = ((performance.now() - startTime) / 1000).toFixed(1);
         
-        // Show website content
-        document.body.classList.remove('scrollytelling-loading');
-        document.body.classList.add('scrollytelling-ready');
+        if (loadingTime) {
+          loadingTime.textContent = `Loaded in ${totalTime}s`;
+        }
         
-        // Small delay to ensure smooth transition
+        // Small delay to show completion message
         setTimeout(() => {
+          if (loadingEl) loadingEl.style.display = 'none';
+          
+          // Show website content
+          document.body.classList.remove('scrollytelling-loading');
+          document.body.classList.add('scrollytelling-ready');
+          
           drawFrame(0);
-        }, 100);
+        }, 500);
       }
     }
 
