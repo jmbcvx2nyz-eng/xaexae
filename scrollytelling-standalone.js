@@ -102,6 +102,10 @@
         const img = new Image();
         const frameNum = (index + 1).toString().padStart(3, '0');
         
+        // Try WebP first for better compression, fallback to PNG
+        const webpSrc = `sequence/ezgif-frame-${frameNum}.webp`;
+        const pngSrc = `sequence/ezgif-frame-${frameNum}.png`;
+        
         img.onload = () => {
           loaded++;
           updateProgress();
@@ -109,12 +113,19 @@
         };
         
         img.onerror = () => {
-          loaded++;
-          updateProgress();
-          resolve(); // Continue even if image fails
+          // If WebP fails, try PNG as fallback
+          if (img.src.includes('.webp')) {
+            img.src = pngSrc;
+          } else {
+            // Both failed, but continue
+            loaded++;
+            updateProgress();
+            resolve();
+          }
         };
-
-        img.src = `sequence/ezgif-frame-${frameNum}.png`;
+        
+        // Start with WebP
+        img.src = webpSrc;
         images[index] = img;
       });
     }
