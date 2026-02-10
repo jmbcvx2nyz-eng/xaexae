@@ -383,9 +383,17 @@
         textElements.cta.style.transform = `translateY(${ctaY}px) scale(${ctaScale})`;
         textElements.cta.style.filter = `blur(${ctaBlur}px)`;
       }
+        
+        textRafId = null;
+      });
     }
 
-    window.addEventListener('scroll', updateText);
+    window.addEventListener('scroll', updateText, { passive: true });
+    window.addEventListener('resize', () => {
+      containerTop = scrollContainer.offsetTop;
+      containerHeight = scrollContainer.offsetHeight;
+      updateText();
+    }, { passive: true });
     updateText();
   }
 
