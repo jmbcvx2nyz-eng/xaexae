@@ -412,10 +412,10 @@
 <body>
 
     <div id="mobileMenu">
-                <button onclick="toggleMenu()" class="logo-font text-sm uppercase tracking-widest text-[var(--accent-blue)]">Close [X]</button>
-        <a href="#residential" onclick="toggleMenu()" class="logo-font text-2xl uppercase tracking-widest">Residential</a>
-        <a href="#commercial" onclick="toggleMenu()" class="logo-font text-2xl uppercase tracking-widest">Commercial</a>
-        <a href="#enterprise" onclick="toggleMenu()" class="logo-font text-2xl uppercase tracking-widest">Enterprise</a>
+                <button onclick="toggleMenu()" class="logo-font text-sm uppercase tracking-widest text-[var(--accent-blue)]" data-translate="close-menu">Close [X]</button>
+        <a href="#residential" onclick="toggleMenu()" class="logo-font text-2xl uppercase tracking-widest" data-translate="nav-residential">Residential</a>
+        <a href="#commercial" onclick="toggleMenu()" class="logo-font text-2xl uppercase tracking-widest" data-translate="nav-commercial">Commercial</a>
+        <a href="#enterprise" onclick="toggleMenu()" class="logo-font text-2xl uppercase tracking-widest" data-translate="nav-enterprise">Enterprise</a>
     </div>
 
     <nav>
@@ -432,18 +432,25 @@
             <img src="no bg.png" alt="XAEROVA" class="logo-img">
         </div>
         <div class="hidden lg:flex desktop-nav gap-12 text-[10px] font-bold uppercase tracking-[0.4em] opacity-60">
-            <a href="#residential" class="hover:text-[var(--accent-blue)] transition">Residential</a>
-            <a href="#commercial" class="hover:text-[var(--accent-blue)] transition">Commercial</a>
-            <a href="#enterprise" class="hover:text-[var(--accent-blue)] transition">Enterprise</a>
+            <a href="#residential" class="hover:text-[var(--accent-blue)] transition" data-translate="nav-residential">Residential</a>
+            <a href="#commercial" class="hover:text-[var(--accent-blue)] transition" data-translate="nav-commercial">Commercial</a>
+            <a href="#enterprise" class="hover:text-[var(--accent-blue)] transition" data-translate="nav-enterprise">Enterprise</a>
         </div>
 
         <div class="nav-right">
-            <div class="flex items-center gap-3">
-                <span id="modeText" class="text-[8px] font-bold uppercase tracking-widest opacity-60">Dark Mode</span>
-                <label class="switch">
-                    <input type="checkbox" id="themeToggle" onchange="runSwitch()">
-                    <span class="slider"></span>
-                </label>
+            <div class="flex items-center gap-4">
+                <!-- Language Toggle -->
+                <button id="langToggle" onclick="toggleLanguage()" class="text-[8px] font-bold uppercase tracking-widest opacity-60 hover:opacity-100 transition">
+                    <span id="langText">ENG</span>
+                </button>
+                <!-- Theme Toggle -->
+                <div class="flex items-center gap-3">
+                    <span id="modeText" class="text-[8px] font-bold uppercase tracking-widest opacity-60">Dark Mode</span>
+                    <label class="switch">
+                        <input type="checkbox" id="themeToggle" onchange="runSwitch()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
             </div>
         </div>
     </nav>
@@ -465,31 +472,31 @@
             <!-- Text Overlays -->
             <div id="scrollytelling-title" class="scrollytelling-text px-4">
                 <div class="text-center">
-                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white/90 mb-4" style="font-family: 'Orbitron', sans-serif;">
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white/90 mb-4" style="font-family: 'Orbitron', sans-serif;" data-translate="scrolly-title">
                         Skymind V0
                     </h1>
-                    <p class="text-xl md:text-2xl lg:text-3xl text-white/60">Aerospace Security</p>
+                    <p class="text-xl md:text-2xl lg:text-3xl text-white/60" data-translate="scrolly-subtitle">Aerospace Security</p>
                 </div>
             </div>
 
             <div id="scrollytelling-params" class="scrollytelling-text px-8 md:px-16 lg:px-24" style="justify-content: flex-start;">
-                <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white/90" style="font-family: 'Orbitron', sans-serif;">
+                <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white/90" style="font-family: 'Orbitron', sans-serif;" data-translate="scrolly-params">
                     Remote Flying
                 </h2>
             </div>
 
             <div id="scrollytelling-speed" class="scrollytelling-text px-8 md:px-16 lg:px-24" style="justify-content: flex-end;">
-                <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white/90 text-right" style="font-family: 'Orbitron', sans-serif;">
+                <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white/90 text-right" style="font-family: 'Orbitron', sans-serif;" data-translate="scrolly-speed">
                     Built for Convenience.<br /><span class="text-white/70">Designed for Scale.</span>
                 </h2>
             </div>
 
             <div id="scrollytelling-cta" class="scrollytelling-text px-4">
                 <div class="text-center">
-                    <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white/90 mb-8" style="font-family: 'Orbitron', sans-serif;">
+                    <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white/90 mb-8" style="font-family: 'Orbitron', sans-serif;" data-translate="scrolly-cta">
                         Take Full Control
                     </h2>
-                    <button class="pointer-events-auto px-8 py-4 bg-white/10 border border-white/20 rounded-full text-white/90 text-lg font-medium hover:bg-white/20 transition-all">
+                    <button class="pointer-events-auto px-8 py-4 bg-white/10 border border-white/20 rounded-full text-white/90 text-lg font-medium hover:bg-white/20 transition-all" data-translate="scrolly-button">
                         Get Started
                     </button>
                 </div>
@@ -498,10 +505,10 @@
     </div>
 </div>
     <header class="pt-24 pb-16 px-6 text-center">
-        <h1 data-aos="fade-up" class="logo-font text-5xl md:text-9xl font-black uppercase mb-6 leading-none">
+        <h1 data-aos="fade-up" class="logo-font text-5xl md:text-9xl font-black uppercase mb-6 leading-none" data-translate="header-title">
             Eyes In <br> The Sky
         </h1>
-        <p data-aos="fade-up" data-aos-delay="200" class="text-lg opacity-60 max-w-2xl mx-auto mb-10">
+        <p data-aos="fade-up" data-aos-delay="200" class="text-lg opacity-60 max-w-2xl mx-auto mb-10" data-translate="header-subtitle">
             The Beehive is the only fully autonomous, AI-powered drone security system built to protect high-value infrastructure.
         </p>
         <div data-aos="zoom-in" data-aos-delay="400" class="max-w-4xl mx-auto border border-[var(--border-color)] overflow-hidden">
@@ -513,38 +520,38 @@
         <div class="grid md:grid-cols-3 gap-6">
             <div class="hover-box p-8 flex flex-col items-center text-center">
                 <img src="https://images.unsplash.com/photo-1521714161819-15534968fc5f?auto=format&fit=crop&q=80&w=800" class="grayscale-img w-full h-32 object-cover mb-6">
-                <h3 class="logo-font text-lg font-bold uppercase tracking-widest">remote flying</h3>
+                <h3 class="logo-font text-lg font-bold uppercase tracking-widest" data-translate="feature-1">remote flying</h3>
             </div>
             <div class="hover-box p-8 flex flex-col items-center text-center">
                 <img src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&q=80&w=800" class="grayscale-img w-full h-32 object-cover mb-6">
-                <h3 class="logo-font text-lg font-bold uppercase tracking-widest">light and effective</h3>
+                <h3 class="logo-font text-lg font-bold uppercase tracking-widest" data-translate="feature-2">light and effective</h3>
             </div>
             <div class="hover-box p-8 flex flex-col items-center text-center">
                 <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=800" class="grayscale-img w-full h-32 object-cover mb-6">
-                <h3 class="logo-font text-lg font-bold uppercase tracking-widest">easy to carry</h3>
+                <h3 class="logo-font text-lg font-bold uppercase tracking-widest" data-translate="feature-3">easy to carry</h3>
             </div>
         </div>
     </section>
 
-    <div class="py-10 text-center"><h2 class="logo-font text-4xl md:text-6xl font-black uppercase opacity-20">USE CASES</h2></div>
+    <div class="py-10 text-center"><h2 class="logo-font text-4xl md:text-6xl font-black uppercase opacity-20" data-translate="use-cases">USE CASES</h2></div>
 
     <section id="residential" class="py-16 px-6 max-w-7xl mx-auto border-t border-[var(--border-color)]">
-        <h2 class="logo-font text-2xl mb-12 uppercase tracking-widest opacity-80">Residential</h2>
+        <h2 class="logo-font text-2xl mb-12 uppercase tracking-widest opacity-80" data-translate="residential-title">Residential</h2>
         <div class="grid md:grid-cols-3 gap-8">
             <div class="use-case-card p-6 flex flex-col">
                 <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800" class="grayscale-img w-full h-48 object-cover mb-4">
-                <h4 class="font-bold uppercase text-sm mb-2">Private Estates</h4>
-                <p class="text-xs opacity-60">Aerial surveillance for luxury private grounds.</p>
+                <h4 class="font-bold uppercase text-sm mb-2" data-translate="use-case-1-title">Private Estates</h4>
+                <p class="text-xs opacity-60" data-translate="use-case-1-desc">Aerial surveillance for luxury private grounds.</p>
             </div>
             <div class="use-case-card p-6 flex flex-col">
                 <img src="https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&q=80&w=800" class="grayscale-img w-full h-48 object-cover mb-4">
-                <h4 class="font-bold uppercase text-sm mb-2">Gated Communities</h4>
-                <p class="text-xs opacity-60">Perimeter security and smart alerts.</p>
+                <h4 class="font-bold uppercase text-sm mb-2" data-translate="use-case-2-title">Gated Communities</h4>
+                <p class="text-xs opacity-60" data-translate="use-case-2-desc">Perimeter security and smart alerts.</p>
             </div>
             <div class="use-case-card p-6 flex flex-col">
                 <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80&w=800" class="grayscale-img w-full h-48 object-cover mb-4">
-                <h4 class="font-bold uppercase text-sm mb-2">Property Monitoring</h4>
-                <p class="text-xs opacity-60">Verification of motion sensor triggers.</p>
+                <h4 class="font-bold uppercase text-sm mb-2" data-translate="use-case-3-title">Property Monitoring</h4>
+                <p class="text-xs opacity-60" data-translate="use-case-3-desc">Verification of motion sensor triggers.</p>
             </div>
         </div>
     </section>
@@ -552,15 +559,15 @@
     <section class="py-24 px-6 md:px-10 max-w-7xl mx-auto border-t border-[var(--border-color)]">
         <div class="grid md:grid-cols-2 gap-16 items-center">
             <div data-aos="fade-right">
-                <h2 class="logo-font text-3xl mb-8 uppercase">Designed for Privacy</h2>
+                <h2 class="logo-font text-3xl mb-8 uppercase" data-translate="privacy-title">Designed for Privacy</h2>
                 <ul class="space-y-6 text-sm opacity-80">
-                    <li><strong>Geocaged Airspace:</strong> Drone stays strictly within property lines.</li>
-                    <li><strong>Real-time Blurring:</strong> AI automatically blurs objects beyond boundaries.</li>
+                    <li data-translate="privacy-1"><strong>Geocaged Airspace:</strong> Drone stays strictly within property lines.</li>
+                    <li data-translate="privacy-2"><strong>Real-time Blurring:</strong> AI automatically blurs objects beyond boundaries.</li>
                 </ul>
             </div>
             <div data-aos="fade-left" class="grid grid-cols-2 gap-4">
-                <div class="spec-box p-6"><div class="text-2xl font-bold logo-font text-[var(--accent-blue)]">20min</div><div class="text-[10px] uppercase opacity-40">Flight Time</div></div>
-                <div class="spec-box p-6"><div class="text-2xl font-bold logo-font text-[var(--accent-blue)]">2X</div><div class="text-[10px] uppercase opacity-40">Recharge Speed</div></div>
+                <div class="spec-box p-6"><div class="text-2xl font-bold logo-font text-[var(--accent-blue)]">20min</div><div class="text-[10px] uppercase opacity-40" data-translate="flight-time">Flight Time</div></div>
+                <div class="spec-box p-6"><div class="text-2xl font-bold logo-font text-[var(--accent-blue)]">2X</div><div class="text-[10px] uppercase opacity-40" data-translate="recharge-speed">Recharge Speed</div></div>
             </div>
         </div>
     </section>
@@ -568,8 +575,8 @@
     <footer class="pt-20 pb-12 px-6 border-t border-[var(--border-color)]">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
             <div class="flex gap-10 text-[10px] font-bold uppercase tracking-widest opacity-40">
-                <a href="#">How it works</a>
-                <a href="#">Specs</a>
+                <a href="#" data-translate="footer-link-1">How it works</a>
+                <a href="#" data-translate="footer-link-2">Specs</a>
             </div>
             <div class="flex flex-col items-center md:items-end">
                 <img src="no bg.png" alt="XAEROVA" class="logo-img mb-4">
@@ -586,8 +593,121 @@
             const body = document.body;
             const text = document.getElementById('modeText');
             const isLight = body.classList.toggle('light-mode');
-            text.innerText = isLight ? "Light Mode" : "Dark Mode";
+            const lang = localStorage.getItem('lang') || 'en';
+            text.innerText = isLight ? (lang === 'fr' ? "Mode Clair" : "Light Mode") : (lang === 'fr' ? "Mode Sombre" : "Dark Mode");
         }
+
+        // Translation system
+        const translations = {
+            en: {
+                'nav-residential': 'Residential',
+                'nav-commercial': 'Commercial',
+                'nav-enterprise': 'Enterprise',
+                'close-menu': 'Close [X]',
+                'header-title': 'Eyes In The Sky',
+                'header-subtitle': 'The Beehive is the only fully autonomous, AI-powered drone security system built to protect high-value infrastructure.',
+                'feature-1': 'remote flying',
+                'feature-2': 'light and effective',
+                'feature-3': 'easy to carry',
+                'use-cases': 'USE CASES',
+                'residential-title': 'Residential',
+                'use-case-1-title': 'Private Estates',
+                'use-case-1-desc': 'Aerial surveillance for luxury private grounds.',
+                'use-case-2-title': 'Gated Communities',
+                'use-case-2-desc': 'Perimeter security and smart alerts.',
+                'use-case-3-title': 'Property Monitoring',
+                'use-case-3-desc': 'Verification of motion sensor triggers.',
+                'privacy-title': 'Designed for Privacy',
+                'privacy-1': 'Geocaged Airspace: Drone stays strictly within property lines.',
+                'privacy-2': 'Real-time Blurring: AI automatically blurs objects beyond boundaries.',
+                'flight-time': 'Flight Time',
+                'recharge-speed': 'Recharge Speed',
+                'footer-link-1': 'How it works',
+                'footer-link-2': 'Specs',
+                'scrolly-title': 'Skymind V0',
+                'scrolly-subtitle': 'Aerospace Security',
+                'scrolly-params': 'Remote Flying',
+                'scrolly-speed': 'Built for Convenience.<br /><span class="text-white/70">Designed for Scale.</span>',
+                'scrolly-cta': 'Take Full Control',
+                'scrolly-button': 'Get Started'
+            },
+            fr: {
+                'nav-residential': 'Résidentiel',
+                'nav-commercial': 'Commercial',
+                'nav-enterprise': 'Entreprise',
+                'close-menu': 'Fermer [X]',
+                'header-title': 'Des Yeux Dans Le Ciel',
+                'header-subtitle': 'The Beehive est le seul système de sécurité par drone entièrement autonome et alimenté par l\'IA, conçu pour protéger les infrastructures à haute valeur.',
+                'feature-1': 'vol à distance',
+                'feature-2': 'léger et efficace',
+                'feature-3': 'facile à transporter',
+                'use-cases': 'CAS D\'UTILISATION',
+                'residential-title': 'Résidentiel',
+                'use-case-1-title': 'Domaines Privés',
+                'use-case-1-desc': 'Surveillance aérienne pour terrains privés de luxe.',
+                'use-case-2-title': 'Communautés Fermées',
+                'use-case-2-desc': 'Sécurité périmétrique et alertes intelligentes.',
+                'use-case-3-title': 'Surveillance de Propriété',
+                'use-case-3-desc': 'Vérification des déclencheurs de capteurs de mouvement.',
+                'privacy-title': 'Conçu pour la Confidentialité',
+                'privacy-1': 'Espace Aérien Géolocalisé: Le drone reste strictement dans les limites de la propriété.',
+                'privacy-2': 'Floutage en Temps Réel: L\'IA floute automatiquement les objets au-delà des limites.',
+                'flight-time': 'Temps de Vol',
+                'recharge-speed': 'Vitesse de Recharge',
+                'footer-link-1': 'Comment ça marche',
+                'footer-link-2': 'Spécifications',
+                'scrolly-title': 'Skymind V0',
+                'scrolly-subtitle': 'Sécurité Aérospatiale',
+                'scrolly-params': 'Vol à Distance',
+                'scrolly-speed': 'Conçu pour la Commodité.<br /><span class="text-white/70">Pensé pour l\'Échelle.</span>',
+                'scrolly-cta': 'Prenez le Contrôle Total',
+                'scrolly-button': 'Commencer'
+            }
+        };
+
+        function translatePage(lang) {
+            const t = translations[lang];
+            document.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.getAttribute('data-translate');
+                if (t[key]) {
+                    if (el.tagName === 'INPUT' && el.type === 'button') {
+                        el.value = t[key];
+                    } else if (el.tagName === 'LI') {
+                        // For list items, preserve the <strong> tag structure
+                        const parts = t[key].split(':');
+                        if (parts.length === 2) {
+                            el.innerHTML = `<strong>${parts[0]}:</strong> ${parts[1]}`;
+                        } else {
+                            el.innerHTML = t[key];
+                        }
+                    } else {
+                        el.innerHTML = t[key];
+                    }
+                }
+            });
+            
+            // Update mode text
+            const modeText = document.getElementById('modeText');
+            if (modeText) {
+                const isLight = document.body.classList.contains('light-mode');
+                modeText.innerText = isLight ? (lang === 'fr' ? "Mode Clair" : "Light Mode") : (lang === 'fr' ? "Mode Sombre" : "Dark Mode");
+            }
+        }
+
+        function toggleLanguage() {
+            const currentLang = localStorage.getItem('lang') || 'en';
+            const newLang = currentLang === 'en' ? 'fr' : 'en';
+            localStorage.setItem('lang', newLang);
+            document.getElementById('langText').innerText = newLang.toUpperCase();
+            translatePage(newLang);
+        }
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('lang') || 'en';
+            document.getElementById('langText').innerText = savedLang.toUpperCase();
+            translatePage(savedLang);
+        });
     </script>
     <script src="scrollytelling-standalone.js"></script>
 </body>
