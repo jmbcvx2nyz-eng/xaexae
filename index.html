@@ -734,7 +734,7 @@
                     
                     <div class="slider-slide">
                         <div class="slider-image-container">
-                            <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&q=80&w=1200" 
+                            <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&q=80&w=1200" 
                                  alt="Drone 2" 
                                  class="slider-image grayscale-img">
                             <div class="slider-overlay">
@@ -786,7 +786,7 @@
         <p data-aos="fade-up" data-aos-delay="200" class="text-lg opacity-60 max-w-2xl mx-auto mb-10" data-translate="header-subtitle">
             The Beehive is the only fully autonomous, AI-powered drone security system built to protect high-value infrastructure.
         </p>
-        <div data-aos="zoom-in" data-aos-delay="400" class="max-w-4xl mx-auto border border-[var(--border-color)] overflow-hidden">
+        <div data-aos="zoom-in" data-aos-delay="100" class="max-w-4xl mx-auto border border-[var(--border-color)] overflow-hidden">
             <img src="https://images.unsplash.com/photo-1506947411487-a56738267384?auto=format&fit=crop&q=80&w=2000" class="grayscale-img w-full h-auto opacity-80" alt="Drone Technology">
         </div>
     </header>
@@ -1245,14 +1245,14 @@
                 clearInterval(autoSlideInterval);
             }
             
-            // Auto-slide every 1 second
+            // Auto-slide every 3 seconds
             autoSlideInterval = setInterval(() => {
                 currentSlide++;
                 if (currentSlide >= totalSlides) {
                     currentSlide = 0;
                 }
                 updateSlider();
-            }, 1000);
+            }, 3000);
         }
 
         // Initialize slider when page loads
