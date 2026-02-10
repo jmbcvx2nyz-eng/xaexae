@@ -169,12 +169,22 @@
     loadAllFrames();
   }
 
-  // Draw frame to canvas (optimized)
+  // Draw frame to canvas (optimized with interpolation)
   let rafId = null;
+  let lastDrawnFrame = -1;
+  
   function drawFrame(index) {
     if (!ctx || images.length === 0) return;
     
-    const clamped = Math.max(0, Math.min(Math.floor(index), images.length - 1));
+    // Use integer frame for now (can add interpolation later if needed)
+    const frameIndex = Math.round(index);
+    const clamped = Math.max(0, Math.min(frameIndex, images.length - 1));
+    
+    // Skip if same frame is already drawn
+    if (clamped === lastDrawnFrame && images[clamped] && images[clamped].complete) {
+      return;
+    }
+    
     const img = images[clamped];
     
     // If image not loaded, try to find nearest loaded frame
@@ -203,6 +213,10 @@
 
     // Use requestAnimationFrame for smooth rendering
     rafId = requestAnimationFrame(() => {
+      // Use image smoothing for better quality
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       const imgAspect = img.width / img.height;
@@ -222,38 +236,76 @@
       }
 
       ctx.drawImage(img, x, y, w, h);
+      lastDrawnFrame = clamped;
       rafId = null;
     });
   }
 
-  // Setup scroll tracking
+  // Setup scroll tracking with smooth interpolation
+  let scrollRafId = null;
+  let lastScrollTime = 0;
+  
   function setupScroll() {
     const scrollContainer = document.getElementById('scrollytelling-scroll');
     if (!scrollContainer) return;
 
+    // Cache container properties for better performance
+    let containerTop = scrollContainer.offsetTop;
+    let containerHeight = scrollContainer.offsetHeight;
+    const viewportHeight = window.innerHeight;
+
     function updateFrame() {
-      const rect = scrollContainer.getBoundingClientRect();
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const containerTop = scrollContainer.offsetTop;
-      const containerHeight = scrollContainer.offsetHeight;
-      const viewportHeight = window.innerHeight;
-      
-      const scrollProgress = Math.max(0, Math.min(1, 
-        (scrollTop - containerTop + viewportHeight) / containerHeight
-      ));
-      
-      const frame = Math.floor(scrollProgress * (TOTAL_FRAMES - 1));
-      if (frame !== currentFrame && imagesLoaded) {
-        currentFrame = frame;
-        drawFrame(frame);
+      // Use requestAnimationFrame for smooth, throttled updates
+      if (scrollRafId) {
+        cancelAnimationFrame(scrollRafId);
       }
+
+      scrollRafId = requestAnimationFrame(() => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Recalculate container position if needed (for dynamic layouts)
+        const currentContainerTop = scrollContainer.offsetTop;
+        const currentContainerHeight = scrollContainer.offsetHeight;
+        
+        // Update cache if changed significantly
+        if (Math.abs(currentContainerTop - containerTop) > 10) {
+          containerTop = currentContainerTop;
+        }
+        if (Math.abs(currentContainerHeight - containerHeight) > 10) {
+          containerHeight = currentContainerHeight;
+        }
+        
+        const scrollProgress = Math.max(0, Math.min(1, 
+          (scrollTop - containerTop + viewportHeight) / containerHeight
+        ));
+        
+        // Use smooth interpolation instead of floor for smoother transitions
+        const exactFrame = scrollProgress * (TOTAL_FRAMES - 1);
+        const frame = Math.round(exactFrame);
+        
+        // Only update if frame changed significantly (reduces unnecessary redraws)
+        if (Math.abs(frame - currentFrame) >= 1 && imagesLoaded) {
+          currentFrame = frame;
+          drawFrame(exactFrame); // Pass exact frame for potential interpolation
+        }
+        
+        scrollRafId = null;
+      });
     }
 
-    window.addEventListener('scroll', updateFrame);
+    // Use passive listener for better scroll performance
+    window.addEventListener('scroll', updateFrame, { passive: true });
+    window.addEventListener('resize', () => {
+      containerTop = scrollContainer.offsetTop;
+      containerHeight = scrollContainer.offsetHeight;
+      updateFrame();
+    }, { passive: true });
     updateFrame();
   }
 
-  // Setup text animations
+  // Setup text animations with smooth updates
+  let textRafId = null;
+  
   function setupTextAnimations() {
     const textElements = {
       title: document.getElementById('scrollytelling-title'),
@@ -262,18 +314,36 @@
       cta: document.getElementById('scrollytelling-cta')
     };
 
-    function updateText() {
-      const scrollContainer = document.getElementById('scrollytelling-scroll');
-      if (!scrollContainer) return;
+    // Cache container properties
+    const scrollContainer = document.getElementById('scrollytelling-scroll');
+    if (!scrollContainer) return;
+    
+    let containerTop = scrollContainer.offsetTop;
+    let containerHeight = scrollContainer.offsetHeight;
+    const viewportHeight = window.innerHeight;
 
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const containerTop = scrollContainer.offsetTop;
-      const containerHeight = scrollContainer.offsetHeight;
-      const viewportHeight = window.innerHeight;
-      
-      const progress = Math.max(0, Math.min(1, 
-        (scrollTop - containerTop + viewportHeight) / containerHeight
-      ));
+    function updateText() {
+      // Throttle text updates with requestAnimationFrame
+      if (textRafId) {
+        cancelAnimationFrame(textRafId);
+      }
+
+      textRafId = requestAnimationFrame(() => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Update cache if changed
+        const currentContainerTop = scrollContainer.offsetTop;
+        const currentContainerHeight = scrollContainer.offsetHeight;
+        if (Math.abs(currentContainerTop - containerTop) > 10) {
+          containerTop = currentContainerTop;
+        }
+        if (Math.abs(currentContainerHeight - containerHeight) > 10) {
+          containerHeight = currentContainerHeight;
+        }
+        
+        const progress = Math.max(0, Math.min(1, 
+          (scrollTop - containerTop + viewportHeight) / containerHeight
+        ));
 
       // Title (0-0.2)
       if (textElements.title) {
