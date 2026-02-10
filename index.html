@@ -553,7 +553,10 @@
         /* Smaller frame on mobile */
         @media (max-width: 768px) {
             #scrollytelling-frame {
-                height: 60vh; /* Reduced height on mobile for better UX */
+                height: 50vh; /* Reduced height on mobile for better UX */
+                width: 100vw;
+                margin: 0;
+                padding: 0;
             }
         }
 
@@ -569,8 +572,10 @@
         /* Ensure canvas fits container width on mobile */
         @media (max-width: 768px) {
             #scrollytelling-canvas {
-                width: 100%;
-                max-width: 100%;
+                width: 100vw;
+                max-width: 100vw;
+                left: 0;
+                right: 0;
             }
         }
 
@@ -723,7 +728,7 @@
 </div>
 
     <!-- Drone Gallery Slider Section -->
-    <section class="py-20 w-full">
+    <section class="py-20 w-full hidden md:block">
         <div class="slider-container relative">
             <button class="slider-arrow slider-arrow-left" onclick="slideCarousel(-1)" aria-label="Previous">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
