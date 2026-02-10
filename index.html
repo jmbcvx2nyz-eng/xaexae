@@ -104,6 +104,25 @@
             background-position: 0 0, 20px 20px;
         }
 
+        /* Language Toggle Styles */
+        .lang-option {
+            background: transparent;
+            color: var(--text-color);
+            opacity: 0.5;
+            border: none;
+            cursor: pointer;
+        }
+
+        .lang-option:hover {
+            opacity: 0.8;
+        }
+
+        .lang-option.active {
+            opacity: 1;
+            background-color: var(--accent-blue);
+            color: white;
+        }
+
         /* Mobile Layout (< 1024px) */
         @media (max-width: 1023px) {
             nav {
@@ -440,9 +459,14 @@
         <div class="nav-right">
             <div class="flex items-center gap-4">
                 <!-- Language Toggle -->
-                <button id="langToggle" onclick="toggleLanguage()" class="text-[8px] font-bold uppercase tracking-widest opacity-60 hover:opacity-100 transition">
-                    <span id="langText">ENG</span>
-                </button>
+                <div class="flex items-center gap-1 border border-[var(--border-color)] rounded px-1">
+                    <button id="langENG" onclick="setLanguage('en')" class="lang-option text-[8px] font-bold uppercase tracking-widest px-2 py-1 rounded transition">
+                        ENG
+                    </button>
+                    <button id="langFR" onclick="setLanguage('fr')" class="lang-option text-[8px] font-bold uppercase tracking-widest px-2 py-1 rounded transition">
+                        FR
+                    </button>
+                </div>
                 <!-- Theme Toggle -->
                 <div class="flex items-center gap-3">
                     <span id="modeText" class="text-[8px] font-bold uppercase tracking-widest opacity-60">Dark Mode</span>
@@ -694,18 +718,31 @@
             }
         }
 
-        function toggleLanguage() {
-            const currentLang = localStorage.getItem('lang') || 'en';
-            const newLang = currentLang === 'en' ? 'fr' : 'en';
-            localStorage.setItem('lang', newLang);
-            document.getElementById('langText').innerText = newLang.toUpperCase();
-            translatePage(newLang);
+        function setLanguage(lang) {
+            localStorage.setItem('lang', lang);
+            updateLanguageButtons(lang);
+            translatePage(lang);
+        }
+
+        function updateLanguageButtons(lang) {
+            const engBtn = document.getElementById('langENG');
+            const frBtn = document.getElementById('langFR');
+            
+            if (engBtn && frBtn) {
+                if (lang === 'en') {
+                    engBtn.classList.add('active');
+                    frBtn.classList.remove('active');
+                } else {
+                    frBtn.classList.add('active');
+                    engBtn.classList.remove('active');
+                }
+            }
         }
 
         // Initialize language on page load
         document.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('lang') || 'en';
-            document.getElementById('langText').innerText = savedLang.toUpperCase();
+            updateLanguageButtons(savedLang);
             translatePage(savedLang);
         });
     </script>
