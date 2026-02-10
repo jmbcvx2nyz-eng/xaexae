@@ -123,6 +123,44 @@
             color: white;
         }
 
+        /* FAQ Styles */
+        .faq-item {
+            transition: all 0.3s ease;
+        }
+
+        .faq-question {
+            cursor: pointer;
+        }
+
+        .faq-question:hover {
+            color: var(--accent-blue);
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+            color: var(--accent-blue);
+            font-weight: 300;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+            padding: 0;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            opacity: 1;
+            padding-top: 0.5rem;
+            padding-bottom: 1rem;
+        }
+
         /* Mobile Layout (< 1024px) */
         @media (max-width: 1023px) {
             nav {
@@ -161,12 +199,12 @@
         }
 
         .logo-img {
-            height: 18px; 
+            height: 14px; 
             width: auto;
             filter: none !important;
             object-fit: contain;
         }
-        @media (min-width: 1024px) { .logo-img { height: 22px; } }
+        @media (min-width: 1024px) { .logo-img { height: 16px; } }
         .light-mode .logo-img { filter: invert(1) !important; }
 
         /* THEME TOGGLE */
@@ -212,6 +250,16 @@
             transform: scale(1.02) translateY(-5px);
             box-shadow: 0 15px 30px -10px rgba(0, 128, 255, 0.2);
         }
+
+        /* Drone Gallery Cards */
+        .drone-card {
+            cursor: pointer;
+        }
+
+        .drone-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -10px rgba(0, 128, 255, 0.3);
+        }
         .grayscale-img { 
             filter: grayscale(100%) contrast(1.5) brightness(0.9); 
             transition: 0.5s; 
@@ -247,7 +295,7 @@
         }
 
         .loading-logo {
-            width: 120px;
+            width: 80px;
             height: auto;
             animation: pulse 2s ease-in-out infinite;
             filter: drop-shadow(0 0 20px rgba(0, 128, 255, 0.3));
@@ -332,36 +380,12 @@
             width: 100%;
             height: 100vh;
             overflow: hidden;
-            /* Vignette effect to blend with next section */
-            mask-image: radial-gradient(ellipse 80% 100% at center bottom, black 60%, transparent 100%);
-            -webkit-mask-image: radial-gradient(ellipse 80% 100% at center bottom, black 60%, transparent 100%);
-        }
-
-        /* Vignette overlay for better blending */
-        #scrollytelling-frame::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 40%;
-            background: linear-gradient(to bottom, transparent 0%, var(--bg-color) 100%);
-            pointer-events: none;
-            z-index: 5;
         }
 
         /* Smaller frame on mobile */
         @media (max-width: 768px) {
             #scrollytelling-frame {
                 height: 60vh; /* Reduced height on mobile for better UX */
-                /* Remove vignette on mobile */
-                mask-image: none;
-                -webkit-mask-image: none;
-            }
-            
-            /* Remove vignette overlay on mobile */
-            #scrollytelling-frame::after {
-                display: none;
             }
         }
 
@@ -468,12 +492,12 @@
                     </button>
                 </div>
                 <!-- Theme Toggle -->
-                <div class="flex items-center gap-3">
-                    <span id="modeText" class="text-[8px] font-bold uppercase tracking-widest opacity-60">Dark Mode</span>
-                    <label class="switch">
-                        <input type="checkbox" id="themeToggle" onchange="runSwitch()">
-                        <span class="slider"></span>
-                    </label>
+            <div class="flex items-center gap-3">
+                <span id="modeText" class="text-[8px] font-bold uppercase tracking-widest opacity-60">Dark Mode</span>
+                <label class="switch">
+                    <input type="checkbox" id="themeToggle" onchange="runSwitch()">
+                    <span class="slider"></span>
+                </label>
                 </div>
             </div>
         </div>
@@ -485,7 +509,7 @@
         <div class="loading-progress">
             <div class="loading-percentage" id="loading-percentage">0%</div>
             <div class="loading-time" id="loading-time">Loading frames...</div>
-            <div class="loading-spinner"></div>
+        <div class="loading-spinner"></div>
         </div>
     </div>
 
@@ -528,6 +552,70 @@
         </div>
     </div>
 </div>
+
+    <!-- Drone Gallery Section -->
+    <section class="py-20 px-6 md:px-10 max-w-7xl mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
+            <div class="drone-card group relative overflow-hidden border border-[var(--border-color)] hover:border-[var(--accent-blue)] transition-all duration-300">
+                <div class="aspect-square overflow-hidden bg-black/20">
+                    <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&q=80&w=800" 
+                         alt="Drone 1" 
+                         class="w-full h-full object-cover grayscale-img group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-110">
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <h3 class="text-white font-bold text-sm mb-1">Skymind V0</h3>
+                    <p class="text-white/80 text-xs">Aerospace Security</p>
+                </div>
+            </div>
+            
+            <div class="drone-card group relative overflow-hidden border border-[var(--border-color)] hover:border-[var(--accent-blue)] transition-all duration-300">
+                <div class="aspect-square overflow-hidden bg-black/20">
+                    <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&q=80&w=800" 
+                         alt="Drone 2" 
+                         class="w-full h-full object-cover grayscale-img group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-110">
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <h3 class="text-white font-bold text-sm mb-1">Skymind V1</h3>
+                    <p class="text-white/80 text-xs">Advanced Surveillance</p>
+                </div>
+            </div>
+            
+            <div class="drone-card group relative overflow-hidden border border-[var(--border-color)] hover:border-[var(--accent-blue)] transition-all duration-300">
+                <div class="aspect-square overflow-hidden bg-black/20">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800" 
+                         alt="Drone 3" 
+                         class="w-full h-full object-cover grayscale-img group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-110">
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <h3 class="text-white font-bold text-sm mb-1">Skymind V2</h3>
+                    <p class="text-white/80 text-xs">Enterprise Solution</p>
+                </div>
+            </div>
+            
+            <div class="drone-card group relative overflow-hidden border border-[var(--border-color)] hover:border-[var(--accent-blue)] transition-all duration-300">
+                <div class="aspect-square overflow-hidden bg-black/20">
+                    <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&q=80&w=800" 
+                         alt="Drone 4" 
+                         class="w-full h-full object-cover grayscale-img group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-110">
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <h3 class="text-white font-bold text-sm mb-1">Skymind Pro</h3>
+                    <p class="text-white/80 text-xs">Professional Grade</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center">
+            <button class="px-8 py-4 bg-[var(--accent-blue)] text-white font-bold uppercase tracking-widest text-sm hover:bg-[var(--accent-blue)]/80 transition-all duration-300 transform hover:scale-105" data-translate="discover-button">
+                Discover
+            </button>
+        </div>
+    </section>
+
     <header class="pt-24 pb-16 px-6 text-center">
         <h1 data-aos="fade-up" class="logo-font text-5xl md:text-9xl font-black uppercase mb-6 leading-none" data-translate="header-title">
             Eyes In <br> The Sky
@@ -596,6 +684,153 @@
         </div>
     </section>
 
+    <!-- FAQ Section -->
+    <section class="py-24 px-6 md:px-10 max-w-7xl mx-auto border-t border-[var(--border-color)]">
+        <h2 class="logo-font text-4xl md:text-6xl font-black uppercase mb-16 text-center" data-translate="faq-title">Frequently Asked Questions</h2>
+        
+        <div class="max-w-4xl mx-auto space-y-6">
+            <!-- Pricing & Availability -->
+            <div class="faq-category mb-12">
+                <h3 class="text-xl font-bold mb-6 uppercase tracking-widest opacity-60" data-translate="faq-pricing-title">Pricing & Availability</h3>
+                
+                <div class="faq-item border-b border-[var(--border-color)] pb-4 mb-4">
+                    <button class="faq-question w-full text-left flex justify-between items-center py-4 hover:opacity-80 transition" onclick="toggleFAQ(this)">
+                        <span class="font-bold" data-translate="faq-q1">What is the price of the system?</span>
+                        <span class="faq-icon text-2xl">+</span>
+                    </button>
+                    <div class="faq-answer text-sm opacity-70">
+                        <p data-translate="faq-a1">Pricing depends on property size, configuration, and location. Contact us for a customized quote. As a general guideline, the cost ranges from $3-6/hr for continuous operations after installation.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item border-b border-[var(--border-color)] pb-4 mb-4">
+                    <button class="faq-question w-full text-left flex justify-between items-center py-4 hover:opacity-80 transition" onclick="toggleFAQ(this)">
+                        <span class="font-bold" data-translate="faq-q2">How long does delivery and installation take?</span>
+                        <span class="faq-icon text-2xl">+</span>
+                    </button>
+                    <div class="faq-answer text-sm opacity-70">
+                        <p data-translate="faq-a2">Standard delivery and installation takes 6-10 weeks. Expedited timelines are available for priority orders. Our team will coordinate with you throughout the process.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item border-b border-[var(--border-color)] pb-4 mb-4">
+                    <button class="faq-question w-full text-left flex justify-between items-center py-4 hover:opacity-80 transition" onclick="toggleFAQ(this)">
+                        <span class="font-bold" data-translate="faq-q3">Where is the system currently available?</span>
+                        <span class="faq-icon text-2xl">+</span>
+                    </button>
+                    <div class="faq-answer text-sm opacity-70">
+                        <p data-translate="faq-a3">We are currently shipping to customers in North America, Europe, and select regions in Asia. Contact us to check availability in your area.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drone Operations -->
+            <div class="faq-category mb-12">
+                <h3 class="text-xl font-bold mb-6 uppercase tracking-widest opacity-60" data-translate="faq-operations-title">Drone Operations</h3>
+                
+                <div class="faq-item border-b border-[var(--border-color)] pb-4 mb-4">
+                    <button class="faq-question w-full text-left flex justify-between items-center py-4 hover:opacity-80 transition" onclick="toggleFAQ(this)">
+                        <span class="font-bold" data-translate="faq-q4">How long can the drone fly on a single charge?</span>
+                        <span class="faq-icon text-2xl">+</span>
+                    </button>
+                    <div class="faq-answer text-sm opacity-70">
+                        <p data-translate="faq-a4">The Skymind V0 can fly for up to 20 minutes on a single charge. Most operational flights last around 10-15 minutes, with reserve time for safe return and landing. The system supports multiple flights per day with rapid recharging.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item border-b border-[var(--border-color)] pb-4 mb-4">
+                    <button class="faq-question w-full text-left flex justify-between items-center py-4 hover:opacity-80 transition" onclick="toggleFAQ(this)">
+                        <span class="font-bold" data-translate="faq-q5">How long does it take to fully recharge?</span>
+                        <span class="faq-icon text-2xl">+</span>
+                    </button>
+                    <div class="faq-answer text-sm opacity-70">
+                        <p data-translate="faq-a5">Recharging takes approximately 2x the flight time. After a 10-minute flight, it takes about 20 minutes to reach full charge. Our advanced charging system ensures the drone is ready for deployment quickly.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item border-b border-[var(--border-color)] pb-4 mb-4">
+                    <button class="faq-question w-full text-left flex justify-between items-center py-4 hover:opacity-80 transition" onclick="toggleFAQ(this)">
+                        <span class="font-bold" data-translate="faq-q6">How much area can one system cover?</span>
+                        <span class="faq-icon text-2xl">+</span>
+                    </button>
+                    <div class="faq-answer text-sm opacity-70">
+                        <p data-translate="faq-a6">The Skymind V0 has a maximum operational radius of approximately 500m (1,640 ft). Coverage depends on response time requirements and property layout. Multiple systems can be deployed for larger properties.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item border-b border-[var(--border-color)] pb-4 mb-4">
+                    <button class="faq-question w-full text-left flex justify-between items-center py-4 hover:opacity-80 transition" onclick="toggleFAQ(this)">
+                        <span class="font-bold" data-translate="faq-q7">Do I need a pilot for the drone?</span>
+                        <span class="faq-icon text-2xl">+</span>
+                    </button>
+                    <div class="faq-answer text-sm opacity-70">
+                        <p data-translate="faq-a7">The system is fully autonomous, but most regions require a pilot-in-command (PiC) to be connected when the drone is flying. The PiC can be you, your security company, or a remote piloting service. The PiC primarily observes operations and intervenes only in emergencies.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Privacy & Security -->
+            <div class="faq-category mb-12">
+                <h3 class="text-xl font-bold mb-6 uppercase tracking-widest opacity-60" data-translate="faq-privacy-title">Privacy & Security</h3>
+                
+                <div class="faq-item border-b border-[var(--border-color)] pb-4 mb-4">
+                    <button class="faq-question w-full text-left flex justify-between items-center py-4 hover:opacity-80 transition" onclick="toggleFAQ(this)">
+                        <span class="font-bold" data-translate="faq-q8">How does the system handle privacy?</span>
+                        <span class="faq-icon text-2xl">+</span>
+                    </button>
+                    <div class="faq-answer text-sm opacity-70">
+                        <p data-translate="faq-a8">All footage belongs to you. You can export or delete data at any time and choose your preferred storage location. The system uses geocaged airspace to ensure flights stay within your property, and real-time AI blurring protects neighbors' privacy.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item border-b border-[var(--border-color)] pb-4 mb-4">
+                    <button class="faq-question w-full text-left flex justify-between items-center py-4 hover:opacity-80 transition" onclick="toggleFAQ(this)">
+                        <span class="font-bold" data-translate="faq-q9">Can the drone recognize faces?</span>
+                        <span class="faq-icon text-2xl">+</span>
+                    </button>
+                    <div class="faq-answer text-sm opacity-70">
+                        <p data-translate="faq-a9">No. The Skymind V0 detects people, vehicles, and animals but does not perform facial recognition. The AI focuses on behavior patterns and security threats rather than individual identification.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item border-b border-[var(--border-color)] pb-4 mb-4">
+                    <button class="faq-question w-full text-left flex justify-between items-center py-4 hover:opacity-80 transition" onclick="toggleFAQ(this)">
+                        <span class="font-bold" data-translate="faq-q10">Where is video footage stored?</span>
+                        <span class="faq-icon text-2xl">+</span>
+                    </button>
+                    <div class="faq-answer text-sm opacity-70">
+                        <p data-translate="faq-a10">By default, video is stored securely in the cloud, but storage location and retention can be configured based on your location and privacy requirements. You maintain full control over your data.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Support & Reliability -->
+            <div class="faq-category mb-12">
+                <h3 class="text-xl font-bold mb-6 uppercase tracking-widest opacity-60" data-translate="faq-support-title">Support & Reliability</h3>
+                
+                <div class="faq-item border-b border-[var(--border-color)] pb-4 mb-4">
+                    <button class="faq-question w-full text-left flex justify-between items-center py-4 hover:opacity-80 transition" onclick="toggleFAQ(this)">
+                        <span class="font-bold" data-translate="faq-q11">What happens if the drone needs repairs?</span>
+                        <span class="faq-icon text-2xl">+</span>
+                    </button>
+                    <div class="faq-answer text-sm opacity-70">
+                        <p data-translate="faq-a11">During your service agreement, XAEROVA ensures your drone stays operational and will replace or repair it as needed. Our support team is available 24/7 for assistance and emergency situations.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item border-b border-[var(--border-color)] pb-4 mb-4">
+                    <button class="faq-question w-full text-left flex justify-between items-center py-4 hover:opacity-80 transition" onclick="toggleFAQ(this)">
+                        <span class="font-bold" data-translate="faq-q12">Can the system operate in bad weather?</span>
+                        <span class="faq-icon text-2xl">+</span>
+                    </button>
+                    <div class="faq-answer text-sm opacity-70">
+                        <p data-translate="faq-a12">The Skymind V0 is designed to operate in 99% of weather conditions, including light rain and moderate winds. The system automatically assesses weather conditions and will delay flights if conditions are unsafe.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer class="pt-20 pb-12 px-6 border-t border-[var(--border-color)]">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
             <div class="flex gap-10 text-[10px] font-bold uppercase tracking-widest opacity-40">
@@ -653,7 +888,37 @@
                 'scrolly-params': 'Remote Flying',
                 'scrolly-speed': 'Built for Convenience.<br /><span class="text-white/70">Designed for Scale.</span>',
                 'scrolly-cta': 'Take Full Control',
-                'scrolly-button': 'Get Started'
+                'scrolly-button': 'Get Started',
+                'discover-button': 'Discover',
+                'faq-title': 'Frequently Asked Questions',
+                'faq-pricing-title': 'Pricing & Availability',
+                'faq-operations-title': 'Drone Operations',
+                'faq-privacy-title': 'Privacy & Security',
+                'faq-support-title': 'Support & Reliability',
+                'faq-q1': 'What is the price of the system?',
+                'faq-a1': 'Pricing depends on property size, configuration, and location. Contact us for a customized quote. As a general guideline, the cost ranges from $3-6/hr for continuous operations after installation.',
+                'faq-q2': 'How long does delivery and installation take?',
+                'faq-a2': 'Standard delivery and installation takes 6-10 weeks. Expedited timelines are available for priority orders. Our team will coordinate with you throughout the process.',
+                'faq-q3': 'Where is the system currently available?',
+                'faq-a3': 'We are currently shipping to customers in North America, Europe, and select regions in Asia. Contact us to check availability in your area.',
+                'faq-q4': 'How long can the drone fly on a single charge?',
+                'faq-a4': 'The Skymind V0 can fly for up to 20 minutes on a single charge. Most operational flights last around 10-15 minutes, with reserve time for safe return and landing. The system supports multiple flights per day with rapid recharging.',
+                'faq-q5': 'How long does it take to fully recharge?',
+                'faq-a5': 'Recharging takes approximately 2x the flight time. After a 10-minute flight, it takes about 20 minutes to reach full charge. Our advanced charging system ensures the drone is ready for deployment quickly.',
+                'faq-q6': 'How much area can one system cover?',
+                'faq-a6': 'The Skymind V0 has a maximum operational radius of approximately 500m (1,640 ft). Coverage depends on response time requirements and property layout. Multiple systems can be deployed for larger properties.',
+                'faq-q7': 'Do I need a pilot for the drone?',
+                'faq-a7': 'The system is fully autonomous, but most regions require a pilot-in-command (PiC) to be connected when the drone is flying. The PiC can be you, your security company, or a remote piloting service. The PiC primarily observes operations and intervenes only in emergencies.',
+                'faq-q8': 'How does the system handle privacy?',
+                'faq-a8': 'All footage belongs to you. You can export or delete data at any time and choose your preferred storage location. The system uses geocaged airspace to ensure flights stay within your property, and real-time AI blurring protects neighbors\' privacy.',
+                'faq-q9': 'Can the drone recognize faces?',
+                'faq-a9': 'No. The Skymind V0 detects people, vehicles, and animals but does not perform facial recognition. The AI focuses on behavior patterns and security threats rather than individual identification.',
+                'faq-q10': 'Where is video footage stored?',
+                'faq-a10': 'By default, video is stored securely in the cloud, but storage location and retention can be configured based on your location and privacy requirements. You maintain full control over your data.',
+                'faq-q11': 'What happens if the drone needs repairs?',
+                'faq-a11': 'During your service agreement, XAEROVA ensures your drone stays operational and will replace or repair it as needed. Our support team is available 24/7 for assistance and emergency situations.',
+                'faq-q12': 'Can the system operate in bad weather?',
+                'faq-a12': 'The Skymind V0 is designed to operate in 99% of weather conditions, including light rain and moderate winds. The system automatically assesses weather conditions and will delay flights if conditions are unsafe.'
             },
             fr: {
                 'nav-residential': 'Résidentiel',
@@ -685,7 +950,37 @@
                 'scrolly-params': 'Vol à Distance',
                 'scrolly-speed': 'Conçu pour la Commodité.<br /><span class="text-white/70">Pensé pour l\'Échelle.</span>',
                 'scrolly-cta': 'Prenez le Contrôle Total',
-                'scrolly-button': 'Commencer'
+                'scrolly-button': 'Commencer',
+                'discover-button': 'Découvrir',
+                'faq-title': 'Questions Fréquemment Posées',
+                'faq-pricing-title': 'Tarification et Disponibilité',
+                'faq-operations-title': 'Opérations de Drone',
+                'faq-privacy-title': 'Confidentialité et Sécurité',
+                'faq-support-title': 'Support et Fiabilité',
+                'faq-q1': 'Quel est le prix du système?',
+                'faq-a1': 'Le prix dépend de la taille de la propriété, de la configuration et de l\'emplacement. Contactez-nous pour un devis personnalisé. En général, le coût varie de 3 à 6 $/h pour des opérations continues après l\'installation.',
+                'faq-q2': 'Combien de temps prend la livraison et l\'installation?',
+                'faq-a2': 'La livraison et l\'installation standard prennent 6 à 10 semaines. Des délais accélérés sont disponibles pour les commandes prioritaires. Notre équipe vous accompagnera tout au long du processus.',
+                'faq-q3': 'Où le système est-il actuellement disponible?',
+                'faq-a3': 'Nous expédions actuellement aux clients en Amérique du Nord, en Europe et dans certaines régions d\'Asie. Contactez-nous pour vérifier la disponibilité dans votre région.',
+                'faq-q4': 'Combien de temps le drone peut-il voler sur une seule charge?',
+                'faq-a4': 'Le Skymind V0 peut voler jusqu\'à 20 minutes sur une seule charge. La plupart des vols opérationnels durent environ 10 à 15 minutes, avec un temps de réserve pour un retour et un atterrissage en toute sécurité. Le système prend en charge plusieurs vols par jour avec une recharge rapide.',
+                'faq-q5': 'Combien de temps faut-il pour recharger complètement?',
+                'faq-a5': 'La recharge prend environ 2x le temps de vol. Après un vol de 10 minutes, il faut environ 20 minutes pour atteindre une charge complète. Notre système de charge avancé garantit que le drone est prêt pour le déploiement rapidement.',
+                'faq-q6': 'Quelle superficie un système peut-il couvrir?',
+                'faq-a6': 'Le Skymind V0 a un rayon opérationnel maximum d\'environ 500 m (1 640 pi). La couverture dépend des exigences de temps de réponse et de la disposition de la propriété. Plusieurs systèmes peuvent être déployés pour des propriétés plus grandes.',
+                'faq-q7': 'Ai-je besoin d\'un pilote pour le drone?',
+                'faq-a7': 'Le système est entièrement autonome, mais la plupart des régions exigent qu\'un pilote commandant (PiC) soit connecté lorsque le drone vole. Le PiC peut être vous, votre entreprise de sécurité ou un service de pilotage à distance. Le PiC observe principalement les opérations et n\'intervient qu\'en cas d\'urgence.',
+                'faq-q8': 'Comment le système gère-t-il la confidentialité?',
+                'faq-a8': 'Toutes les images vous appartiennent. Vous pouvez exporter ou supprimer les données à tout moment et choisir votre emplacement de stockage préféré. Le système utilise un espace aérien géolocalisé pour garantir que les vols restent dans votre propriété, et le floutage IA en temps réel protège la vie privée des voisins.',
+                'faq-q9': 'Le drone peut-il reconnaître les visages?',
+                'faq-a9': 'Non. Le Skymind V0 détecte les personnes, les véhicules et les animaux mais n\'effectue pas de reconnaissance faciale. L\'IA se concentre sur les modèles de comportement et les menaces de sécurité plutôt que sur l\'identification individuelle.',
+                'faq-q10': 'Où sont stockées les images vidéo?',
+                'faq-a10': 'Par défaut, la vidéo est stockée en toute sécurité dans le cloud, mais l\'emplacement de stockage et la rétention peuvent être configurés en fonction de votre emplacement et de vos exigences de confidentialité. Vous gardez le contrôle total de vos données.',
+                'faq-q11': 'Que se passe-t-il si le drone a besoin de réparations?',
+                'faq-a11': 'Pendant votre accord de service, XAEROVA garantit que votre drone reste opérationnel et le remplacera ou le réparera selon les besoins. Notre équipe de support est disponible 24h/24 et 7j/7 pour l\'assistance et les situations d\'urgence.',
+                'faq-q12': 'Le système peut-il fonctionner par mauvais temps?',
+                'faq-a12': 'Le Skymind V0 est conçu pour fonctionner dans 99% des conditions météorologiques, y compris la pluie légère et les vents modérés. Le système évalue automatiquement les conditions météorologiques et retardera les vols si les conditions sont dangereuses.'
             }
         };
 
@@ -745,6 +1040,22 @@
             updateLanguageButtons(savedLang);
             translatePage(savedLang);
         });
+
+        // FAQ Toggle Function
+        function toggleFAQ(button) {
+            const faqItem = button.closest('.faq-item');
+            const isActive = faqItem.classList.contains('active');
+            
+            // Close all FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Open clicked item if it wasn't active
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        }
     </script>
     <script src="scrollytelling-standalone.js"></script>
 </body>
