@@ -537,6 +537,19 @@
             z-index: 5;
         }
 
+        /* Vignette at top of scrollytelling in light mode */
+        body.light-mode #scrollytelling-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to bottom, var(--bg-color) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 5;
+        }
+
         /* Smaller frame on mobile */
         @media (max-width: 768px) {
             #scrollytelling-frame {
