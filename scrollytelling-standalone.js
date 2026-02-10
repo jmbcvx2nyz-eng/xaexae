@@ -43,6 +43,14 @@
     }
     resize();
     window.addEventListener('resize', resize);
+    
+    // Redraw when theme changes
+    const observer = new MutationObserver(() => {
+      if (imagesLoaded) {
+        drawFrame(currentFrame);
+      }
+    });
+    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
   }
 
   // Load all images with optimization
@@ -195,7 +203,15 @@
 
     // Use requestAnimationFrame for smooth rendering
     rafId = requestAnimationFrame(() => {
+      // Clear canvas and set background color based on light mode
+      const isLightMode = document.body.classList.contains('light-mode');
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Fill with white background in light mode
+      if (isLightMode) {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
 
       const imgAspect = img.width / img.height;
       const canvasAspect = canvas.width / canvas.height;
