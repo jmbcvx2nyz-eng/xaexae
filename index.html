@@ -524,6 +524,19 @@
             box-sizing: border-box;
         }
 
+        /* Vignette at bottom of scrollytelling */
+        #scrollytelling-frame::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to top, var(--bg-color) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 5;
+        }
+
         /* Smaller frame on mobile */
         @media (max-width: 768px) {
             #scrollytelling-frame {
@@ -697,7 +710,7 @@
 </div>
 
     <!-- Drone Gallery Slider Section -->
-    <section class="py-20 px-6 md:px-10 max-w-7xl mx-auto">
+    <section class="py-20 w-full">
         <div class="slider-container relative">
             <button class="slider-arrow slider-arrow-left" onclick="slideCarousel(-1)" aria-label="Previous">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -764,11 +777,6 @@
             </button>
         </div>
         
-        <div class="text-center mt-12">
-            <button class="px-8 py-4 bg-[var(--accent-blue)] text-white font-bold uppercase tracking-widest text-sm hover:bg-[var(--accent-blue)]/80 transition-all duration-300 transform hover:scale-105" data-translate="discover-button">
-                Discover
-            </button>
-        </div>
     </section>
 
     <header class="pt-24 pb-16 px-6 text-center">
@@ -1237,14 +1245,14 @@
                 clearInterval(autoSlideInterval);
             }
             
-            // Auto-slide every 5 seconds
+            // Auto-slide every 1 second
             autoSlideInterval = setInterval(() => {
                 currentSlide++;
                 if (currentSlide >= totalSlides) {
                     currentSlide = 0;
                 }
                 updateSlider();
-            }, 5000);
+            }, 1000);
         }
 
         // Initialize slider when page loads
