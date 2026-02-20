@@ -27,12 +27,13 @@
         }
 
         body.light-mode {
-            --bg-color: #FAF8F3;
+            --bg-color: #dbdbdc;
             --text-color: #2C2C2C;
             --border-color: rgba(0, 0, 0, 0.1);
+            background-color: #dbdbdc;
             background-image: 
-                radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.03) 1px, transparent 0),
-                radial-gradient(circle at 2px 2px, rgba(0, 0, 0, 0.02) 1px, transparent 0);
+                radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.05) 1px, transparent 0),
+                radial-gradient(circle at 2px 2px, rgba(0, 0, 0, 0.03) 1px, transparent 0);
             background-size: 40px 40px, 60px 60px;
             background-position: 0 0, 20px 20px;
         }
@@ -520,14 +521,14 @@
             background-color: #000000;
         }
 
-        /* Light mode: frame background and border match scrollytelling background */
+        /* Light mode: frame background matches site background */
         body.light-mode #scrollytelling-frame {
             background-color: #dbdbdc;
             border: 2px solid #dbdbdc;
             box-sizing: border-box;
         }
 
-        /* Vignette at bottom of scrollytelling */
+        /* Vignette at bottom of scrollytelling (dark mode only) */
         #scrollytelling-frame::after {
             content: '';
             position: absolute;
@@ -540,22 +541,10 @@
             z-index: 5;
         }
 
-        /* Light mode: bottom vignette matches frame background */
+        /* In light mode we remove vignettes (no white fog) */
+        body.light-mode #scrollytelling-frame::before,
         body.light-mode #scrollytelling-frame::after {
-            background: linear-gradient(to top, #dbdbdc 0%, transparent 100%);
-        }
-
-        /* Vignette at top of scrollytelling in light mode */
-        body.light-mode #scrollytelling-frame::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 200px;
-            background: linear-gradient(to bottom, #dbdbdc 0%, transparent 100%);
-            pointer-events: none;
-            z-index: 5;
+            display: none;
         }
 
         /* Smaller frame on mobile */
