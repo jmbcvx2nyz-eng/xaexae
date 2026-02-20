@@ -5,7 +5,10 @@
   'use strict';
 
   const TOTAL_FRAMES = 240;
+  // Default (dark mode) sequence
   let images = [];
+  let imagesLight = [];
+  let lightImagesLoaded = false;
   let currentFrame = 0;
   let imagesLoaded = false;
   let canvas, ctx, container;
@@ -53,7 +56,7 @@
     observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
   }
 
-  // Load all images with optimization
+  // Load all images with optimization for DARK mode (default sequence)
   function loadImages() {
     const loadingEl = document.getElementById('scrollytelling-loading');
     const loadingPercentage = document.getElementById('loading-percentage');
@@ -64,7 +67,7 @@
     const isMobile = window.innerWidth <= 768;
     const BATCH_SIZE = isMobile ? 25 : 40; // Larger batches for faster loading
 
-    // Initialize images array
+    // Initialize images array for dark-mode sequence
     images = new Array(TOTAL_FRAMES);
 
     // Start timer
@@ -165,8 +168,74 @@
       }
     }
 
+        // Once dark sequence is ready, start background preload of light-mode sequence
+        preloadLightSequence();
+    }
+
     // Start loading all frames
     loadAllFrames();
+  }
+
+  // Preload LIGHT-MODE sequence in the background (no loading UI)
+  function preloadLightSequence() {
+    imagesLight = new Array(TOTAL_FRAMES);
+    let loaded = 0;
+    const CONCURRENT_LOADS = 8;
+    const isMobile = window.innerWidth <= 768;
+    const BATCH_SIZE = isMobile ? 25 : 40;
+
+    function loadLightImage(index) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        const frameNum = (index + 1).toString().padStart(3, '0');
+        const webpSrc = `sequence 2/ezgif-frame-${frameNum}.webp`;
+        const pngSrc = `sequence 2/ezgif-frame-${frameNum}.png`;
+
+        img.onload = () => {
+          loaded++;
+          imagesLight[index] = img;
+          resolve();
+        };
+
+        img.onerror = () => {
+          if (img.src.includes('.webp')) {
+            img.src = pngSrc;
+          } else {
+            // If both formats fail, just skip this frame
+            imagesLight[index] = null;
+            loaded++;
+            resolve();
+          }
+        };
+
+        img.src = webpSrc;
+      });
+    }
+
+    async function loadAllLightFrames() {
+      for (let start = 0; start < TOTAL_FRAMES; start += BATCH_SIZE) {
+        const end = Math.min(start + BATCH_SIZE, TOTAL_FRAMES);
+        const batchPromises = [];
+
+        for (let i = start; i < end; i++) {
+          batchPromises.push(loadLightImage(i));
+          if (batchPromises.length >= CONCURRENT_LOADS) {
+            await Promise.all(batchPromises);
+            batchPromises.length = 0;
+          }
+        }
+
+        if (batchPromises.length > 0) {
+          await Promise.all(batchPromises);
+        }
+
+        await new Promise(resolve => setTimeout(resolve, 2));
+      }
+
+      lightImagesLoaded = true;
+    }
+
+    loadAllLightFrames();
   }
 
   // Draw frame to canvas (optimized with interpolation)
@@ -174,25 +243,32 @@
   let lastDrawnFrame = -1;
   
   function drawFrame(index) {
-    if (!ctx || images.length === 0) return;
+    if (!ctx) return;
+    
+    const isLightMode = document.body.classList.contains('light-mode');
+    const sequence = (isLightMode && lightImagesLoaded && imagesLight.length === TOTAL_FRAMES)
+      ? imagesLight
+      : images;
+
+    if (!sequence || sequence.length === 0) return;
     
     // Use integer frame for now (can add interpolation later if needed)
     const frameIndex = Math.round(index);
-    const clamped = Math.max(0, Math.min(frameIndex, images.length - 1));
+    const clamped = Math.max(0, Math.min(frameIndex, sequence.length - 1));
     
     // Skip if same frame is already drawn
     if (clamped === lastDrawnFrame && images[clamped] && images[clamped].complete) {
       return;
     }
     
-    const img = images[clamped];
+    const img = sequence[clamped];
     
     // If image not loaded, try to find nearest loaded frame
     if (!img || !img.complete) {
       // Find nearest loaded frame
       for (let offset = 1; offset < 20; offset++) {
-        const prevFrame = images[clamped - offset];
-        const nextFrame = images[clamped + offset];
+        const prevFrame = sequence[clamped - offset];
+        const nextFrame = sequence[clamped + offset];
         
         if (prevFrame && prevFrame.complete) {
           drawFrame(clamped - offset);
