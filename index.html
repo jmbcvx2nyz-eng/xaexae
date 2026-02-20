@@ -524,7 +524,7 @@
             box-sizing: border-box;
         }
 
-        /* Vignette at bottom of scrollytelling */
+        /* Vignette at bottom of scrollytelling (dark mode only) */
         #scrollytelling-frame::after {
             content: '';
             position: absolute;
@@ -537,17 +537,10 @@
             z-index: 5;
         }
 
-        /* Vignette at top of scrollytelling in light mode */
-        body.light-mode #scrollytelling-frame::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 200px;
-            background: linear-gradient(to bottom, var(--bg-color) 0%, transparent 100%);
-            pointer-events: none;
-            z-index: 5;
+        /* No vignette in light mode */
+        body.light-mode #scrollytelling-frame::before,
+        body.light-mode #scrollytelling-frame::after {
+            display: none;
         }
 
         /* Smaller frame on mobile */
@@ -594,6 +587,26 @@
 
         .scrollytelling-text * {
             pointer-events: auto;
+        }
+
+        /* Scrollytelling text black in light mode */
+        body.light-mode #scrollytelling-frame #scrollytelling-title h1,
+        body.light-mode #scrollytelling-frame #scrollytelling-title p,
+        body.light-mode #scrollytelling-frame #scrollytelling-params h2,
+        body.light-mode #scrollytelling-frame #scrollytelling-speed h2,
+        body.light-mode #scrollytelling-frame #scrollytelling-cta h2 {
+            color: #111 !important;
+        }
+        body.light-mode #scrollytelling-frame #scrollytelling-speed span {
+            color: rgba(0,0,0,0.75) !important;
+        }
+        body.light-mode #scrollytelling-frame #scrollytelling-cta button {
+            background: rgba(0,0,0,0.08);
+            border-color: rgba(0,0,0,0.25);
+            color: #111;
+        }
+        body.light-mode #scrollytelling-frame #scrollytelling-cta button:hover {
+            background: rgba(0,0,0,0.15);
         }
 
         /* Mobile text size optimizations */
