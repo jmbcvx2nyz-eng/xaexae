@@ -103,7 +103,9 @@
           document.body.classList.remove('scrollytelling-loading');
           document.body.classList.add('scrollytelling-ready');
           
+          // Draw initial frame and start preloading light-mode sequence
           drawFrame(0);
+          preloadLightSequence();
         }, 500);
       }
     }
@@ -166,10 +168,6 @@
         // Minimal delay between batches for faster loading
         await new Promise(resolve => setTimeout(resolve, 2));
       }
-    }
-
-        // Once dark sequence is ready, start background preload of light-mode sequence
-        preloadLightSequence();
     }
 
     // Start loading all frames
