@@ -300,10 +300,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: filter 0.5s ease;
-        }
-
-        .slider-image-container:hover .slider-image {
+            /* Always full color in both dark and light mode */
             filter: grayscale(0%) contrast(1) brightness(1);
         }
 
@@ -398,6 +395,11 @@
         .grayscale-img { 
             filter: grayscale(100%) contrast(1.5) brightness(0.9); 
             transition: 0.5s; 
+        }
+        /* Slider images always full color (dark and light mode) */
+        .slider-image-container .slider-image,
+        .slider-image-container .grayscale-img {
+            filter: grayscale(0%) contrast(1) brightness(1);
         }
         /* Images become colorful on hover */
         .use-case-card:hover .grayscale-img, .hover-box:hover .grayscale-img { 
@@ -518,13 +520,14 @@
             background-color: #000000;
         }
 
-        /* Thin frame in light mode matching background color */
+        /* Light mode: frame background and border match scrollytelling background */
         body.light-mode #scrollytelling-frame {
-            border: 2px solid #FAF8F3;
+            background-color: #dbdbdc;
+            border: 2px solid #dbdbdc;
             box-sizing: border-box;
         }
 
-        /* Vignette at bottom of scrollytelling (dark mode only) */
+        /* Vignette at bottom of scrollytelling */
         #scrollytelling-frame::after {
             content: '';
             position: absolute;
@@ -537,10 +540,22 @@
             z-index: 5;
         }
 
-        /* No vignette in light mode */
-        body.light-mode #scrollytelling-frame::before,
+        /* Light mode: bottom vignette matches frame background */
         body.light-mode #scrollytelling-frame::after {
-            display: none;
+            background: linear-gradient(to top, #dbdbdc 0%, transparent 100%);
+        }
+
+        /* Vignette at top of scrollytelling in light mode */
+        body.light-mode #scrollytelling-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to bottom, #dbdbdc 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 5;
         }
 
         /* Smaller frame on mobile */
@@ -589,24 +604,25 @@
             pointer-events: auto;
         }
 
-        /* Scrollytelling text black in light mode */
+        /* Scrollytelling text theme blue in light mode */
         body.light-mode #scrollytelling-frame #scrollytelling-title h1,
         body.light-mode #scrollytelling-frame #scrollytelling-title p,
         body.light-mode #scrollytelling-frame #scrollytelling-params h2,
         body.light-mode #scrollytelling-frame #scrollytelling-speed h2,
         body.light-mode #scrollytelling-frame #scrollytelling-cta h2 {
-            color: #111 !important;
+            color: var(--accent-blue) !important;
         }
         body.light-mode #scrollytelling-frame #scrollytelling-speed span {
-            color: rgba(0,0,0,0.75) !important;
+            color: var(--accent-blue) !important;
+            opacity: 0.85;
         }
         body.light-mode #scrollytelling-frame #scrollytelling-cta button {
-            background: rgba(0,0,0,0.08);
-            border-color: rgba(0,0,0,0.25);
-            color: #111;
+            background: rgba(0, 128, 255, 0.15);
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
         }
         body.light-mode #scrollytelling-frame #scrollytelling-cta button:hover {
-            background: rgba(0,0,0,0.15);
+            background: rgba(0, 128, 255, 0.25);
         }
 
         /* Mobile text size optimizations */
