@@ -60,7 +60,7 @@
         body.light-mode .section-warm { background-color: var(--bg-warm); }
         body.light-mode .section-warm-alt { background-color: var(--bg-warm-alt); }
 
-        /* Light dotted texture – only on some sections; smaller, lower contrast */
+        /* Dotted texture – only on dotted sections; visible in both modes */
         .dotted-overlay {
             position: relative;
         }
@@ -68,19 +68,19 @@
             content: '';
             position: absolute;
             inset: 0;
-            background-image: radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px);
-            background-size: 28px 28px;
+            background-image: radial-gradient(circle, rgba(0,0,0,0.12) 1.25px, transparent 1.25px);
+            background-size: 22px 22px;
             pointer-events: none;
         }
-        /* Dark mode: light dots, subtle */
+        /* Dark mode: light dots */
         body:not(.light-mode) .dotted-overlay::after {
-            background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
-            background-size: 28px 28px;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.14) 1.25px, transparent 1.25px);
+            background-size: 22px 22px;
         }
-        /* Light mode: dark dots, subtle */
+        /* Light mode: dark dots */
         body.light-mode .dotted-overlay::after {
-            background-image: radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px);
-            background-size: 28px 28px;
+            background-image: radial-gradient(circle, rgba(0,0,0,0.12) 1.25px, transparent 1.25px);
+            background-size: 22px 22px;
         }
 
         /* Section container with rounded corners */
@@ -633,7 +633,7 @@
             box-sizing: border-box;
         }
 
-        /* Vignette at bottom of scrollytelling (dark mode only) */
+        /* Vignette at bottom of scrollytelling */
         #scrollytelling-frame::after {
             content: '';
             position: absolute;
@@ -646,9 +646,12 @@
             z-index: 5;
         }
 
-        /* In light mode we remove vignettes (no white fog) */
-        body.light-mode #scrollytelling-frame::before,
+        /* Light mode: bottom vignette blends into next section */
         body.light-mode #scrollytelling-frame::after {
+            background: linear-gradient(to top, var(--bg-warm) 0%, transparent 100%);
+        }
+        /* Light mode: no top vignette */
+        body.light-mode #scrollytelling-frame::before {
             display: none;
         }
 
