@@ -34,6 +34,7 @@
             --bg-warm: #faf7f2;
             --bg-warm-alt: #f5f1ea;
             --accent-warm: #e67e22;
+            --bg-dark-alt: #0c0c0c;
         }
 
         body.light-mode {
@@ -48,10 +49,14 @@
             background-position: 0 0, 20px 20px;
         }
 
-        /* Premium section backgrounds (subtle gradient transitions) */
+        /* Premium section backgrounds (subtle gradient transitions) – both modes */
         .section-gradient-base {
             background: linear-gradient(180deg, var(--bg-color) 0%, var(--bg-color) 100%);
         }
+        /* Dark mode: alternate section tones */
+        body:not(.light-mode) .section-warm { background-color: var(--bg-color); }
+        body:not(.light-mode) .section-warm-alt { background-color: var(--bg-dark-alt); }
+        /* Light mode */
         body.light-mode .section-warm { background-color: var(--bg-warm); }
         body.light-mode .section-warm-alt { background-color: var(--bg-warm-alt); }
 
@@ -66,6 +71,10 @@
             background-image: radial-gradient(circle, rgba(0,0,0,0.03) 1px, transparent 1px);
             background-size: 24px 24px;
             pointer-events: none;
+        }
+        /* Dark mode: very subtle light dots for texture (Sunflower-style) */
+        body:not(.light-mode) .dotted-overlay::after {
+            background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
         }
         body.light-mode .dotted-overlay::after {
             background-image: radial-gradient(circle, rgba(0,0,0,0.025) 1px, transparent 1px);
@@ -93,6 +102,9 @@
         @media (max-width: 768px) {
             .divider-wave svg { height: 32px; }
         }
+        /* Dark mode: divider fills match section below */
+        body:not(.light-mode) .divider-wave.divider-fill-warm-alt svg { fill: var(--bg-dark-alt); }
+        /* Light mode */
         body.light-mode .divider-wave svg { fill: var(--bg-color); }
         body.light-mode .divider-wave.divider-fill-warm svg { fill: var(--bg-warm); }
         body.light-mode .divider-wave.divider-fill-warm-alt svg { fill: var(--bg-warm-alt); }
@@ -827,76 +839,6 @@
         </div>
     </div>
 </div>
-
-    <!-- Drone Gallery Slider Section -->
-    <section class="py-20 w-full hidden md:block">
-        <div class="slider-container relative">
-            <button class="slider-arrow slider-arrow-left" onclick="slideCarousel(-1)" aria-label="Previous">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M15 18l-6-6 6-6"/>
-                </svg>
-            </button>
-            
-            <div class="slider-wrapper">
-                <div class="slider-track" id="sliderTrack">
-                    <div class="slider-slide">
-                        <div class="slider-image-container">
-                            <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&q=80&w=1200" 
-                                 alt="Drone 1" 
-                                 class="slider-image grayscale-img">
-                            <div class="slider-overlay">
-                                <h3 class="slider-title">Skymind V0</h3>
-                                <p class="slider-subtitle">Aerospace Security</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="slider-slide">
-                        <div class="slider-image-container">
-                            <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&q=80&w=1200" 
-                                 alt="Drone 2" 
-                                 class="slider-image grayscale-img">
-                            <div class="slider-overlay">
-                                <h3 class="slider-title">Skymind V1</h3>
-                                <p class="slider-subtitle">Advanced Surveillance</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="slider-slide">
-                        <div class="slider-image-container">
-                            <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=80&w=1200" 
-                                 alt="Aerial View Property" 
-                                 class="slider-image grayscale-img">
-                            <div class="slider-overlay">
-                                <h3 class="slider-title">Skymind V2</h3>
-                                <p class="slider-subtitle">Enterprise Solution</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="slider-slide">
-                        <div class="slider-image-container">
-                            <img src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?auto=format&fit=crop&q=80&w=1200" 
-                                 alt="Drone 4" 
-                                 class="slider-image grayscale-img">
-                            <div class="slider-overlay">
-                                <h3 class="slider-title">Skymind Pro</h3>
-                                <p class="slider-subtitle">Professional Grade</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <button class="slider-arrow slider-arrow-right" onclick="slideCarousel(1)" aria-label="Next">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M9 18l6-6-6-6"/>
-                </svg>
-            </button>
-        </div>
-        
-    </section>
 
     <!-- SVG wave divider -->
     <div class="divider-wave" aria-hidden="true">
