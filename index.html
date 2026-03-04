@@ -195,8 +195,6 @@
             opacity: 0.7;
             border: none;
             cursor: pointer;
-            width: 52px;
-            min-width: 52px;
             font-weight: 700;
             transition: all 0.2s ease;
             display: inline-flex;
@@ -205,6 +203,9 @@
             text-align: center;
             line-height: 1;
         }
+        /* Equal-width ENG/FR boxes: same size on all screens */
+        .lang-toggle-wrap { width: 106px; }
+        .lang-toggle-wrap .lang-option { flex: 1 1 0; min-width: 0; padding-left: 0.5rem; padding-right: 0.5rem; }
 
         .lang-option:hover {
             opacity: 1;
@@ -548,13 +549,13 @@
 
         <div class="nav-right">
             <div class="flex items-center gap-4">
-                <!-- Language Toggle -->
-                <div class="flex items-center gap-0 border border-[var(--border-color)] rounded overflow-hidden">
-                    <button id="langENG" onclick="setLanguage('en')" class="lang-option text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 transition">
+                <!-- Language Toggle – equal-width ENG/FR on mobile -->
+                <div class="lang-toggle-wrap flex items-center gap-0 border border-[var(--border-color)] rounded overflow-hidden">
+                    <button id="langENG" onclick="setLanguage('en')" class="lang-option text-[9px] font-bold uppercase tracking-widest py-1.5 transition">
                         ENG
                     </button>
-                    <div class="w-px h-4 bg-[var(--border-color)]"></div>
-                    <button id="langFR" onclick="setLanguage('fr')" class="lang-option text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 transition">
+                    <div class="w-px h-4 shrink-0 bg-[var(--border-color)]" aria-hidden="true"></div>
+                    <button id="langFR" onclick="setLanguage('fr')" class="lang-option text-[9px] font-bold uppercase tracking-widest py-1.5 transition">
                         FR
                     </button>
                 </div>
