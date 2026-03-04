@@ -42,6 +42,11 @@
             background-position: 0 0, 20px 20px;
         }
 
+        html, body {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
@@ -49,7 +54,6 @@
             transition: background-color 0.3s ease, color 0.3s ease, background-image 0.3s ease;
             margin: 0;
             overflow-x: hidden;
-            width: 100vw;
             min-height: 100vh;
         }
 
@@ -90,9 +94,14 @@
             opacity: 0.7;
             border: none;
             cursor: pointer;
-            min-width: 40px;
+            min-width: 48px;
             font-weight: 700;
             transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1;
         }
         .lang-option:hover { opacity: 1; background-color: rgba(0, 128, 255, 0.1); }
         .lang-option.active { opacity: 1; background-color: var(--accent-blue); color: white; font-weight: 900; }
@@ -244,7 +253,7 @@
         }
         body.light-mode #scrollytelling-frame::before { display: none; }
         @media (max-width: 768px) {
-            #scrollytelling-frame { height: 50vh; width: 100vw; margin: 0; padding: 0; }
+            #scrollytelling-frame { height: 50vh; width: 100%; margin: 0; padding: 0; }
         }
         #scrollytelling-canvas {
             position: absolute;
@@ -253,7 +262,7 @@
             object-fit: cover;
         }
         @media (max-width: 768px) {
-            #scrollytelling-canvas { width: 100vw; max-width: 100vw; left: 0; right: 0; }
+            #scrollytelling-canvas { width: 100%; max-width: 100%; left: 0; right: 0; }
         }
         .scrollytelling-text {
             position: absolute;
@@ -301,7 +310,6 @@
         <a href="index.html#residential" onclick="toggleMenu()" class="logo-font text-2xl uppercase tracking-widest" data-translate="nav-residential">Residential</a>
         <a href="index.html#commercial" onclick="toggleMenu()" class="logo-font text-2xl uppercase tracking-widest" data-translate="nav-commercial">Commercial</a>
         <a href="index.html#enterprise" onclick="toggleMenu()" class="logo-font text-2xl uppercase tracking-widest" data-translate="nav-enterprise">Enterprise</a>
-        <a href="prototype.html" onclick="toggleMenu()" class="logo-font text-2xl uppercase tracking-widest" data-translate="nav-prototype">Prototype</a>
     </div>
 
     <nav>
@@ -320,7 +328,6 @@
             <a href="index.html#residential" class="hover:text-[var(--accent-blue)] transition" data-translate="nav-residential">Residential</a>
             <a href="index.html#commercial" class="hover:text-[var(--accent-blue)] transition" data-translate="nav-commercial">Commercial</a>
             <a href="index.html#enterprise" class="hover:text-[var(--accent-blue)] transition" data-translate="nav-enterprise">Enterprise</a>
-            <a href="prototype.html" class="hover:text-[var(--accent-blue)] transition" data-translate="nav-prototype">Prototype</a>
         </div>
         <div class="nav-right">
             <div class="flex items-center gap-4">
@@ -385,14 +392,14 @@
         }
         const translations = {
             en: {
-                'nav-residential': 'Residential', 'nav-commercial': 'Commercial', 'nav-enterprise': 'Enterprise', 'nav-prototype': 'Prototype',
+                'nav-residential': 'Residential', 'nav-commercial': 'Commercial', 'nav-enterprise': 'Enterprise',
                 'close-menu': 'Close [X]',
                 'scrolly-title': 'Skymind V0', 'scrolly-subtitle': 'Aerospace Security', 'scrolly-params': 'Remote Flying',
                 'scrolly-speed': 'Built for Convenience.<br /><span class="text-white/70">Designed for Scale.</span>',
                 'scrolly-cta': 'Take Full Control', 'scrolly-button': 'Get Started'
             },
             fr: {
-                'nav-residential': 'Résidentiel', 'nav-commercial': 'Commercial', 'nav-enterprise': 'Entreprise', 'nav-prototype': 'Prototype',
+                'nav-residential': 'Résidentiel', 'nav-commercial': 'Commercial', 'nav-enterprise': 'Entreprise',
                 'close-menu': 'Fermer [X]',
                 'scrolly-title': 'Skymind V0', 'scrolly-subtitle': 'Sécurité Aérospatiale', 'scrolly-params': 'Vol à Distance',
                 'scrolly-speed': 'Conçu pour la Commodité.<br /><span class="text-white/70">Pensé pour l\'Échelle.</span>',

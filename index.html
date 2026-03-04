@@ -146,6 +146,11 @@
             box-shadow: 0 0 24px rgba(0, 128, 255, 0.35);
         }
 
+        html, body {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
@@ -153,7 +158,6 @@
             transition: background-color 0.3s ease, color 0.3s ease, background-image 0.3s ease;
             margin: 0;
             overflow-x: hidden;
-            width: 100vw;
             min-height: 100vh;
         }
 
@@ -191,9 +195,14 @@
             opacity: 0.7;
             border: none;
             cursor: pointer;
-            min-width: 40px;
+            min-width: 48px;
             font-weight: 700;
             transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1;
         }
 
         .lang-option:hover {
@@ -515,7 +524,6 @@
         <a href="#residential" onclick="toggleMenu()" class="logo-font text-2xl uppercase tracking-widest" data-translate="nav-residential">Residential</a>
         <a href="#commercial" onclick="toggleMenu()" class="logo-font text-2xl uppercase tracking-widest" data-translate="nav-commercial">Commercial</a>
         <a href="#enterprise" onclick="toggleMenu()" class="logo-font text-2xl uppercase tracking-widest" data-translate="nav-enterprise">Enterprise</a>
-        <a href="prototype.html" onclick="toggleMenu()" class="logo-font text-2xl uppercase tracking-widest" data-translate="nav-prototype">Prototype</a>
     </div>
 
     <nav>
@@ -535,7 +543,6 @@
             <a href="#residential" class="hover:text-[var(--accent-blue)] transition" data-translate="nav-residential">Residential</a>
             <a href="#commercial" class="hover:text-[var(--accent-blue)] transition" data-translate="nav-commercial">Commercial</a>
             <a href="#enterprise" class="hover:text-[var(--accent-blue)] transition" data-translate="nav-enterprise">Enterprise</a>
-            <a href="prototype.html" class="hover:text-[var(--accent-blue)] transition" data-translate="nav-prototype">Prototype</a>
         </div>
 
         <div class="nav-right">
@@ -856,7 +863,6 @@
                 'nav-residential': 'Residential',
                 'nav-commercial': 'Commercial',
                 'nav-enterprise': 'Enterprise',
-                'nav-prototype': 'Prototype',
                 'close-menu': 'Close [X]',
                 'header-title': 'Eyes In The Sky',
                 'header-subtitle': 'Skymind is the only fully autonomous, AI-powered drone security system built to protect high-value infrastructure.',
@@ -913,7 +919,7 @@
                 'faq-q4': 'How long can the drone fly on a single charge?',
                 'faq-a4': 'The Skymind V0 can fly for up to 20 minutes on a single charge. Most operational flights last around 10-15 minutes, with reserve time for safe return and landing. The system supports multiple flights per day with rapid recharging.',
                 'faq-q5': 'How long does it take to fully recharge?',
-                'faq-a5': 'Recharging takes approximately 2x the flight time. After a 10-minute flight, it takes about 20 minutes to reach full charge. Our advanced charging system ensures the drone is ready for deployment quickly.',
+                'faq-a5': 'It takes about 1 hour and 30 minutes to fully recharge after a 30-minute flight.',
                 'faq-q6': 'How much area can one system cover?',
                 'faq-a6': 'The Skymind V0 has a maximum operational radius of approximately 500m (1,640 ft). Coverage depends on response time requirements and property layout. Multiple systems can be deployed for larger properties.',
                 'faq-q7': 'Do I need a pilot for the drone?',
@@ -933,7 +939,6 @@
                 'nav-residential': 'Résidentiel',
                 'nav-commercial': 'Commercial',
                 'nav-enterprise': 'Entreprise',
-                'nav-prototype': 'Prototype',
                 'close-menu': 'Fermer [X]',
                 'header-title': 'Des Yeux Dans Le Ciel',
                 'header-subtitle': 'The Beehive est le seul système de sécurité par drone entièrement autonome et alimenté par l\'IA, conçu pour protéger les infrastructures à haute valeur.',
@@ -990,7 +995,7 @@
                 'faq-q4': 'Combien de temps le drone peut-il voler sur une seule charge?',
                 'faq-a4': 'Le Skymind V0 peut voler jusqu\'à 20 minutes sur une seule charge. La plupart des vols opérationnels durent environ 10 à 15 minutes, avec un temps de réserve pour un retour et un atterrissage en toute sécurité. Le système prend en charge plusieurs vols par jour avec une recharge rapide.',
                 'faq-q5': 'Combien de temps faut-il pour recharger complètement?',
-                'faq-a5': 'La recharge prend environ 2x le temps de vol. Après un vol de 10 minutes, il faut environ 20 minutes pour atteindre une charge complète. Notre système de charge avancé garantit que le drone est prêt pour le déploiement rapidement.',
+                'faq-a5': 'Il faut environ 1 h 30 pour recharger complètement après un vol de 30 minutes.',
                 'faq-q6': 'Quelle superficie un système peut-il couvrir?',
                 'faq-a6': 'Le Skymind V0 a un rayon opérationnel maximum d\'environ 500 m (1 640 pi). La couverture dépend des exigences de temps de réponse et de la disposition de la propriété. Plusieurs systèmes peuvent être déployés pour des propriétés plus grandes.',
                 'faq-q7': 'Ai-je besoin d\'un pilote pour le drone?',
