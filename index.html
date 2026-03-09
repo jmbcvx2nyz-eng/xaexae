@@ -95,6 +95,18 @@
             transition: var(--transition-smooth);
         }
 
+        #mission.mission-section { position: relative; }
+        .mission-sticker {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: auto;
+            max-width: 140px;
+            max-height: 100px;
+            object-fit: contain;
+            pointer-events: none;
+        }
+
         /* SVG divider component – high-contrast visible wave */
         .divider-wave {
             display: block;
@@ -267,10 +279,17 @@
                 grid-template-columns: 1fr auto minmax(160px, 1fr);
                 padding-left: 16px;
                 padding-right: 28px;
+                gap: 12px;
             }
             .desktop-nav { display: none; }
             .mobile-sandwich { display: flex; justify-content: flex-start; }
-            .nav-logo-container { display: flex; justify-content: center; }
+            .nav-logo-container {
+                display: flex;
+                justify-content: center;
+                max-width: 100px;
+                min-width: 0;
+            }
+            .nav-logo-container .logo-img { max-width: 100%; height: 12px; }
             .nav-right {
                 display: flex;
                 justify-content: flex-end;
@@ -581,9 +600,18 @@
         </div>
     </header>
 
-    <section id="mission" class="py-16 px-6 md:px-10 max-w-4xl mx-auto section-warm-alt">
+    <section id="mission" class="mission-section py-16 px-6 md:px-10 max-w-4xl mx-auto section-warm-alt">
+        <img src="sticker.png" alt="" class="mission-sticker" aria-hidden="true">
         <h2 class="logo-font text-2xl mb-8 uppercase tracking-widest opacity-80" data-translate="about-title">Our Mission</h2>
         <p class="text-lg opacity-90 leading-relaxed" data-translate="about-body">XAerova exists to make physical security, patrol, and property oversight simple and affordable. We help homeowners and businesses monitor and protect the places that matter most, from homes and farms to construction sites and facilities. Our autonomous drone systems provide reliable remote presence even when owners cannot be there in person. By removing the cost and complexity of traditional security teams and enterprise drone systems, XAerova delivers peace of mind that anyone can use.</p>
+    </section>
+
+    <section id="skymind" class="py-16 px-6 md:px-10 max-w-4xl mx-auto section-warm">
+        <h2 class="logo-font text-2xl mb-8 uppercase tracking-widest opacity-80" data-translate="skymind-title">Skymind</h2>
+        <p class="text-lg opacity-90 leading-relaxed mb-10" data-translate="skymind-body">Skymind is our remote flying drone platform, designed to strengthen security for communities and businesses. By providing reliable aerial oversight that can be piloted from anywhere, it helps protect property, deter incidents, and give peace of mind—contributing to a safer society for everyone.</p>
+        <div class="max-w-4xl mx-auto overflow-hidden section-container" style="border-radius: var(--radius-card); box-shadow: var(--shadow-soft); border: 1px solid var(--border-color);">
+            <img src="Skymind.PNG" alt="Skymind remote flying drone" class="grayscale-img w-full h-auto opacity-90">
+        </div>
     </section>
 
     <section class="py-16 px-6 md:px-10 max-w-7xl mx-auto section-warm dotted-overlay">
@@ -874,6 +902,8 @@
                 'header-subtitle': 'Simple, affordable physical security and property oversight for homeowners and businesses—anywhere.',
                 'about-title': 'Our Mission',
                 'about-body': 'XAerova exists to make physical security, patrol, and property oversight simple and affordable. We help homeowners and businesses monitor and protect the places that matter most, from homes and farms to construction sites and facilities. Our autonomous drone systems provide reliable remote presence even when owners cannot be there in person. By removing the cost and complexity of traditional security teams and enterprise drone systems, XAerova delivers peace of mind that anyone can use.',
+                'skymind-title': 'Skymind',
+                'skymind-body': 'Skymind is our remote flying drone platform, designed to strengthen security for communities and businesses. By providing reliable aerial oversight that can be piloted from anywhere, it helps protect property, deter incidents, and give peace of mind—contributing to a safer society for everyone.',
                 'feature-1': 'remote flying',
                 'feature-2': 'light and effective',
                 'feature-3': 'easy to carry',
@@ -952,6 +982,8 @@
                 'header-subtitle': 'Sécurité physique et surveillance des biens simples et abordables, pour particuliers et professionnels—partout.',
                 'about-title': 'Notre mission',
                 'about-body': 'XAerova existe pour rendre la sécurité physique, la patrouille et la surveillance des biens simples et abordables. Nous aidons les particuliers et les entreprises à surveiller et protéger les lieux qui comptent le plus, des maisons et fermes aux chantiers et installations. Nos systèmes de drones autonomes offrent une présence à distance fiable même lorsque les propriétaires ne peuvent pas être sur place. En éliminant le coût et la complexité des équipes de sécurité traditionnelles et des systèmes de drones d\'entreprise, XAerova offre une tranquillité d\'esprit accessible à tous.',
+                'skymind-title': 'Skymind',
+                'skymind-body': 'Skymind est notre plateforme de drone volant à distance, conçue pour renforcer la sécurité des communautés et des entreprises. En offrant une surveillance aérienne fiable pilotable de n\'importe où, il contribue à protéger les biens, à dissuader les incidents et à offrir une tranquillité d\'esprit—au service d\'une société plus sûre pour tous.',
                 'feature-1': 'vol à distance',
                 'feature-2': 'léger et efficace',
                 'feature-3': 'facile à transporter',
