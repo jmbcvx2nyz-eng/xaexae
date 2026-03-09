@@ -288,6 +288,7 @@
                 justify-content: center;
                 max-width: 100px;
                 min-width: 0;
+                margin-left: -12px;
             }
             .nav-logo-container .logo-img { max-width: 100%; height: 12px; }
             .nav-right {
@@ -533,6 +534,22 @@
         .use-case-card:hover .grayscale-img, .hover-box:hover .grayscale-img { 
             filter: grayscale(0%) contrast(1) brightness(1); 
         }
+        /* Skymind section: image shows in color + hover animation */
+        .skymind-image-wrap {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            display: block;
+        }
+        .skymind-image-wrap:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        .skymind-image-wrap:hover .grayscale-img {
+            filter: grayscale(0%) contrast(1) brightness(1);
+            opacity: 1;
+        }
+        .skymind-image-wrap .grayscale-img {
+            transition: filter 0.4s ease, opacity 0.4s ease;
+        }
 
         html { scroll-behavior: smooth; }
     </style>
@@ -609,7 +626,7 @@
     <section id="skymind" class="py-16 px-6 md:px-10 max-w-4xl mx-auto section-warm">
         <h2 class="logo-font text-2xl mb-8 uppercase tracking-widest opacity-80" data-translate="skymind-title">Skymind</h2>
         <p class="text-lg opacity-90 leading-relaxed mb-10" data-translate="skymind-body">Skymind is our remote flying drone platform, designed to strengthen security for communities and businesses. By providing reliable aerial oversight that can be piloted from anywhere, it helps protect property, deter incidents, and give peace of mind—contributing to a safer society for everyone.</p>
-        <div class="max-w-4xl mx-auto overflow-hidden section-container" style="border-radius: var(--radius-card); box-shadow: var(--shadow-soft); border: 1px solid var(--border-color);">
+        <div class="skymind-image-wrap max-w-4xl mx-auto overflow-hidden section-container" style="border-radius: var(--radius-card); box-shadow: var(--shadow-soft); border: 1px solid var(--border-color);">
             <img src="Skymind.PNG" alt="Skymind remote flying drone" class="grayscale-img w-full h-auto opacity-90">
         </div>
     </section>
@@ -713,7 +730,7 @@
                 </ul>
             </div>
             <div data-aos="fade-left" class="grid grid-cols-2 gap-4">
-                <div class="spec-box p-6 card-elevated" style="border-radius: var(--radius-card);"><div class="text-2xl font-bold logo-font text-[var(--accent-blue)]">20min</div><div class="text-[10px] uppercase opacity-40" data-translate="flight-time">Flight Time</div></div>
+                <div class="spec-box p-6 card-elevated" style="border-radius: var(--radius-card);"><div class="text-2xl font-bold logo-font text-[var(--accent-blue)]">30min</div><div class="text-[10px] uppercase opacity-40" data-translate="flight-time">Flight Time</div></div>
                 <div class="spec-box p-6 card-elevated" style="border-radius: var(--radius-card);"><div class="text-2xl font-bold logo-font text-[var(--accent-blue)]">2X</div><div class="text-[10px] uppercase opacity-40" data-translate="recharge-speed">Recharge Speed</div></div>
             </div>
         </div>
