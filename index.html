@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XAEROVA | Autonomous Drone Infrastructure</title>
+    <title>XAerova | Autonomous Drone Infrastructure</title>
     <link rel="icon" type="image/png" href="Favicon 3.PNG">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -550,6 +550,55 @@
         .skymind-image-wrap .grayscale-img {
             transition: filter 0.4s ease, opacity 0.4s ease;
         }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            background: var(--bg-warm);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 14px;
+            color: var(--text-color);
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(100, 210, 255, 0.2);
+        }
+        .contact-submit {
+            border: 1px solid var(--border-color);
+            background: var(--accent-blue);
+            color: #06131a;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border-radius: 8px;
+            padding: 12px 16px;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+        .contact-submit:hover {
+            transform: translateY(-1px);
+            opacity: 0.95;
+        }
+        .social-icon-link {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            background: var(--bg-warm);
+            transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+        .social-icon-link:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
 
         html { scroll-behavior: smooth; }
     </style>
@@ -570,11 +619,11 @@
             </button>
         </div>
         <div class="hidden lg:flex nav-logo-container">
-            <img src="no bg.png" alt="XAEROVA" class="logo-img">
+            <img src="no bg.png" alt="XAerova" class="logo-img">
         </div>
         
         <div class="nav-logo-container lg:hidden">
-            <img src="no bg.png" alt="XAEROVA" class="logo-img">
+            <img src="no bg.png" alt="XAerova" class="logo-img">
         </div>
         <div class="hidden lg:flex desktop-nav gap-12 text-[10px] font-bold uppercase tracking-[0.4em] opacity-60">
             <a href="#residential" class="hover:text-[var(--accent-blue)] transition" data-translate="nav-residential">Residential</a>
@@ -866,7 +915,7 @@
                         <span class="faq-icon text-2xl">+</span>
                     </button>
                     <div class="faq-answer text-sm opacity-70">
-                        <p data-translate="faq-a11">During your service agreement, XAEROVA ensures your drone stays operational and will replace or repair it as needed. Our support team is available 24/7 for assistance and emergency situations.</p>
+                        <p data-translate="faq-a11">During your service agreement, XAerova ensures your drone stays operational and will replace or repair it as needed. Our support team is available 24/7 for assistance and emergency situations.</p>
                     </div>
                 </div>
 
@@ -883,6 +932,48 @@
         </div>
     </section>
 
+    <section id="contact" class="py-16 px-6 md:px-10 max-w-7xl mx-auto section-warm-alt">
+        <div class="grid md:grid-cols-2 gap-10 items-start">
+            <div>
+                <h2 class="logo-font text-3xl md:text-4xl font-black uppercase mb-6" data-translate="contact-title">Contact Us</h2>
+                <p class="opacity-70 mb-6" data-translate="contact-body">Send us a message and our team will get back to you shortly.</p>
+                <div class="space-y-3 text-sm">
+                    <p><span class="opacity-60" data-translate="contact-email-label">Email:</span> <a href="mailto:info@XAerova.fr" class="underline">info@XAerova.fr</a></p>
+                    <p><span class="opacity-60" data-translate="contact-phone-label">Phone:</span> <a href="tel:+2250778084491" class="underline">+2250778084491</a></p>
+                </div>
+                <div class="flex items-center gap-3 mt-6">
+                    <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X" class="social-icon-link">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                            <path d="M18.244 2H21l-6.56 7.498L22 22h-5.956l-4.664-6.1L5.98 22H3.22l7.017-8.018L2 2h6.044l4.214 5.56L18.244 2zm-1.044 18h1.65L7.148 3.9H5.37L17.2 20z"></path>
+                        </svg>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-icon-link">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                            <circle cx="12" cy="12" r="4"></circle>
+                            <circle cx="17.5" cy="6.5" r="1"></circle>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <form class="contact-form card-elevated p-6" action="mailto:info@XAerova.fr" method="post" enctype="text/plain">
+                <div class="mb-4">
+                    <label class="block text-xs uppercase tracking-widest opacity-60 mb-2" for="contactName" data-translate="contact-name">Name</label>
+                    <input id="contactName" name="name" type="text" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-xs uppercase tracking-widest opacity-60 mb-2" for="contactEmail" data-translate="contact-email">Email</label>
+                    <input id="contactEmail" name="email" type="email" required>
+                </div>
+                <div class="mb-5">
+                    <label class="block text-xs uppercase tracking-widest opacity-60 mb-2" for="contactMessage" data-translate="contact-message">Message</label>
+                    <textarea id="contactMessage" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="contact-submit w-full" data-translate="contact-submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
     <footer class="pt-20 pb-12 px-6 border-t border-[var(--border-color)]">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
             <div class="flex gap-10 text-[10px] font-bold uppercase tracking-widest opacity-40">
@@ -890,8 +981,8 @@
                 <a href="#" data-translate="footer-link-2">Specs</a>
             </div>
             <div class="flex flex-col items-center md:items-end">
-                <img src="no bg.png" alt="XAEROVA" class="logo-img mb-4">
-                <p class="text-[9px] uppercase tracking-widest opacity-30 mt-8">©2026 XAEROVA. ALL RIGHTS RESERVED.</p>
+                <img src="no bg.png" alt="XAerova" class="logo-img mb-4">
+                <p class="text-[9px] uppercase tracking-widest opacity-30 mt-8">©2026 XAerova. ALL RIGHTS RESERVED.</p>
             </div>
         </div>
     </footer>
@@ -953,6 +1044,14 @@
                 'recharge-speed': 'Recharge Speed',
                 'footer-link-1': 'How it works',
                 'footer-link-2': 'Specs',
+                'contact-title': 'Contact Us',
+                'contact-body': 'Send us a message and our team will get back to you shortly.',
+                'contact-email-label': 'Email:',
+                'contact-phone-label': 'Phone:',
+                'contact-name': 'Name',
+                'contact-email': 'Email',
+                'contact-message': 'Message',
+                'contact-submit': 'Send Message',
                 'scrolly-title': 'Skymind V0',
                 'scrolly-subtitle': 'Aerospace Security',
                 'scrolly-params': 'Remote Flying',
@@ -986,7 +1085,7 @@
                 'faq-q10': 'Where is video footage stored?',
                 'faq-a10': 'By default, video footage is stored on a memory card inside the drone. Storage location and retention can be configured based on your location and privacy requirements. You maintain full control over your data.',
                 'faq-q11': 'What happens if the drone needs repairs?',
-                'faq-a11': 'During your service agreement, XAEROVA ensures your drone stays operational and will replace or repair it as needed. Our support team is available 24/7 for assistance and emergency situations.',
+                'faq-a11': 'During your service agreement, XAerova ensures your drone stays operational and will replace or repair it as needed. Our support team is available 24/7 for assistance and emergency situations.',
                 'faq-q12': 'Can the system operate in bad weather?',
                 'faq-a12': 'The Skymind V0 is designed to operate in 99% of weather conditions, including light rain and moderate winds. The system automatically assesses weather conditions and will delay flights if conditions are unsafe.'
             },
@@ -1033,6 +1132,14 @@
                 'recharge-speed': 'Vitesse de Recharge',
                 'footer-link-1': 'Comment ça marche',
                 'footer-link-2': 'Spécifications',
+                'contact-title': 'Contact',
+                'contact-body': 'Envoyez-nous un message et notre équipe vous répondra rapidement.',
+                'contact-email-label': 'Email :',
+                'contact-phone-label': 'Téléphone :',
+                'contact-name': 'Nom',
+                'contact-email': 'Email',
+                'contact-message': 'Message',
+                'contact-submit': 'Envoyer',
                 'scrolly-title': 'Skymind V0',
                 'scrolly-subtitle': 'Sécurité Aérospatiale',
                 'scrolly-params': 'Vol à Distance',
@@ -1066,7 +1173,7 @@
                 'faq-q10': 'Où sont stockées les images vidéo?',
                 'faq-a10': 'Par défaut, les images sont stockées sur une carte mémoire dans le drone. L\'emplacement de stockage et la rétention peuvent être configurés en fonction de votre emplacement et de vos exigences de confidentialité. Vous gardez le contrôle total de vos données.',
                 'faq-q11': 'Que se passe-t-il si le drone a besoin de réparations?',
-                'faq-a11': 'Pendant votre accord de service, XAEROVA garantit que votre drone reste opérationnel et le remplacera ou le réparera selon les besoins. Notre équipe de support est disponible 24h/24 et 7j/7 pour l\'assistance et les situations d\'urgence.',
+                'faq-a11': 'Pendant votre accord de service, XAerova garantit que votre drone reste opérationnel et le remplacera ou le réparera selon les besoins. Notre équipe de support est disponible 24h/24 et 7j/7 pour l\'assistance et les situations d\'urgence.',
                 'faq-q12': 'Le système peut-il fonctionner par mauvais temps?',
                 'faq-a12': 'Le Skymind V0 est conçu pour fonctionner dans 99% des conditions météorologiques, y compris la pluie légère et les vents modérés. Le système évalue automatiquement les conditions météorologiques et retardera les vols si les conditions sont dangereuses.'
             }
