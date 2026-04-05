@@ -4,6 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XAerova | Autonomous Drone Infrastructure</title>
+    <meta name="description" content="Simple, affordable physical security and property oversight for homeowners and businesses—anywhere.">
+    <!-- Social preview (Open Graph / X / LinkedIn / Discord). Image URL must be absolute. -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="XAerova">
+    <meta property="og:title" content="XAerova | Autonomous Drone Infrastructure">
+    <meta property="og:description" content="Simple, affordable physical security and property oversight for homeowners and businesses—anywhere.">
+    <meta property="og:url" content="https://jmbcvx2nyz-eng.github.io/xaexae/">
+    <meta property="og:image" content="https://raw.githubusercontent.com/jmbcvx2nyz-eng/xaexae/main/og-image.png">
+    <meta property="og:image:alt" content="XAerova logo">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="XAerova | Autonomous Drone Infrastructure">
+    <meta name="twitter:description" content="Simple, affordable physical security and property oversight for homeowners and businesses—anywhere.">
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/jmbcvx2nyz-eng/xaexae/main/og-image.png">
+    <meta name="twitter:image:alt" content="XAerova logo">
     <link rel="icon" type="image/png" href="Favicon 3.PNG">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -553,14 +567,20 @@
         .contact-form input,
         .contact-form textarea {
             width: 100%;
-            background: var(--bg-warm);
-            border: 1px solid var(--border-color);
+            background: #2a2a2a;
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 8px;
             padding: 12px 14px;
-            color: var(--text-color);
+            color: #f0f0f0;
             font-size: 14px;
             outline: none;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+        body.light-mode .contact-form input,
+        body.light-mode .contact-form textarea {
+            background: #b8b8b7;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
         }
         .contact-form input:focus,
         .contact-form textarea:focus {
