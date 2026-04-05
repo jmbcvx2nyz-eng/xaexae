@@ -954,6 +954,7 @@
     </section>
 
     <section id="contact" class="py-16 px-6 md:px-10 max-w-7xl mx-auto section-warm-alt">
+        <p id="contact-success" class="hidden mb-8 p-4 rounded-lg border text-sm" style="border-color: var(--accent-blue); background: rgba(0, 128, 255, 0.08);" role="status" aria-live="polite" data-translate="contact-sent">Thank you! Your message was sent. We will contact you soon.</p>
         <div class="grid md:grid-cols-2 gap-10 items-start">
             <div>
                 <h2 class="logo-font text-3xl md:text-4xl font-black uppercase mb-6" data-translate="contact-title">Contact Us</h2>
@@ -977,7 +978,14 @@
                     </a>
                 </div>
             </div>
-            <form class="contact-form card-elevated p-6" action="mailto:info@XAerova.fr" method="post" enctype="text/plain">
+            <!-- Submissions emailed to ange@xaerova.fr via FormSubmit (confirm the address in FormSubmit’s first email if new). -->
+            <form id="contactForm" class="contact-form card-elevated p-6 relative" action="https://formsubmit.co/ange@xaerova.fr" method="POST">
+                <p id="contact-error" class="hidden mb-4 p-3 rounded-lg border text-sm" style="border-color: rgba(220,80,80,0.6); background: rgba(220,80,80,0.12);" role="alert" data-translate="contact-error">Something went wrong. Please try again or email ange@xaerova.fr.</p>
+                <input type="hidden" name="_subject" value="XAerova — Contact form (xaerova.com)">
+                <input type="hidden" name="_next" value="https://xaerova.com/?contact=sent#contact">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="text" name="_honey" class="absolute opacity-0 pointer-events-none" style="height:0;width:0;position:absolute;left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">
                 <div class="mb-4">
                     <label class="block text-xs uppercase tracking-widest opacity-60 mb-2" for="contactName" data-translate="contact-name">Name</label>
                     <input id="contactName" name="name" type="text" required>
@@ -990,7 +998,7 @@
                     <label class="block text-xs uppercase tracking-widest opacity-60 mb-2" for="contactMessage" data-translate="contact-message">Message</label>
                     <textarea id="contactMessage" name="message" rows="5" required></textarea>
                 </div>
-                <button type="submit" class="contact-submit w-full" data-translate="contact-submit">Send Message</button>
+                <button type="submit" id="contactSubmitBtn" class="contact-submit w-full" data-translate="contact-submit">Send Message</button>
             </form>
         </div>
     </section>
@@ -1073,6 +1081,9 @@
                 'contact-email': 'Email',
                 'contact-message': 'Message',
                 'contact-submit': 'Send Message',
+                'contact-sending': 'Sending…',
+                'contact-sent': 'Thank you! Your message was sent. We will contact you soon.',
+                'contact-error': 'Something went wrong. Please try again or email ange@xaerova.fr.',
                 'scrolly-title': 'Skymind V0',
                 'scrolly-subtitle': 'Aerospace Security',
                 'scrolly-params': 'Remote Flying',
@@ -1161,6 +1172,9 @@
                 'contact-email': 'Email',
                 'contact-message': 'Message',
                 'contact-submit': 'Envoyer',
+                'contact-sending': 'Envoi en cours…',
+                'contact-sent': 'Merci ! Votre message a bien été envoyé. Nous vous contacterons bientôt.',
+                'contact-error': 'Une erreur s\'est produite. Réessayez ou écrivez à ange@xaerova.fr.',
                 'scrolly-title': 'Skymind V0',
                 'scrolly-subtitle': 'Sécurité Aérospatiale',
                 'scrolly-params': 'Vol à Distance',
@@ -1255,6 +1269,59 @@
             const savedLang = localStorage.getItem('lang') || 'en';
             updateLanguageButtons(savedLang);
             translatePage(savedLang);
+            if (new URLSearchParams(location.search).get('contact') === 'sent') {
+                const ok = document.getElementById('contact-success');
+                if (ok) {
+                    ok.classList.remove('hidden');
+                    ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                history.replaceState(null, '', location.pathname + '#contact');
+            }
+
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', async function (e) {
+                    e.preventDefault();
+                    const lang = localStorage.getItem('lang') || 'en';
+                    const t = translations[lang] || translations.en;
+                    const btn = document.getElementById('contactSubmitBtn');
+                    const okEl = document.getElementById('contact-success');
+                    const errEl = document.getElementById('contact-error');
+                    if (okEl) okEl.classList.add('hidden');
+                    if (errEl) errEl.classList.add('hidden');
+                    if (btn) {
+                        btn.disabled = true;
+                        btn.textContent = t['contact-sending'] || 'Sending…';
+                    }
+                    try {
+                        const res = await fetch('https://formsubmit.co/ajax/ange@xaerova.fr', {
+                            method: 'POST',
+                            body: new FormData(contactForm),
+                            headers: { Accept: 'application/json' }
+                        });
+                        const data = await res.json().catch(function () { return {}; });
+                        if (data.success === true || data.success === 'true') {
+                            contactForm.reset();
+                            if (okEl) {
+                                okEl.classList.remove('hidden');
+                                okEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }
+                        } else {
+                            throw new Error(data.message || 'submit failed');
+                        }
+                    } catch (err) {
+                        if (errEl) {
+                            errEl.classList.remove('hidden');
+                            errEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        }
+                    } finally {
+                        if (btn) {
+                            btn.disabled = false;
+                            btn.textContent = t['contact-submit'] || 'Send Message';
+                        }
+                    }
+                });
+            }
         });
 
         // FAQ Toggle Function
