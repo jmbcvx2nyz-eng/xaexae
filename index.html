@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XAerova | Autonomous Drone Infrastructure</title>
-    <meta name="description" content="Simple, affordable physical security and property oversight for homeowners and businesses—anywhere.">
+    <title>Autonomous Drone Infrastructure</title>
+    <meta name="description" content="XAerova enables laptop-based remote drone piloting from any location worldwide.">
     <!-- Social preview (Open Graph / X / LinkedIn / Discord). Points at custom domain on Cloudflare. -->
     <link rel="canonical" href="https://xaerova.com/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="XAerova">
-    <meta property="og:title" content="XAerova | Autonomous Drone Infrastructure">
-    <meta property="og:description" content="Simple, affordable physical security and property oversight for homeowners and businesses—anywhere.">
+    <meta property="og:title" content="Autonomous Drone Infrastructure">
+    <meta property="og:description" content="XAerova enables laptop-based remote drone piloting from any location worldwide.">
     <meta property="og:url" content="https://xaerova.com/">
     <meta property="og:image" content="https://xaerova.com/og-image.png">
     <meta property="og:image:alt" content="XAerova logo">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="XAerova | Autonomous Drone Infrastructure">
-    <meta name="twitter:description" content="Simple, affordable physical security and property oversight for homeowners and businesses—anywhere.">
+    <meta name="twitter:title" content="Autonomous Drone Infrastructure">
+    <meta name="twitter:description" content="XAerova enables laptop-based remote drone piloting from any location worldwide.">
     <meta name="twitter:image" content="https://xaerova.com/og-image.png">
     <meta name="twitter:image:alt" content="XAerova logo">
     <link rel="icon" type="image/png" href="Favicon 3.PNG">
@@ -679,8 +679,8 @@
         <h1 data-aos="fade-up" class="logo-font text-5xl md:text-9xl font-black uppercase mb-6 leading-none" data-translate="header-title">
             Eyes In <br> The Sky
         </h1>
-        <p data-aos="fade-up" data-aos-delay="200" class="text-lg opacity-60 max-w-2xl mx-auto mb-10" data-translate="header-subtitle">
-            Simple, affordable physical security and property oversight for homeowners and businesses—anywhere.
+        <p data-aos="fade-up" data-aos-delay="200" class="text-lg opacity-60 max-w-3xl mx-auto mb-10" data-translate="header-subtitle">
+            XAerova enables laptop-based remote drone piloting from any location worldwide.
         </p>
         <div data-aos="zoom-in" data-aos-delay="100" class="max-w-4xl mx-auto overflow-hidden section-container" style="border-radius: var(--radius-card); box-shadow: var(--shadow-soft); border: 1px solid var(--border-color);">
             <img src="https://images.unsplash.com/photo-1506947411487-a56738267384?auto=format&fit=crop&q=80&w=2000" class="grayscale-img w-full h-auto opacity-80" alt="Drone Technology">
@@ -978,14 +978,9 @@
                     </a>
                 </div>
             </div>
-            <!-- Submissions emailed to ange@xaerova.fr via FormSubmit (confirm the address in FormSubmit’s first email if new). -->
-            <form id="contactForm" class="contact-form card-elevated p-6 relative" action="https://formsubmit.co/ange@xaerova.fr" method="POST">
-                <p id="contact-error" class="hidden mb-4 p-3 rounded-lg border text-sm" style="border-color: rgba(220,80,80,0.6); background: rgba(220,80,80,0.12);" role="alert" data-translate="contact-error">Something went wrong. Please try again or email ange@xaerova.fr.</p>
-                <input type="hidden" name="_subject" value="XAerova — Contact form (xaerova.com)">
-                <input type="hidden" name="_next" value="https://xaerova.com/?contact=sent#contact">
-                <input type="hidden" name="_template" value="table">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="text" name="_honey" class="absolute opacity-0 pointer-events-none" style="height:0;width:0;position:absolute;left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <!-- Submissions posted to /contact and sent via Zoho SMTP from server.js. -->
+            <form id="contactForm" class="contact-form card-elevated p-6 relative" action="/contact" method="POST">
+                <p id="contact-error" class="hidden mb-4 p-3 rounded-lg border text-sm" style="border-color: rgba(220,80,80,0.6); background: rgba(220,80,80,0.12);" role="alert" data-translate="contact-error">Something went wrong. Please try again or email info@xaerova.com.</p>
                 <div class="mb-4">
                     <label class="block text-xs uppercase tracking-widest opacity-60 mb-2" for="contactName" data-translate="contact-name">Name</label>
                     <input id="contactName" name="name" type="text" required>
@@ -1036,7 +1031,7 @@
                 'nav-enterprise': 'Enterprise',
                 'close-menu': 'Close [X]',
                 'header-title': 'Eyes In The Sky',
-                'header-subtitle': 'Simple, affordable physical security and property oversight for homeowners and businesses—anywhere.',
+                'header-subtitle': 'XAerova enables laptop-based remote drone piloting from any location worldwide.',
                 'about-title': 'Our Mission',
                 'about-body': 'XAerova exists to make physical security, patrol, and property oversight simple and affordable. We help homeowners and businesses monitor and protect the places that matter most, from homes and farms to construction sites and facilities. Our autonomous drone systems provide reliable remote presence even when owners cannot be there in person. By removing the cost and complexity of traditional security teams and enterprise drone systems, XAerova delivers peace of mind that anyone can use.',
                 'skymind-title': 'Skymind',
@@ -1083,7 +1078,7 @@
                 'contact-submit': 'Send Message',
                 'contact-sending': 'Sending…',
                 'contact-sent': 'Thank you! Your message was sent. We will contact you soon.',
-                'contact-error': 'Something went wrong. Please try again or email ange@xaerova.fr.',
+                'contact-error': 'Something went wrong. Please try again or email info@xaerova.com.',
                 'scrolly-title': 'Skymind V0',
                 'scrolly-subtitle': 'Aerospace Security',
                 'scrolly-params': 'Remote Flying',
@@ -1127,7 +1122,7 @@
                 'nav-enterprise': 'Entreprise',
                 'close-menu': 'Fermer [X]',
                 'header-title': 'Des Yeux Dans Le Ciel',
-                'header-subtitle': 'Sécurité physique et surveillance des biens simples et abordables, pour particuliers et professionnels—partout.',
+                'header-subtitle': 'XAerova permet le pilotage à distance de drones depuis un ordinateur portable, depuis n\'importe quel lieu au monde.',
                 'about-title': 'Notre mission',
                 'about-body': 'XAerova existe pour rendre la sécurité physique, la patrouille et la surveillance des biens simples et abordables. Nous aidons les particuliers et les entreprises à surveiller et protéger les lieux qui comptent le plus, des maisons et fermes aux chantiers et installations. Nos systèmes de drones autonomes offrent une présence à distance fiable même lorsque les propriétaires ne peuvent pas être sur place. En éliminant le coût et la complexité des équipes de sécurité traditionnelles et des systèmes de drones d\'entreprise, XAerova offre une tranquillité d\'esprit accessible à tous.',
                 'skymind-title': 'Skymind',
@@ -1174,7 +1169,7 @@
                 'contact-submit': 'Envoyer',
                 'contact-sending': 'Envoi en cours…',
                 'contact-sent': 'Merci ! Votre message a bien été envoyé. Nous vous contacterons bientôt.',
-                'contact-error': 'Une erreur s\'est produite. Réessayez ou écrivez à ange@xaerova.fr.',
+                'contact-error': 'Une erreur s\'est produite. Réessayez ou écrivez à info@xaerova.com.',
                 'scrolly-title': 'Skymind V0',
                 'scrolly-subtitle': 'Sécurité Aérospatiale',
                 'scrolly-params': 'Vol à Distance',
@@ -1294,10 +1289,17 @@
                         btn.textContent = t['contact-sending'] || 'Sending…';
                     }
                     try {
-                        const res = await fetch('https://formsubmit.co/ajax/ange@xaerova.fr', {
+                        const res = await fetch('/contact', {
                             method: 'POST',
-                            body: new FormData(contactForm),
-                            headers: { Accept: 'application/json' }
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                name: contactForm.name.value,
+                                email: contactForm.email.value,
+                                message: contactForm.message.value
+                            })
                         });
                         const data = await res.json().catch(function () { return {}; });
                         if (data.success === true || data.success === 'true') {

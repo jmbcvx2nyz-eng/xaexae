@@ -6,5 +6,7 @@
     "dev": "node server.js",
     "start": "node server.js"
   },
-  "devDependencies": {}
+  "dependencies": {
+    "nodemailer": "^8.0.4"
+  }
 }
