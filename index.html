@@ -978,9 +978,13 @@
                     </a>
                 </div>
             </div>
-            <!-- Submissions posted to /contact and sent via Zoho SMTP from server.js. -->
-            <form id="contactForm" class="contact-form card-elevated p-6 relative" action="/contact" method="POST">
+            <!-- Submissions sent via FormSubmit (works on static Cloudflare hosting). -->
+            <form id="contactForm" class="contact-form card-elevated p-6 relative" action="https://formsubmit.co/info@xaerova.com" method="POST">
                 <p id="contact-error" class="hidden mb-4 p-3 rounded-lg border text-sm" style="border-color: rgba(220,80,80,0.6); background: rgba(220,80,80,0.12);" role="alert" data-translate="contact-error">Something went wrong. Please try again or email info@xaerova.com.</p>
+                <input type="hidden" name="_subject" value="XAerova — Contact form (xaerova.com)">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="text" name="_honey" class="absolute opacity-0 pointer-events-none" style="height:0;width:0;position:absolute;left:-9999px" tabindex="-1" autocomplete="off" aria-hidden="true">
                 <div class="mb-4">
                     <label class="block text-xs uppercase tracking-widest opacity-60 mb-2" for="contactName" data-translate="contact-name">Name</label>
                     <input id="contactName" name="name" type="text" required>
@@ -1289,17 +1293,10 @@
                         btn.textContent = t['contact-sending'] || 'Sending…';
                     }
                     try {
-                        const res = await fetch('/contact', {
+                        const res = await fetch('https://formsubmit.co/ajax/info@xaerova.com', {
                             method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Accept': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                name: contactForm.name.value,
-                                email: contactForm.email.value,
-                                message: contactForm.message.value
-                            })
+                            headers: { Accept: 'application/json' },
+                            body: new FormData(contactForm)
                         });
                         const data = await res.json().catch(function () { return {}; });
                         if (data.success === true || data.success === 'true') {
