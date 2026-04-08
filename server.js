@@ -50,14 +50,8 @@ function readBody(req) {
 const server = http.createServer(async (req, res) => {
   console.log(`${req.method} ${req.url}`);
 
-  if (req.method === 'POST' && req.url === '/contact') {
+  if (req.method === 'POST' && (req.url === '/contact' || req.url === '/api/contact')) {
     try {
-      if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
-        res.writeHead(500, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ success: false, message: 'SMTP credentials missing' }));
-        return;
-      }
-
       const rawBody = await readBody(req);
       const payload = JSON.parse(rawBody || '{}');
       const name = String(payload.name || '').trim();
@@ -70,11 +64,16 @@ const server = http.createServer(async (req, res) => {
         return;
       }
 
+      if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: false, message: 'SMTP credentials missing' }));
+        return;
+      }
       await transporter.sendMail({
         from: process.env.SMTP_FROM || process.env.SMTP_USER,
         to: process.env.CONTACT_TO || 'info@xaerova.com',
         replyTo: email,
-        subject: 'New message from xaerova.com',
+        subject: `XAerova — Contact form from ${email}`,
         text: `Name: ${name}\nEmail: ${email}\nMessage:\n${message}`
       });
 
