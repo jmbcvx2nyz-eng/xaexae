@@ -1,0 +1,12 @@
+{
+  "name": "xaerova-website",
+  "version": "1.0.0",
+  "description": "XAerova website with scrollytelling",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "nodemailer": "^8.0.4"
+  }
+}

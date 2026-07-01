@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XAerova | Prototype</title>
+    <link rel="icon" type="image/png" href="Favicon 3.PNG">
+
+    <!-- Preload critical scrollytelling frames -->
+    <link rel="preload" as="image" href="sequence/ezgif-frame-001.webp" type="image/webp">
+    <link rel="preload" as="image" href="sequence/ezgif-frame-002.webp" type="image/webp">
+    <link rel="preload" as="image" href="sequence/ezgif-frame-003.webp" type="image/webp">
+    <link rel="preload" as="image" href="sequence/ezgif-frame-004.webp" type="image/webp">
+    <link rel="preload" as="image" href="sequence/ezgif-frame-005.webp" type="image/webp">
+    <link rel="preload" as="image" href="sequence/ezgif-frame-010.webp" type="image/webp">
+    <link rel="preload" as="image" href="sequence/ezgif-frame-020.webp" type="image/webp">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #000000;
+            --text-color: #ffffff;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --accent-blue: #0080ff;
+            --radius-pill: 9999px;
+            --transition-smooth: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            --bg-warm: #e7e7e6;
+        }
+
+        body.light-mode {
+            --bg-color: #e7e7e6;
+            --text-color: #4a4a4a;
+            --border-color: rgba(0, 0, 0, 0.08);
+            background-color: #e7e7e6;
+            background-image:
+                radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.04) 1px, transparent 0),
+                radial-gradient(circle at 2px 2px, rgba(0, 0, 0, 0.025) 1px, transparent 0);
+            background-size: 40px 40px, 60px 60px;
+            background-position: 0 0, 20px 20px;
+        }
+
+        html, body {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Rajdhani', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease, background-image 0.3s ease;
+            margin: 0;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        body.scrollytelling-loading { overflow: hidden; }
+        body.scrollytelling-loading nav { visibility: hidden; opacity: 0; }
+        body.scrollytelling-ready nav { visibility: visible; opacity: 1; transition: opacity 0.5s ease; }
+        #scrollytelling-container, #scrollytelling-loading { visibility: visible !important; opacity: 1 !important; }
+
+        .logo-font { font-family: 'Orbitron', sans-serif; }
+
+        nav {
+            display: grid;
+            align-items: center;
+            padding: 0 20px;
+            height: 70px;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background-color: var(--bg-color);
+            z-index: 1000;
+            width: 100%;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, background-image 0.3s ease;
+        }
+
+        body.light-mode nav {
+            background-color: var(--bg-warm);
+            background-image:
+                radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.03) 1px, transparent 0),
+                radial-gradient(circle at 2px 2px, rgba(0, 0, 0, 0.02) 1px, transparent 0);
+            background-size: 40px 40px, 60px 60px;
+            background-position: 0 0, 20px 20px;
+        }
+
+        .lang-option {
+            background: transparent;
+            color: var(--text-color);
+            opacity: 0.7;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1;
+        }
+        .lang-toggle-wrap { width: 106px; }
+        .lang-toggle-wrap .lang-option { flex: 1 1 0; min-width: 0; padding-left: 0.5rem; padding-right: 0.5rem; }
+        .lang-option:hover { opacity: 1; background-color: rgba(0, 128, 255, 0.1); }
+        .lang-option.active { opacity: 1; background-color: var(--accent-blue); color: white; font-weight: 900; }
+        .lang-option.active:hover { background-color: var(--accent-blue); opacity: 1; }
+
+        @media (max-width: 1023px) {
+            nav { grid-template-columns: 1fr auto minmax(160px, 1fr); gap: 12px; padding-left: 16px; padding-right: 28px; }
+            .desktop-nav { display: none; }
+            .mobile-sandwich { display: flex; justify-content: flex-start; }
+            .nav-logo-container { display: flex; justify-content: center; max-width: 100px; min-width: 0; margin-left: -12px; }
+            .nav-logo-container .logo-img { max-width: 100%; height: 12px; }
+            .nav-right { display: flex; justify-content: flex-end; min-width: 0; }
+        }
+        @media (min-width: 1024px) {
+            nav { grid-template-columns: 1fr 2fr 1fr; }
+            .mobile-sandwich { display: none; }
+            .desktop-nav { display: flex; justify-content: center; }
+            .nav-logo-container { display: flex; justify-content: flex-start; }
+            .nav-right { display: flex; justify-content: flex-end; }
+        }
+
+        .nav-logo-container {
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, background-image 0.3s ease;
+        }
+        body.light-mode .nav-logo-container {
+            background-color: var(--bg-warm);
+            background-image:
+                radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.03) 1px, transparent 0),
+                radial-gradient(circle at 2px 2px, rgba(0, 0, 0, 0.02) 1px, transparent 0);
+            background-size: 40px 40px, 60px 60px;
+            background-position: 0 0, 20px 20px;
+        }
+
+        .logo-img {
+            height: 14px;
+            width: auto;
+            filter: none !important;
+            object-fit: contain;
+        }
+        @media (min-width: 1024px) { .logo-img { height: 16px; } }
+        body.light-mode .logo-img { filter: invert(1) !important; }
+
+        .switch { position: relative; display: inline-block; width: 34px; height: 18px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute; cursor: pointer; inset: 0;
+            background-color: #333; transition: .4s; border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute; content: ""; height: 12px; width: 12px;
+            left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%;
+        }
+        input:checked + .slider { background-color: var(--accent-blue); }
+        input:checked + .slider:before { transform: translateX(16px); }
+
+        .bar { width: 18px; height: 2px; background-color: var(--text-color); margin: 3px 0; }
+
+        #mobileMenu {
+            position: fixed; top: 0; left: -100%; width: 100%; height: 100%;
+            background-color: var(--bg-color); z-index: 2000;
+            transition: 0.5s; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; gap: 2rem;
+        }
+        #mobileMenu.active { left: 0; }
+        body.light-mode #mobileMenu { background-color: var(--bg-warm); }
+
+        .btn-premium { border-radius: var(--radius-pill); font-weight: 600; transition: all var(--transition-smooth); }
+        .btn-premium:hover { box-shadow: 0 0 24px rgba(0, 128, 255, 0.35); }
+
+        /* Scrollytelling */
+        #scrollytelling-container {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+        }
+        #scrollytelling-loading {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: var(--bg-color);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            color: white;
+        }
+        .loading-logo {
+            width: 80px; height: auto;
+            animation: pulse 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(0, 128, 255, 0.3));
+        }
+        body.light-mode .loading-logo {
+            filter: drop-shadow(0 0 20px rgba(0, 128, 255, 0.2)) invert(0);
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        .loading-progress { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+        .loading-percentage { font-size: 1.5rem; font-weight: bold; font-family: 'Orbitron', sans-serif; color: var(--accent-blue); }
+        .loading-time { font-size: 0.875rem; opacity: 0.6; font-family: 'Rajdhani', sans-serif; }
+        .loading-spinner {
+            width: 4px; height: 40px;
+            background: linear-gradient(to top, var(--accent-blue), transparent);
+            border-radius: 2px;
+            animation: loadingBar 1.5s ease-in-out infinite;
+        }
+        @keyframes loadingBar {
+            0%, 100% { transform: scaleY(0.3); opacity: 0.5; }
+            50% { transform: scaleY(1); opacity: 1; }
+        }
+        #scrollytelling-scroll {
+            position: relative;
+            width: 100%;
+            height: 500vh;
+            margin-top: 200px;
+        }
+        @media (max-width: 768px) {
+            #scrollytelling-container { padding: 0 1.5rem; }
+            #scrollytelling-scroll { height: 300vh; margin-top: 250px; }
+        }
+        #scrollytelling-frame {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #000000;
+        }
+        body.light-mode #scrollytelling-frame {
+            background-color: var(--bg-warm);
+            border: 2px solid var(--bg-warm);
+            box-sizing: border-box;
+        }
+        #scrollytelling-frame::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 200px;
+            background: linear-gradient(to top, var(--bg-color) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 5;
+        }
+        body.light-mode #scrollytelling-frame::after {
+            background: linear-gradient(to top, var(--bg-warm) 0%, transparent 100%);
+        }
+        body.light-mode #scrollytelling-frame::before { display: none; }
+        @media (max-width: 768px) {
+            #scrollytelling-frame { height: 50vh; width: 100%; margin: 0; padding: 0; }
+        }
+        #scrollytelling-canvas {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+        @media (max-width: 768px) {
+            #scrollytelling-canvas { width: 100%; max-width: 100%; left: 0; right: 0; }
+        }
+        .scrollytelling-text {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .scrollytelling-text * { pointer-events: auto; }
+        body.light-mode #scrollytelling-frame #scrollytelling-title h1,
+        body.light-mode #scrollytelling-frame #scrollytelling-title p,
+        body.light-mode #scrollytelling-frame #scrollytelling-params h2,
+        body.light-mode #scrollytelling-frame #scrollytelling-speed h2,
+        body.light-mode #scrollytelling-frame #scrollytelling-cta h2 {
+            color: var(--accent-blue) !important;
+        }
+        body.light-mode #scrollytelling-frame #scrollytelling-speed span {
+            color: var(--accent-blue) !important;
+            opacity: 0.85;
+        }
+        body.light-mode #scrollytelling-frame #scrollytelling-cta button {
+            background: rgba(0, 128, 255, 0.15);
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+        body.light-mode #scrollytelling-frame #scrollytelling-cta button:hover {
+            background: rgba(0, 128, 255, 0.25);
+        }
+        @media (max-width: 768px) {
+            #scrollytelling-title h1 { font-size: 2rem !important; margin-bottom: 0.5rem !important; }
+            #scrollytelling-title p { font-size: 1rem !important; }
+            #scrollytelling-params h2, #scrollytelling-speed h2 { font-size: 1.75rem !important; }
+            #scrollytelling-cta h2 { font-size: 1.5rem !important; margin-bottom: 1rem !important; }
+            #scrollytelling-params, #scrollytelling-speed { padding-left: 1rem !important; padding-right: 1rem !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="mobileMenu">
+        <button onclick="toggleMenu()" class="logo-font text-sm uppercase tracking-widest text-[var(--accent-blue)]" data-translate="close-menu">Close [X]</button>
+        <a href="index.html#residential" onclick="toggleMenu()" class="logo-font text-2xl uppercase tracking-widest" data-translate="nav-residential">Residential</a>
+        <a href="index.html#commercial" onclick="toggleMenu()" class="logo-font text-2xl uppercase tracking-widest" data-translate="nav-commercial">Commercial</a>
+        <a href="index.html#enterprise" onclick="toggleMenu()" class="logo-font text-2xl uppercase tracking-widest" data-translate="nav-enterprise">Enterprise</a>
+    </div>
+
+    <nav>
+        <div class="mobile-sandwich">
+            <button onclick="toggleMenu()" class="p-2 flex flex-col">
+                <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            </button>
+        </div>
+        <div class="hidden lg:flex nav-logo-container">
+            <a href="index.html"><img src="no bg.png" alt="XAerova" class="logo-img"></a>
+        </div>
+        <div class="nav-logo-container lg:hidden">
+            <a href="index.html"><img src="no bg.png" alt="XAerova" class="logo-img"></a>
+        </div>
+        <div class="hidden lg:flex desktop-nav gap-12 text-[10px] font-bold uppercase tracking-[0.4em] opacity-60">
+            <a href="index.html#residential" class="hover:text-[var(--accent-blue)] transition" data-translate="nav-residential">Residential</a>
+            <a href="index.html#commercial" class="hover:text-[var(--accent-blue)] transition" data-translate="nav-commercial">Commercial</a>
+            <a href="index.html#enterprise" class="hover:text-[var(--accent-blue)] transition" data-translate="nav-enterprise">Enterprise</a>
+        </div>
+        <div class="nav-right">
+            <div class="flex items-center gap-4">
+                <div class="lang-toggle-wrap flex items-center gap-0 border border-[var(--border-color)] rounded overflow-hidden">
+                    <button id="langENG" onclick="setLanguage('en')" class="lang-option text-[9px] font-bold uppercase tracking-widest py-1.5 transition">ENG</button>
+                    <div class="w-px h-4 shrink-0 bg-[var(--border-color)]" aria-hidden="true"></div>
+                    <button id="langFR" onclick="setLanguage('fr')" class="lang-option text-[9px] font-bold uppercase tracking-widest py-1.5 transition">FR</button>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span id="modeText" class="text-[8px] font-bold uppercase tracking-widest opacity-60">Dark Mode</span>
+                    <label class="switch">
+                        <input type="checkbox" id="themeToggle" onchange="runSwitch()">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="scrollytelling-container">
+        <div id="scrollytelling-loading">
+            <img src="no bg.png" alt="XAerova" class="loading-logo">
+            <div class="loading-progress">
+                <div class="loading-percentage" id="loading-percentage">0%</div>
+                <div class="loading-time" id="loading-time">Loading frames...</div>
+                <div class="loading-spinner"></div>
+            </div>
+        </div>
+        <div id="scrollytelling-scroll">
+            <div id="scrollytelling-frame">
+                <canvas id="scrollytelling-canvas"></canvas>
+                <div id="scrollytelling-title" class="scrollytelling-text px-4">
+                    <div class="text-center">
+                        <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white/90 mb-4" style="font-family: 'Orbitron', sans-serif;" data-translate="scrolly-title">Skymind V0</h1>
+                        <p class="text-xl md:text-2xl lg:text-3xl text-white/60" data-translate="scrolly-subtitle">Aerospace Security</p>
+                    </div>
+                </div>
+                <div id="scrollytelling-params" class="scrollytelling-text px-8 md:px-16 lg:px-24" style="justify-content: flex-start;">
+                    <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white/90" style="font-family: 'Orbitron', sans-serif;" data-translate="scrolly-params">Remote Flying</h2>
+                </div>
+                <div id="scrollytelling-speed" class="scrollytelling-text px-8 md:px-16 lg:px-24" style="justify-content: flex-end;">
+                    <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white/90 text-right" style="font-family: 'Orbitron', sans-serif;" data-translate="scrolly-speed">Built for Convenience.<br /><span class="text-white/70">Designed for Scale.</span></h2>
+                </div>
+                <div id="scrollytelling-cta" class="scrollytelling-text px-4">
+                    <div class="text-center">
+                        <h2 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white/90 mb-8" style="font-family: 'Orbitron', sans-serif;" data-translate="scrolly-cta">Take Full Control</h2>
+                        <button class="pointer-events-auto px-8 py-4 bg-white/10 border border-white/20 rounded-full text-white/90 text-lg font-medium hover:bg-white/20 btn-premium transition-all" data-translate="scrolly-button">Get Started</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('active'); }
+        function runSwitch() {
+            const body = document.body;
+            const text = document.getElementById('modeText');
+            const isLight = body.classList.toggle('light-mode');
+            const lang = localStorage.getItem('lang') || 'en';
+            text.innerText = isLight ? (lang === 'fr' ? "Mode Clair" : "Light Mode") : (lang === 'fr' ? "Mode Sombre" : "Dark Mode");
+        }
+        const translations = {
+            en: {
+                'nav-residential': 'Residential', 'nav-commercial': 'Commercial', 'nav-enterprise': 'Enterprise',
+                'close-menu': 'Close [X]',
+                'scrolly-title': 'Skymind V0', 'scrolly-subtitle': 'Aerospace Security', 'scrolly-params': 'Remote Flying',
+                'scrolly-speed': 'Built for Convenience.<br /><span class="text-white/70">Designed for Scale.</span>',
+                'scrolly-cta': 'Take Full Control', 'scrolly-button': 'Get Started'
+            },
+            fr: {
+                'nav-residential': 'Résidentiel', 'nav-commercial': 'Commercial', 'nav-enterprise': 'Entreprise',
+                'close-menu': 'Fermer [X]',
+                'scrolly-title': 'Skymind V0', 'scrolly-subtitle': 'Sécurité Aérospatiale', 'scrolly-params': 'Vol à Distance',
+                'scrolly-speed': 'Conçu pour la Commodité.<br /><span class="text-white/70">Pensé pour l\'Échelle.</span>',
+                'scrolly-cta': 'Prenez le Contrôle Total', 'scrolly-button': 'Commencer'
+            }
+        };
+        function translatePage(lang) {
+            const t = translations[lang];
+            document.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.getAttribute('data-translate');
+                if (t[key]) el.innerHTML = t[key];
+            });
+            const modeText = document.getElementById('modeText');
+            if (modeText) {
+                const isLight = document.body.classList.contains('light-mode');
+                modeText.innerText = isLight ? (lang === 'fr' ? "Mode Clair" : "Light Mode") : (lang === 'fr' ? "Mode Sombre" : "Dark Mode");
+            }
+        }
+        function setLanguage(lang) {
+            localStorage.setItem('lang', lang);
+            const engBtn = document.getElementById('langENG');
+            const frBtn = document.getElementById('langFR');
+            if (engBtn && frBtn) {
+                if (lang === 'en') { engBtn.classList.add('active'); frBtn.classList.remove('active'); }
+                else { frBtn.classList.add('active'); engBtn.classList.remove('active'); }
+            }
+            translatePage(lang);
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('lang') || 'en';
+            setLanguage(savedLang);
+        });
+    </script>
+    <script src="scrollytelling-standalone.js"></script>
+</body>
+</html>
