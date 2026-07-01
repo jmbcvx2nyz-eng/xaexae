@@ -565,6 +565,26 @@
         .skymind-image-wrap .grayscale-img {
             transition: filter 0.4s ease, opacity 0.4s ease;
         }
+        .dock-image-wrap {
+            position: relative;
+            line-height: 0;
+        }
+        .dock-image-wrap img {
+            width: 100%;
+            height: auto;
+            transition: opacity 0.5s ease;
+        }
+        .dock-image-wrap .dock-image-hover {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+        }
+        .dock-image-wrap:hover .dock-image-hover {
+            opacity: 1;
+        }
+        .dock-image-wrap:hover .dock-image-default {
+            opacity: 0;
+        }
         .contact-form input,
         .contact-form textarea {
             width: 100%;
@@ -628,9 +648,9 @@
 
     <div id="mobileMenu">
                 <button onclick="toggleMenu()" class="logo-font text-sm uppercase tracking-widest text-[var(--accent-blue)]" data-translate="close-menu">Close [X]</button>
-        <a href="#residential" onclick="toggleMenu()" class="logo-font text-2xl uppercase tracking-widest" data-translate="nav-residential">Residential</a>
-        <a href="#commercial" onclick="toggleMenu()" class="logo-font text-2xl uppercase tracking-widest" data-translate="nav-commercial">Commercial</a>
-        <a href="#enterprise" onclick="toggleMenu()" class="logo-font text-2xl uppercase tracking-widest" data-translate="nav-enterprise">Enterprise</a>
+        <a href="#use-agriculture" onclick="toggleMenu()" class="logo-font text-2xl uppercase tracking-widest" data-translate="nav-agriculture">Agriculture</a>
+        <a href="#use-defense" onclick="toggleMenu()" class="logo-font text-2xl uppercase tracking-widest" data-translate="nav-defense">Security & Defense</a>
+        <a href="#use-nature" onclick="toggleMenu()" class="logo-font text-2xl uppercase tracking-widest" data-translate="nav-nature">Nature Protection</a>
     </div>
 
     <nav>
@@ -647,9 +667,9 @@
             <img src="no bg.png" alt="XAerova" class="logo-img">
         </div>
         <div class="hidden lg:flex desktop-nav gap-12 text-[10px] font-bold uppercase tracking-[0.4em] opacity-60">
-            <a href="#residential" class="hover:text-[var(--accent-blue)] transition" data-translate="nav-residential">Residential</a>
-            <a href="#commercial" class="hover:text-[var(--accent-blue)] transition" data-translate="nav-commercial">Commercial</a>
-            <a href="#enterprise" class="hover:text-[var(--accent-blue)] transition" data-translate="nav-enterprise">Enterprise</a>
+            <a href="#use-agriculture" class="hover:text-[var(--accent-blue)] transition" data-translate="nav-agriculture">Agriculture</a>
+            <a href="#use-defense" class="hover:text-[var(--accent-blue)] transition" data-translate="nav-defense">Security & Defense</a>
+            <a href="#use-nature" class="hover:text-[var(--accent-blue)] transition" data-translate="nav-nature">Nature Protection</a>
         </div>
 
         <div class="nav-right">
@@ -693,6 +713,50 @@
         <p class="text-lg opacity-90 leading-relaxed" data-translate="about-body">XAerova exists to make physical security, patrol, and property oversight simple and affordable. We help homeowners and businesses monitor and protect the places that matter most, from homes and farms to construction sites and facilities. Our autonomous drone systems provide reliable remote presence even when owners cannot be there in person. By removing the cost and complexity of traditional security teams and enterprise drone systems, XAerova delivers peace of mind that anyone can use.</p>
     </section>
 
+    <section id="skymind-dock" class="py-16 px-6 md:px-10 max-w-4xl mx-auto section-warm">
+        <h2 class="logo-font text-2xl mb-8 uppercase tracking-widest opacity-80" data-translate="dock-title">Skymind Dock</h2>
+        <p class="text-lg opacity-90 leading-relaxed mb-10" data-translate="dock-body">Skymind Dock is our solar-powered autonomous drone dock. Installed directly on the property you need to protect, it keeps your Skymind drone ready to launch around the clock—without grid power or daily manual setup. Combined with our remote flying capability, property owners can oversee their land, buildings, and perimeters from anywhere in the world, as if they were on site.</p>
+        <ul class="space-y-4 text-sm opacity-80 mb-10">
+            <li data-translate="dock-feature-1"><strong>Solar Powered:</strong> Self-sustaining operation at remote and off-grid locations.</li>
+            <li data-translate="dock-feature-2"><strong>On-Site Presence:</strong> Deployed where surveillance is needed—not at a distant base.</li>
+            <li data-translate="dock-feature-3"><strong>Remote Oversight:</strong> Launch and pilot patrols from your laptop, anywhere in the world.</li>
+        </ul>
+        <div class="skymind-image-wrap dock-image-wrap max-w-4xl mx-auto overflow-hidden section-container" style="border-radius: var(--radius-card); box-shadow: var(--shadow-soft); border: 1px solid var(--border-color);">
+            <img src="skymind-dock.png" alt="Skymind Dock autonomous drone station" class="dock-image-default w-full h-auto">
+            <img src="skymind-dock-open.png" alt="Skymind Dock with doors open" class="dock-image-hover w-full h-auto">
+        </div>
+    </section>
+
+    <section id="skymind-dock-agriculture" class="py-20 px-6 md:px-10 max-w-7xl mx-auto section-warm-alt dotted-overlay">
+        <div class="max-w-4xl mx-auto mb-14">
+            <h2 class="logo-font text-2xl md:text-3xl mb-8 uppercase tracking-widest opacity-80" data-translate="agri-title">Skymind Dock in Agriculture</h2>
+            <p class="text-lg opacity-90 leading-relaxed" data-translate="agri-body">Agricultural land is often vast, remote, and impossible to watch in person every day. Skymind Dock brings always-ready aerial oversight directly to the farm—the solar-powered dock installed on your land, paired with remote flying so owners and operators can patrol fields, check livestock, and inspect infrastructure from anywhere in the world.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-14">
+            <div class="use-case-card p-6 flex flex-col card-elevated" style="overflow: hidden;">
+                <img src="Farms.jpg" alt="Aerial view of farmland" class="grayscale-img w-full h-48 object-cover mb-4">
+                <h3 class="font-bold uppercase text-sm mb-2" data-translate="agri-1-title">Field & Crop Patrol</h3>
+                <p class="text-xs opacity-60" data-translate="agri-1-desc">Routine aerial sweeps across pasture and cropland to spot drainage issues, trespassing, or crop stress before they spread.</p>
+            </div>
+            <div class="use-case-card p-6 flex flex-col card-elevated" style="overflow: hidden;">
+                <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&q=80&w=800" alt="Livestock in open pasture" class="grayscale-img w-full h-48 object-cover mb-4">
+                <h3 class="font-bold uppercase text-sm mb-2" data-translate="agri-2-title">Livestock Monitoring</h3>
+                <p class="text-xs opacity-60" data-translate="agri-2-desc">Oversee herds across open range without driving fence lines every day—launch a patrol from the dock and watch from your laptop.</p>
+            </div>
+            <div class="use-case-card p-6 flex flex-col card-elevated" style="overflow: hidden;">
+                <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&q=80&w=800" alt="Farm infrastructure and fencing" class="grayscale-img w-full h-48 object-cover mb-4">
+                <h3 class="font-bold uppercase text-sm mb-2" data-translate="agri-3-title">Farm Infrastructure</h3>
+                <p class="text-xs opacity-60" data-translate="agri-3-desc">Inspect fences, irrigation lines, gates, and outbuildings across large properties in minutes instead of hours on the ground.</p>
+            </div>
+        </div>
+        <div class="max-w-4xl mx-auto">
+            <p class="text-base opacity-80 leading-relaxed mb-10" data-translate="agri-closing">Because the dock runs on solar power, it fits naturally on remote farms and ranches with no grid connection. The drone stays charged and sheltered on your land, ready whenever you need eyes in the sky—whether you are in the farmhouse, the city, or halfway around the world.</p>
+            <div class="skymind-image-wrap max-w-4xl mx-auto overflow-hidden section-container" style="border-radius: var(--radius-card); box-shadow: var(--shadow-soft); border: 1px solid var(--border-color);">
+                <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&q=80&w=2000" alt="Drone oversight over agricultural fields" class="grayscale-img w-full h-auto opacity-90">
+            </div>
+        </div>
+    </section>
+
     <section id="skymind" class="py-16 px-6 md:px-10 max-w-4xl mx-auto section-warm">
         <h2 class="logo-font text-2xl mb-8 uppercase tracking-widest opacity-80" data-translate="skymind-title">Skymind</h2>
         <p class="text-lg opacity-90 leading-relaxed mb-10" data-translate="skymind-body">Skymind is our remote flying drone platform, designed to strengthen security for communities and businesses. By providing reliable aerial oversight that can be piloted from anywhere, it helps protect property, deter incidents, and give peace of mind—contributing to a safer society for everyone.</p>
@@ -723,69 +787,78 @@
         <svg viewBox="0 0 1200 48" preserveAspectRatio="none"><path d="M0,24 C300,0 600,48 900,24 C1050,12 1150,12 1200,24 L1200,0 L0,0 Z"></path></svg>
     </div>
 
-    <div class="py-12 text-center section-warm-alt"><h2 class="logo-font text-4xl md:text-6xl font-black uppercase opacity-20" data-translate="use-cases">USE CASES</h2></div>
+    <div class="py-12 text-center section-warm-alt px-6">
+        <h2 class="logo-font text-4xl md:text-6xl font-black uppercase opacity-20 mb-6" data-translate="use-cases">USE CASES</h2>
+        <p class="max-w-3xl mx-auto text-sm md:text-base opacity-60 leading-relaxed" data-translate="use-cases-subtitle">Built for government ministries and public agencies—supporting agriculture, security and defense, and nature protection missions worldwide.</p>
+    </div>
 
-    <section id="residential" class="py-16 px-6 max-w-7xl mx-auto section-warm dotted-overlay">
-        <h2 class="logo-font text-2xl mb-12 uppercase tracking-widest opacity-80" data-translate="residential-title">Residential</h2>
+    <section id="use-agriculture" class="py-16 px-6 max-w-7xl mx-auto section-warm dotted-overlay">
+        <h2 class="logo-font text-2xl mb-4 uppercase tracking-widest opacity-80" data-translate="use-agri-title">Agriculture</h2>
+        <p class="text-sm opacity-60 mb-12 max-w-3xl" data-translate="use-agri-subtitle">Ministry of Agriculture — field patrols, livestock oversight, and farm infrastructure monitoring across vast rural territories.</p>
         <div class="grid md:grid-cols-3 gap-8">
             <div class="use-case-card p-6 flex flex-col card-elevated" style="overflow: hidden;">
-                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800" class="grayscale-img w-full h-48 object-cover mb-4">
-                <h4 class="font-bold uppercase text-sm mb-2" data-translate="use-case-1-title">Private Estates</h4>
-                <p class="text-xs opacity-60" data-translate="use-case-1-desc">Aerial surveillance for luxury private grounds.</p>
+                <img src="Farms.jpg" alt="Farmland aerial view" class="grayscale-img w-full h-48 object-cover mb-4">
+                <h4 class="font-bold uppercase text-sm mb-2" data-translate="use-case-agri-1-title">Field & Crop Patrol</h4>
+                <p class="text-xs opacity-60" data-translate="use-case-agri-1-desc">Routine aerial sweeps across pasture and cropland to spot drainage issues, trespassing, or crop stress before they spread.</p>
             </div>
             <div class="use-case-card p-6 flex flex-col card-elevated" style="overflow: hidden;">
-                <img src="gated.jpg" alt="Gated" class="grayscale-img w-full h-48 object-cover mb-4">
-                <h4 class="font-bold uppercase text-sm mb-2" data-translate="use-case-2-title">Gated Communities</h4>
-                <p class="text-xs opacity-60" data-translate="use-case-2-desc">Perimeter security and smart alerts.</p>
+                <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&q=80&w=800" alt="Livestock in pasture" class="grayscale-img w-full h-48 object-cover mb-4">
+                <h4 class="font-bold uppercase text-sm mb-2" data-translate="use-case-agri-2-title">Livestock Monitoring</h4>
+                <p class="text-xs opacity-60" data-translate="use-case-agri-2-desc">Oversee herds across open range without driving fence lines every day—launch a patrol from the dock and watch remotely.</p>
             </div>
             <div class="use-case-card p-6 flex flex-col card-elevated" style="overflow: hidden;">
-                <img src="proper.jpg" alt="Property Monitoring" class="grayscale-img w-full h-48 object-cover mb-4">
-                <h4 class="font-bold uppercase text-sm mb-2" data-translate="use-case-3-title">Property Monitoring</h4>
-                <p class="text-xs opacity-60" data-translate="use-case-3-desc">Verification of motion sensor triggers.</p>
+                <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&q=80&w=800" alt="Farm infrastructure" class="grayscale-img w-full h-48 object-cover mb-4">
+                <h4 class="font-bold uppercase text-sm mb-2" data-translate="use-case-agri-3-title">Farm Infrastructure</h4>
+                <p class="text-xs opacity-60" data-translate="use-case-agri-3-desc">Inspect fences, irrigation lines, gates, and outbuildings across large properties in minutes instead of hours on the ground.</p>
             </div>
         </div>
     </section>
 
-    <!-- Commercial Use Cases -->
-    <section id="commercial" class="py-16 px-6 max-w-7xl mx-auto section-warm-alt">
-        <h2 class="logo-font text-2xl mb-12 uppercase tracking-widest opacity-80" data-translate="commercial-title">Commercial</h2>
-        <div class="grid md:grid-cols-3 gap-8">
+    <section id="use-defense" class="py-16 px-6 max-w-7xl mx-auto section-warm-alt">
+        <h2 class="logo-font text-2xl mb-4 uppercase tracking-widest opacity-80" data-translate="use-defense-title">Security & Defense</h2>
+        <p class="text-sm opacity-60 mb-12 max-w-3xl" data-translate="use-defense-subtitle">Ministry of Defense and public security agencies — persistent aerial presence for patrol, infrastructure protection, and rapid response.</p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div class="use-case-card p-6 flex flex-col card-elevated" style="overflow: hidden;">
-                <img src="mall.webp" alt="Mall" class="grayscale-img w-full h-48 object-cover mb-4">
-                <h4 class="font-bold uppercase text-sm mb-2" data-translate="use-case-4-title">Retail & Shopping Centers</h4>
-                <p class="text-xs opacity-60" data-translate="use-case-4-desc">Live perimeter patrols, parking-lot safety and crowd monitoring.</p>
+                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800" alt="Police patrol" class="grayscale-img w-full h-48 object-cover mb-4">
+                <h4 class="font-bold uppercase text-sm mb-2" data-translate="use-case-def-1-title">Police Patrol</h4>
+                <p class="text-xs opacity-60" data-translate="use-case-def-1-desc">Extend law enforcement reach with remote aerial patrols over neighborhoods, highways, and public spaces.</p>
             </div>
             <div class="use-case-card p-6 flex flex-col card-elevated" style="overflow: hidden;">
-                <img src="ware.avif" alt="Ware" class="grayscale-img w-full h-48 object-cover mb-4">
-                <h4 class="font-bold uppercase text-sm mb-2" data-translate="use-case-5-title">Logistics Warehouses</h4>
-                <p class="text-xs opacity-60" data-translate="use-case-5-desc">Remote dock supervision, yard checks and trailer bay verification.</p>
+                <img src="dataa.webp" alt="Critical infrastructure" class="grayscale-img w-full h-48 object-cover mb-4">
+                <h4 class="font-bold uppercase text-sm mb-2" data-translate="use-case-def-2-title">Critical Infrastructure</h4>
+                <p class="text-xs opacity-60" data-translate="use-case-def-2-desc">Monitor power plants, data centers, dams, and strategic sites with always-ready docked drones.</p>
             </div>
             <div class="use-case-card p-6 flex flex-col card-elevated" style="overflow: hidden;">
-                <img src="Farms.jpg" alt="Farms" class="grayscale-img w-full h-48 object-cover mb-4">
-                <h4 class="font-bold uppercase text-sm mb-2" data-translate="use-case-6-title">Large Private Farms</h4>
-                <p class="text-xs opacity-60" data-translate="use-case-6-desc">Field patrols, fence checks and livestock monitoring over wide areas.</p>
+                <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=800" alt="Emergency response" class="grayscale-img w-full h-48 object-cover mb-4">
+                <h4 class="font-bold uppercase text-sm mb-2" data-translate="use-case-def-3-title">Emergency Response</h4>
+                <p class="text-xs opacity-60" data-translate="use-case-def-3-desc">Deploy eyes in the sky within minutes to assess disasters, accidents, and crisis zones before ground teams arrive.</p>
+            </div>
+            <div class="use-case-card p-6 flex flex-col card-elevated" style="overflow: hidden;">
+                <img src="ports.jpg" alt="Border control" class="grayscale-img w-full h-48 object-cover mb-4">
+                <h4 class="font-bold uppercase text-sm mb-2" data-translate="use-case-def-4-title">Border Control</h4>
+                <p class="text-xs opacity-60" data-translate="use-case-def-4-desc">Patrol remote border corridors and crossing points with solar-powered docks stationed along the frontier.</p>
             </div>
         </div>
     </section>
 
-    <!-- Enterprise / Critical Infrastructure Use Cases -->
-    <section id="enterprise" class="py-16 px-6 max-w-7xl mx-auto section-warm dotted-overlay">
-        <h2 class="logo-font text-2xl mb-12 uppercase tracking-widest opacity-80" data-translate="enterprise-title">Enterprise</h2>
+    <section id="use-nature" class="py-16 px-6 max-w-7xl mx-auto section-warm dotted-overlay">
+        <h2 class="logo-font text-2xl mb-4 uppercase tracking-widest opacity-80" data-translate="use-nature-title">Nature Protection</h2>
+        <p class="text-sm opacity-60 mb-12 max-w-3xl" data-translate="use-nature-subtitle">Ministry of Water and Forests — safeguarding national parks, watersheds, and natural resources across protected territories.</p>
         <div class="grid md:grid-cols-3 gap-8">
             <div class="use-case-card p-6 flex flex-col card-elevated" style="overflow: hidden;">
-                <img src="dataa.webp" alt="Dataa" class="grayscale-img w-full h-48 object-cover mb-4">
-                <h4 class="font-bold uppercase text-sm mb-2" data-translate="use-case-7-title">Data Centers</h4>
-                <p class="text-xs opacity-60" data-translate="use-case-7-desc">Roof and perimeter sweeps with instant incident playback.</p>
+                <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=800" alt="Natural park" class="grayscale-img w-full h-48 object-cover mb-4">
+                <h4 class="font-bold uppercase text-sm mb-2" data-translate="use-case-nat-1-title">National Parks</h4>
+                <p class="text-xs opacity-60" data-translate="use-case-nat-1-desc">Protect natural parks from illegal camping, dumping, and unauthorized access with remote aerial patrols.</p>
             </div>
             <div class="use-case-card p-6 flex flex-col card-elevated" style="overflow: hidden;">
-                <img src="hydro.jpg" alt="Industrial Plants" class="grayscale-img w-full h-48 object-cover mb-4">
-                <h4 class="font-bold uppercase text-sm mb-2" data-translate="use-case-8-title">Industrial Plants</h4>
-                <p class="text-xs opacity-60" data-translate="use-case-8-desc">Hydroelectric dams and heavy infrastructure watched from a remote dock.</p>
+                <img src="hydro.jpg" alt="Watershed and natural resources" class="grayscale-img w-full h-48 object-cover mb-4">
+                <h4 class="font-bold uppercase text-sm mb-2" data-translate="use-case-nat-2-title">Natural Resources</h4>
+                <p class="text-xs opacity-60" data-translate="use-case-nat-2-desc">Monitor rivers, reservoirs, and extraction sites to detect pollution, illegal logging, and resource theft.</p>
             </div>
             <div class="use-case-card p-6 flex flex-col card-elevated" style="overflow: hidden;">
-                <img src="ports.jpg" alt="Ports" class="grayscale-img w-full h-48 object-cover mb-4">
-                <h4 class="font-bold uppercase text-sm mb-2" data-translate="use-case-9-title">Airports & Ports</h4>
-                <p class="text-xs opacity-60" data-translate="use-case-9-desc">Runway, apron and harbor monitoring with beyond-line-of-sight routing.</p>
+                <img src="https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&q=80&w=800" alt="Forest canopy" class="grayscale-img w-full h-48 object-cover mb-4">
+                <h4 class="font-bold uppercase text-sm mb-2" data-translate="use-case-nat-3-title">Forest & Wildlife</h4>
+                <p class="text-xs opacity-60" data-translate="use-case-nat-3-desc">Survey forest cover, wildlife habitats, and fire-risk zones across vast protected landscapes from a remote dock.</p>
             </div>
         </div>
     </section>
@@ -1024,41 +1097,61 @@
         // Translation system
         const translations = {
             en: {
-                'nav-residential': 'Residential',
-                'nav-commercial': 'Commercial',
-                'nav-enterprise': 'Enterprise',
+                'nav-agriculture': 'Agriculture',
+                'nav-defense': 'Security & Defense',
+                'nav-nature': 'Nature Protection',
                 'close-menu': 'Close [X]',
                 'header-title': 'Eyes In The Sky',
                 'header-subtitle': 'XAerova enables laptop-based remote drone piloting from any location worldwide.',
                 'about-title': 'Our Mission',
                 'about-body': 'XAerova exists to make physical security, patrol, and property oversight simple and affordable. We help homeowners and businesses monitor and protect the places that matter most, from homes and farms to construction sites and facilities. Our autonomous drone systems provide reliable remote presence even when owners cannot be there in person. By removing the cost and complexity of traditional security teams and enterprise drone systems, XAerova delivers peace of mind that anyone can use.',
+                'dock-title': 'Skymind Dock',
+                'dock-body': 'Skymind Dock is our solar-powered autonomous drone dock. Installed directly on the property you need to protect, it keeps your Skymind drone ready to launch around the clock—without grid power or daily manual setup. Combined with our remote flying capability, property owners can oversee their land, buildings, and perimeters from anywhere in the world, as if they were on site.',
+                'dock-feature-1': 'Solar Powered: Self-sustaining operation at remote and off-grid locations.',
+                'dock-feature-2': 'On-Site Presence: Deployed where surveillance is needed—not at a distant base.',
+                'dock-feature-3': 'Remote Oversight: Launch and pilot patrols from your laptop, anywhere in the world.',
+                'agri-title': 'Skymind Dock in Agriculture',
+                'agri-body': 'Agricultural land is often vast, remote, and impossible to watch in person every day. Skymind Dock brings always-ready aerial oversight directly to the farm—the solar-powered dock installed on your land, paired with remote flying so owners and operators can patrol fields, check livestock, and inspect infrastructure from anywhere in the world.',
+                'agri-1-title': 'Field & Crop Patrol',
+                'agri-1-desc': 'Routine aerial sweeps across pasture and cropland to spot drainage issues, trespassing, or crop stress before they spread.',
+                'agri-2-title': 'Livestock Monitoring',
+                'agri-2-desc': 'Oversee herds across open range without driving fence lines every day—launch a patrol from the dock and watch from your laptop.',
+                'agri-3-title': 'Farm Infrastructure',
+                'agri-3-desc': 'Inspect fences, irrigation lines, gates, and outbuildings across large properties in minutes instead of hours on the ground.',
+                'agri-closing': 'Because the dock runs on solar power, it fits naturally on remote farms and ranches with no grid connection. The drone stays charged and sheltered on your land, ready whenever you need eyes in the sky—whether you are in the farmhouse, the city, or halfway around the world.',
                 'skymind-title': 'Skymind',
                 'skymind-body': 'Skymind is our remote flying drone platform, designed to strengthen security for communities and businesses. By providing reliable aerial oversight that can be piloted from anywhere, it helps protect property, deter incidents, and give peace of mind—contributing to a safer society for everyone.',
                 'feature-1': 'remote flying',
                 'feature-2': 'light and effective',
                 'feature-3': 'easy to carry',
                 'use-cases': 'USE CASES',
-                'residential-title': 'Residential',
-                'commercial-title': 'Commercial',
-                'enterprise-title': 'Enterprise',
-                'use-case-1-title': 'Private Estates',
-                'use-case-1-desc': 'Aerial surveillance for luxury private grounds.',
-                'use-case-2-title': 'Gated Communities',
-                'use-case-2-desc': 'Perimeter security and smart alerts.',
-                'use-case-3-title': 'Property Monitoring',
-                'use-case-3-desc': 'Verification of motion sensor triggers.',
-                'use-case-4-title': 'Retail & Shopping Centers',
-                'use-case-4-desc': 'Live perimeter patrols, parking-lot safety and crowd monitoring.',
-                'use-case-5-title': 'Logistics Warehouses',
-                'use-case-5-desc': 'Remote dock supervision, yard checks and trailer bay verification.',
-                'use-case-6-title': 'Large Private Farms',
-                'use-case-6-desc': 'Field patrols, fence checks and livestock monitoring over wide areas.',
-                'use-case-7-title': 'Data Centers',
-                'use-case-7-desc': 'Roof and perimeter sweeps with instant incident playback.',
-                'use-case-8-title': 'Industrial Plants',
-                'use-case-8-desc': 'Hydroelectric dams and heavy infrastructure watched from a remote dock.',
-                'use-case-9-title': 'Airports & Ports',
-                'use-case-9-desc': 'Runway, apron and harbor monitoring with beyond-line-of-sight routing.',
+                'use-cases-subtitle': 'Built for government ministries and public agencies—supporting agriculture, security and defense, and nature protection missions worldwide.',
+                'use-agri-title': 'Agriculture',
+                'use-agri-subtitle': 'Ministry of Agriculture — field patrols, livestock oversight, and farm infrastructure monitoring across vast rural territories.',
+                'use-defense-title': 'Security & Defense',
+                'use-defense-subtitle': 'Ministry of Defense and public security agencies — persistent aerial presence for patrol, infrastructure protection, and rapid response.',
+                'use-nature-title': 'Nature Protection',
+                'use-nature-subtitle': 'Ministry of Water and Forests — safeguarding national parks, watersheds, and natural resources across protected territories.',
+                'use-case-agri-1-title': 'Field & Crop Patrol',
+                'use-case-agri-1-desc': 'Routine aerial sweeps across pasture and cropland to spot drainage issues, trespassing, or crop stress before they spread.',
+                'use-case-agri-2-title': 'Livestock Monitoring',
+                'use-case-agri-2-desc': 'Oversee herds across open range without driving fence lines every day—launch a patrol from the dock and watch remotely.',
+                'use-case-agri-3-title': 'Farm Infrastructure',
+                'use-case-agri-3-desc': 'Inspect fences, irrigation lines, gates, and outbuildings across large properties in minutes instead of hours on the ground.',
+                'use-case-def-1-title': 'Police Patrol',
+                'use-case-def-1-desc': 'Extend law enforcement reach with remote aerial patrols over neighborhoods, highways, and public spaces.',
+                'use-case-def-2-title': 'Critical Infrastructure',
+                'use-case-def-2-desc': 'Monitor power plants, data centers, dams, and strategic sites with always-ready docked drones.',
+                'use-case-def-3-title': 'Emergency Response',
+                'use-case-def-3-desc': 'Deploy eyes in the sky within minutes to assess disasters, accidents, and crisis zones before ground teams arrive.',
+                'use-case-def-4-title': 'Border Control',
+                'use-case-def-4-desc': 'Patrol remote border corridors and crossing points with solar-powered docks stationed along the frontier.',
+                'use-case-nat-1-title': 'National Parks',
+                'use-case-nat-1-desc': 'Protect natural parks from illegal camping, dumping, and unauthorized access with remote aerial patrols.',
+                'use-case-nat-2-title': 'Natural Resources',
+                'use-case-nat-2-desc': 'Monitor rivers, reservoirs, and extraction sites to detect pollution, illegal logging, and resource theft.',
+                'use-case-nat-3-title': 'Forest & Wildlife',
+                'use-case-nat-3-desc': 'Survey forest cover, wildlife habitats, and fire-risk zones across vast protected landscapes from a remote dock.',
                 'privacy-title': 'Designed for Privacy',
                 'privacy-1': 'Geocaged Airspace: Drone stays strictly within property lines.',
                 'privacy-2': 'Real-time Blurring: AI automatically blurs objects beyond boundaries.',
@@ -1115,41 +1208,61 @@
                 'faq-a12': 'The Skymind V0 is designed to operate in 99% of weather conditions, including light rain and moderate winds. The system automatically assesses weather conditions and will delay flights if conditions are unsafe.'
             },
             fr: {
-                'nav-residential': 'Résidentiel',
-                'nav-commercial': 'Commercial',
-                'nav-enterprise': 'Entreprise',
+                'nav-agriculture': 'Agriculture',
+                'nav-defense': 'Sécurité & Défense',
+                'nav-nature': 'Protection de la Nature',
                 'close-menu': 'Fermer [X]',
                 'header-title': 'Des Yeux Dans Le Ciel',
                 'header-subtitle': 'XAerova permet le pilotage à distance de drones depuis un ordinateur portable, depuis n\'importe quel lieu au monde.',
                 'about-title': 'Notre mission',
                 'about-body': 'XAerova existe pour rendre la sécurité physique, la patrouille et la surveillance des biens simples et abordables. Nous aidons les particuliers et les entreprises à surveiller et protéger les lieux qui comptent le plus, des maisons et fermes aux chantiers et installations. Nos systèmes de drones autonomes offrent une présence à distance fiable même lorsque les propriétaires ne peuvent pas être sur place. En éliminant le coût et la complexité des équipes de sécurité traditionnelles et des systèmes de drones d\'entreprise, XAerova offre une tranquillité d\'esprit accessible à tous.',
+                'dock-title': 'Skymind Dock',
+                'dock-body': 'Skymind Dock est notre station d\'accueil autonome pour drone, alimentée par l\'énergie solaire. Installée directement sur la propriété à protéger, elle maintient votre drone Skymind prêt au décollage en permanence—sans raccordement au réseau ni configuration manuelle quotidienne. Associée à notre capacité de vol à distance, les propriétaires peuvent surveiller leurs terrains, bâtiments et périmètres depuis n\'importe où dans le monde, comme s\'ils étaient sur place.',
+                'dock-feature-1': 'Alimentation solaire: Fonctionnement autonome sur les sites éloignés et hors réseau.',
+                'dock-feature-2': 'Présence sur site: Déployé là où la surveillance est requise—pas dans une base distante.',
+                'dock-feature-3': 'Surveillance à distance: Lancez et pilotez des patrouilles depuis votre ordinateur portable, où que vous soyez.',
+                'agri-title': 'Skymind Dock en Agriculture',
+                'agri-body': 'Les terres agricoles sont souvent vastes, éloignées et impossibles à surveiller en personne chaque jour. Skymind Dock apporte une surveillance aérienne permanente directement à la ferme—le dock solaire installé sur votre terrain, associé au vol à distance pour que propriétaires et exploitants puissent patrouiller les champs, contrôler le bétail et inspecter les infrastructures depuis n\'importe où dans le monde.',
+                'agri-1-title': 'Patrouille des Champs et Cultures',
+                'agri-1-desc': 'Survols aériens réguliers des pâturages et terres cultivées pour repérer les problèmes de drainage, les intrusions ou le stress des cultures avant qu\'ils ne s\'étendent.',
+                'agri-2-title': 'Suivi du Bétail',
+                'agri-2-desc': 'Surveillez les troupeaux sur de vastes pâturages sans parcourir les clôtures chaque jour—lancez une patrouille depuis le dock et observez depuis votre ordinateur portable.',
+                'agri-3-title': 'Infrastructures Agricoles',
+                'agri-3-desc': 'Inspectez clôtures, lignes d\'irrigation, portails et dépendances sur de grandes propriétés en quelques minutes au lieu de plusieurs heures sur le terrain.',
+                'agri-closing': 'Comme le dock fonctionne à l\'énergie solaire, il s\'intègre naturellement aux fermes et ranchs éloignés sans raccordement au réseau. Le drone reste chargé et protégé sur votre terrain, prêt dès que vous avez besoin d\'yeux dans le ciel—que vous soyez à la ferme, en ville ou à l\'autre bout du monde.',
                 'skymind-title': 'Skymind',
                 'skymind-body': 'Skymind est notre plateforme de drone volant à distance, conçue pour renforcer la sécurité des communautés et des entreprises. En offrant une surveillance aérienne fiable pilotable de n\'importe où, il contribue à protéger les biens, à dissuader les incidents et à offrir une tranquillité d\'esprit—au service d\'une société plus sûre pour tous.',
                 'feature-1': 'vol à distance',
                 'feature-2': 'léger et efficace',
                 'feature-3': 'facile à transporter',
                 'use-cases': 'CAS D\'UTILISATION',
-                'residential-title': 'Résidentiel',
-                'commercial-title': 'Commercial',
-                'enterprise-title': 'Entreprise',
-                'use-case-1-title': 'Domaines Privés',
-                'use-case-1-desc': 'Surveillance aérienne pour terrains privés de luxe.',
-                'use-case-2-title': 'Communautés Fermées',
-                'use-case-2-desc': 'Sécurité périmétrique et alertes intelligentes.',
-                'use-case-3-title': 'Surveillance de Propriété',
-                'use-case-3-desc': 'Vérification des déclencheurs de capteurs de mouvement.',
-                'use-case-4-title': 'Commerces et Centres Commerciaux',
-                'use-case-4-desc': 'Patrouilles périmétriques en direct, sécurité des parkings et suivi des foules.',
-                'use-case-5-title': 'Entrepôts Logistiques',
-                'use-case-5-desc': 'Supervision des quais à distance, contrôles de cour et vérification des quais de chargement.',
-                'use-case-6-title': 'Grandes Fermes Privées',
-                'use-case-6-desc': 'Patrouilles de champs, contrôle des clôtures et suivi du bétail sur de vastes zones.',
-                'use-case-7-title': 'Centres de Données',
-                'use-case-7-desc': 'Survols de toits et de périmètres avec relecture instantanée des incidents.',
-                'use-case-8-title': 'Sites Industriels',
-                'use-case-8-desc': 'Barrages hydroélectriques et grandes infrastructures surveillés depuis un dock de drone.',
-                'use-case-9-title': 'Aéroports et Ports',
-                'use-case-9-desc': 'Surveillance des pistes, des aires de trafic et des zones portuaires au-delà de la ligne de vue.',
+                'use-cases-subtitle': 'Conçu pour les ministères et agences publiques—au service de l\'agriculture, de la sécurité et de la défense, et de la protection de la nature dans le monde entier.',
+                'use-agri-title': 'Agriculture',
+                'use-agri-subtitle': 'Ministère de l\'Agriculture — patrouilles des champs, suivi du bétail et surveillance des infrastructures agricoles sur de vastes territoires ruraux.',
+                'use-defense-title': 'Sécurité & Défense',
+                'use-defense-subtitle': 'Ministère de la Défense et forces de sécurité publique — présence aérienne permanente pour les patrouilles, la protection des infrastructures et l\'intervention rapide.',
+                'use-nature-title': 'Protection de la Nature',
+                'use-nature-subtitle': 'Ministère de l\'Eau et des Forêts — protection des parcs nationaux, des bassins versants et des ressources naturelles sur les territoires protégés.',
+                'use-case-agri-1-title': 'Patrouille des Champs et Cultures',
+                'use-case-agri-1-desc': 'Survols aériens réguliers des pâturages et terres cultivées pour repérer les problèmes de drainage, les intrusions ou le stress des cultures.',
+                'use-case-agri-2-title': 'Suivi du Bétail',
+                'use-case-agri-2-desc': 'Surveillez les troupeaux sur de vastes pâturages sans parcourir les clôtures chaque jour—lancez une patrouille depuis le dock et observez à distance.',
+                'use-case-agri-3-title': 'Infrastructures Agricoles',
+                'use-case-agri-3-desc': 'Inspectez clôtures, lignes d\'irrigation, portails et dépendances sur de grandes propriétés en quelques minutes.',
+                'use-case-def-1-title': 'Patrouille Policière',
+                'use-case-def-1-desc': 'Étendez la portée des forces de l\'ordre avec des patrouilles aériennes à distance sur les quartiers, autoroutes et espaces publics.',
+                'use-case-def-2-title': 'Infrastructures Critiques',
+                'use-case-def-2-desc': 'Surveillez centrales électriques, centres de données, barrages et sites stratégiques avec des drones en permanence prêts au décollage.',
+                'use-case-def-3-title': 'Intervention d\'Urgence',
+                'use-case-def-3-desc': 'Déployez des yeux dans le ciel en quelques minutes pour évaluer catastrophes, accidents et zones de crise avant l\'arrivée des équipes au sol.',
+                'use-case-def-4-title': 'Contrôle des Frontières',
+                'use-case-def-4-desc': 'Patrouillez les corridors frontaliers éloignés et les points de passage avec des docks solaires installés le long de la frontière.',
+                'use-case-nat-1-title': 'Parcs Nationaux',
+                'use-case-nat-1-desc': 'Protégez les parcs naturels contre le camping illégal, les décharges sauvages et les accès non autorisés grâce à des patrouilles aériennes à distance.',
+                'use-case-nat-2-title': 'Ressources Naturelles',
+                'use-case-nat-2-desc': 'Surveillez rivières, réservoirs et sites d\'extraction pour détecter la pollution, l\'exploitation forestière illégale et le vol de ressources.',
+                'use-case-nat-3-title': 'Forêts & Faune',
+                'use-case-nat-3-desc': 'Cartographiez la couverture forestière, les habitats fauniques et les zones à risque d\'incendie sur de vastes paysages protégés depuis un dock distant.',
                 'privacy-title': 'Conçu pour la Confidentialité',
                 'privacy-1': 'Espace Aérien Géolocalisé: Le drone reste strictement dans les limites de la propriété.',
                 'privacy-2': 'Floutage en Temps Réel: L\'IA floute automatiquement les objets au-delà des limites.',
