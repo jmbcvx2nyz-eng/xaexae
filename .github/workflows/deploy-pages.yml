@@ -26,10 +26,19 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      - name: Prepare site
+        run: |
+          mkdir -p _site
+          cp index.html .nojekyll _site/ 2>/dev/null || cp index.html _site/
+          shopt -s nullglob
+          for f in *.png *.jpg *.jpeg *.webp *.avif *.PNG *.JPG *.JPEG; do
+            cp "$f" _site/
+          done
+
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
 
       - name: Deploy
         id: deployment
