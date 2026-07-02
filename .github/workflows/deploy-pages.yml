@@ -3,6 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -11,7 +12,7 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -24,7 +25,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Prepare site
         run: |
@@ -32,17 +33,19 @@ jobs:
           cp life/index.html life/.nojekyll _site/ 2>/dev/null || cp life/index.html _site/
           cp life/package.json life/package-lock.json life/server.js life/scrollytelling-standalone.js life/prototype.html _site/ 2>/dev/null || true
           cp life/*.otf _site/ 2>/dev/null || true
-          cp -r life/sequence life/sequence\ 2 _site/ 2>/dev/null || true
+          mkdir -p _site/sequence _site/sequence\ 2
+          cp life/sequence/*.webp _site/sequence/ 2>/dev/null || true
+          cp life/sequence\ 2/*.webp _site/sequence\ 2/ 2>/dev/null || true
           shopt -s nullglob
           for f in life/*.png life/*.jpg life/*.jpeg life/*.webp life/*.avif life/*.PNG life/*.JPG life/*.JPEG; do
             cp "$f" _site/
           done
 
       - name: Upload site
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: _site
 
       - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
