@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preload" as="image" href="digital-world-background.webp" fetchpriority="high">
   <title>XAEROVA — Autonomous Drone Infrastructure</title>
-  <meta name="description" content="Discover XAEROVA autonomous drone infrastructure. Register for early access and product updates.">
+  <meta name="description" content="Be among the first to discover XAEROVA. Get early access and updates about our autonomous drone system.">
   <link rel="canonical" href="https://xaerova.com/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="XAEROVA">
@@ -65,8 +65,6 @@
 
     a { color: inherit; text-decoration: none; }
 
-    /* HEADER */
-
     .topbar {
       height: 62px;
       width: 100%;
@@ -94,8 +92,6 @@
       object-fit: contain;
     }
 
-    /* NAVIGATION */
-
     .nav-links {
       display: flex;
       align-items: center;
@@ -110,9 +106,7 @@
     }
 
     .nav-links a { transition: color .2s ease; }
-
-    .nav-links a:hover,
-    .dropdown-trigger:hover { color: var(--cyan); }
+    .nav-links a:hover, .dropdown-trigger:hover { color: var(--cyan); }
 
     .dropdown { position: relative; }
 
@@ -170,17 +164,36 @@
     @media (hover: hover) and (pointer: fine) {
       .dropdown:hover .dropdown-menu,
       .dropdown:focus-within .dropdown-menu { display: block; }
-
       .dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
     }
-
-    /* LANGUAGE SELECTOR */
 
     .right-tools {
       display: flex;
       align-items: center;
       justify-content: flex-end;
       gap: 14px;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      color: rgba(255,255,255,.9);
+      transition: color .2s ease, transform .2s ease;
+    }
+
+    .social-link:hover {
+      color: var(--cyan);
+      transform: translateY(-2px);
+    }
+
+    .social-link svg {
+      display: block;
+      width: 17px;
+      height: 17px;
+      fill: currentColor;
     }
 
     .language-switch {
@@ -207,8 +220,6 @@
       background: var(--blue);
     }
 
-    /* MAIN CONTENT - DESKTOP */
-
     main {
       width: min(1120px, 100%);
       min-height: calc(100vh - 62px);
@@ -228,8 +239,6 @@
       color: #fff;
       text-shadow: 0 0 12px rgba(0,153,255,.35), 0 0 35px rgba(0,130,255,.18);
     }
-
-    /* PRODUCT IMAGE */
 
     .product-visual {
       width: min(820px, 94%);
@@ -263,8 +272,6 @@
       filter: drop-shadow(0 16px 28px rgba(0,0,0,.55));
     }
 
-    /* SPECIFICATIONS */
-
     .specs {
       width: min(800px, 100%);
       display: grid;
@@ -289,8 +296,6 @@
       font-weight: 500;
       line-height: 1.15;
     }
-
-    /* REGISTRATION FORM */
 
     .signup { width: min(680px, 100%); }
 
@@ -373,8 +378,6 @@
       color: #fff;
     }
 
-    /* LAUNCH ANNOUNCEMENT */
-
     .launch {
       margin-top: clamp(22px, 3.5vh, 34px);
     }
@@ -395,61 +398,136 @@
       line-height: 1.35;
     }
 
-    /* TABLET AND MOBILE RESPONSIVENESS */
+    .launch sup {
+      font-size: .55em;
+      vertical-align: super;
+    }
 
     @media (min-width: 900px) and (min-height: 850px) {
       main { padding-top: 55px; }
       .product-visual { height: 350px; }
     }
 
-    @media (max-width: 760px) {
-      html, body {
-        width: 100%;
-        overflow-x: hidden;
-      }
+    /* MOBILE HAMBURGER MENU */
 
+    .mobile-menu-toggle { display: none; }
+
+    @media (max-width: 760px) {
       .topbar {
-        width: 100%;
-        height: auto;
-        min-height: 60px;
-        padding: 12px 18px;
-        display: grid;
-        grid-template-columns: 1fr auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        height: 64px;
+        min-height: 64px;
+        padding: 0 15px;
         gap: 12px;
       }
 
+      .brand { flex: 0 0 auto; }
+
       .brand img {
-        width: 100px;
+        width: 88px;
         max-height: 32px;
       }
 
-      .nav-links {
-        grid-column: 1 / -1;
-        grid-row: 2;
-        width: 100%;
+      .mobile-menu-toggle {
         display: flex;
-        flex-wrap: wrap;
-        align-items: center;
+        flex: 0 0 38px;
+        width: 38px;
+        height: 38px;
+        padding: 9px 7px;
+        flex-direction: column;
         justify-content: center;
-        gap: 12px 20px;
-        font-size: 7px;
-        letter-spacing: .12em;
+        align-items: center;
+        gap: 5px;
+        border: 1px solid rgba(0,153,255,.45);
+        border-radius: 5px;
+        background: rgba(0,100,180,.12);
+        cursor: pointer;
       }
 
+      .mobile-menu-toggle span {
+        display: block;
+        width: 21px;
+        height: 2px;
+        border-radius: 2px;
+        background: #fff;
+        transition: transform .2s ease, opacity .2s ease;
+      }
+
+      .mobile-menu-toggle.active span:first-child {
+        transform: translateY(7px) rotate(45deg);
+      }
+
+      .mobile-menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .mobile-menu-toggle.active span:last-child {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
+      .right-tools {
+        flex: 0 0 auto;
+        margin-left: auto;
+      }
+
+      .language-switch button {
+        min-width: 36px;
+        padding: 8px 7px;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        width: 100%;
+        padding: 18px 15px;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 0;
+        background: rgba(2,10,22,.98);
+        border-bottom: 1px solid rgba(0,153,255,.35);
+        box-shadow: 0 12px 25px rgba(0,0,0,.4);
+        font-size: 10px;
+        letter-spacing: .18em;
+      }
+
+      .nav-links.mobile-open { display: flex; }
+
+      .nav-links > a,
+      .nav-links .dropdown-trigger {
+        display: flex;
+        width: 100%;
+        padding: 15px 10px;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(255,255,255,.08);
+      }
+
+      .dropdown { width: 100%; }
+
       .dropdown-menu {
-        left: 50%;
-        transform: translateX(-50%);
-        min-width: 190px;
+        position: static;
+        width: 100%;
+        min-width: 0;
+        transform: none;
+        margin: 0;
+        padding: 5px 10px;
+        border: 0;
+        border-radius: 0;
+        background: rgba(0,100,180,.12);
+        box-shadow: none;
       }
 
       main {
-        width: 100%;
-        min-height: calc(100svh - 100px);
+        min-height: calc(100vh - 64px);
         padding: 38px 20px 32px;
-        margin: 0 auto;
       }
-
-      /* MOBILE HEADLINE */
 
       h1 {
         width: 100%;
@@ -458,18 +536,14 @@
         font-size: clamp(25px, 6.5vw, 42px);
         line-height: 1.15;
         letter-spacing: -.035em;
-        overflow-wrap: normal;
         text-wrap: balance;
       }
-
-      /* SMALLER DOCK IMAGE ON PHONES */
 
       .product-visual {
         width: 78%;
         max-width: 430px;
         height: clamp(115px, 25vw, 190px);
         margin: 0 auto 22px;
-        overflow: visible;
       }
 
       .product-visual img {
@@ -489,12 +563,10 @@
         filter: blur(30px);
       }
 
-      /* SPECIFICATIONS */
-
       .specs {
         width: 100%;
         max-width: 480px;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-template-columns: repeat(4,minmax(0,1fr));
         gap: 8px;
         margin: 0 auto 26px;
       }
@@ -505,17 +577,15 @@
       }
 
       .spec strong {
-        font-size: clamp(19px, 5.5vw, 27px);
+        font-size: clamp(19px,5.5vw,27px);
         line-height: 1.1;
       }
 
       .spec span {
-        font-size: clamp(9px, 2.5vw, 11px);
+        font-size: clamp(9px,2.5vw,11px);
         line-height: 1.25;
         overflow-wrap: break-word;
       }
-
-      /* REGISTRATION FORM */
 
       .signup {
         width: 100%;
@@ -562,15 +632,13 @@
         font-size: 13px;
       }
 
-      /* LAUNCH ANNOUNCEMENT */
-
       .launch {
         width: 100%;
         margin-top: 28px;
       }
 
       .launch h2 {
-        font-size: clamp(23px, 6vw, 30px);
+        font-size: clamp(23px,6vw,30px);
         letter-spacing: .04em;
       }
 
@@ -582,40 +650,27 @@
       }
     }
 
-    /* SMALL PHONES */
-
     @media (max-width: 390px) {
       main { padding: 30px 15px 26px; }
-
-      h1 { font-size: clamp(23px, 6.3vw, 29px); }
-
+      h1 { font-size: clamp(23px,6.3vw,29px); }
       .product-visual {
         width: 75%;
         height: 120px;
         margin-bottom: 20px;
       }
-
       .specs { gap: 5px; }
       .spec strong { font-size: 19px; }
       .spec span { font-size: 9px; }
-      .nav-links { gap: 10px 14px; font-size: 6px; }
       .signup-form { padding: 16px; }
     }
 
-    /* VERY SMALL PHONES */
-
     @media (max-width: 340px) {
-      .product-visual {
-        width: 72%;
-        height: 105px;
-      }
-
+      .product-visual { width: 72%; height: 105px; }
       .spec strong { font-size: 17px; }
       .spec span { font-size: 8px; }
-      .nav-links { letter-spacing: .08em; gap: 9px; }
+      .brand img { width: 78px; }
+      .topbar { padding: 0 10px; gap: 8px; }
     }
-
-    /* LANDSCAPE PHONES */
 
     @media (max-width: 900px) and (max-height: 500px) {
       main { padding-top: 20px; }
@@ -631,447 +686,253 @@
 </head>
 
 <body>
-
   <header class="topbar">
-
     <a class="brand" href="#" aria-label="XAEROVA home">
       <img src="no bg.png" alt="XAEROVA">
     </a>
 
-    <nav class="nav-links" aria-label="Main navigation">
-
-      <a href="mailto:info@xaerova.com?subject=XAEROVA%20Investor%20Enquiry"
-         data-i18n="nav-investors">INVESTORS</a>
-
-      <a href="mailto:info@xaerova.com?subject=XAEROVA%20Press%20Enquiry"
-         data-i18n="nav-press">PRESS</a>
+    <nav class="nav-links" id="mainNavigation" aria-label="Main navigation">
+      <a href="mailto:info@xaerova.com?subject=XAEROVA%20Investor%20Enquiry" data-i18n="nav-investors">INVESTORS</a>
+      <a href="mailto:info@xaerova.com?subject=XAEROVA%20Press%20Enquiry" data-i18n="nav-press">PRESS</a>
 
       <div class="dropdown" id="useCasesDropdown">
-
-        <button class="dropdown-trigger"
-                type="button"
-                id="useCasesButton"
-                aria-expanded="false"
-                aria-controls="useCasesMenu">
-
+        <button class="dropdown-trigger" type="button" id="useCasesButton"
+          aria-expanded="false" aria-controls="useCasesMenu">
           <span data-i18n="nav-usecases">USE CASES</span>
           <span class="dropdown-arrow" aria-hidden="true">⌄</span>
-
         </button>
 
         <div class="dropdown-menu" id="useCasesMenu">
-
           <a href="#early-access" data-i18n="nav-agriculture">Agriculture</a>
-
           <a href="#early-access" data-i18n="nav-security">Security &amp; Defense</a>
-
           <a href="#early-access" data-i18n="nav-nature">Nature Protection</a>
-
         </div>
       </div>
-
     </nav>
 
+    <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button"
+      aria-label="Open navigation menu" aria-expanded="false" aria-controls="mainNavigation">
+      <span></span><span></span><span></span>
+    </button>
+
     <div class="right-tools">
-
       <div class="language-switch" role="group" aria-label="Select language">
-
-        <button type="button"
-                id="langENG"
-                class="active"
-                aria-pressed="true"
-                onclick="setLanguage('en')">ENG</button>
-
-        <button type="button"
-                id="langFR"
-                aria-pressed="false"
-                onclick="setLanguage('fr')">FR</button>
-
+        <button type="button" id="langENG" class="active" aria-pressed="true" onclick="setLanguage('en')">ENG</button>
+        <button type="button" id="langFR" aria-pressed="false" onclick="setLanguage('fr')">FR</button>
       </div>
-
     </div>
-
   </header>
 
   <main>
-
     <h1 data-i18n="headline">AUTONOMOUS DRONE INFRASTRUCTURE</h1>
 
     <div class="product-visual">
-
       <img
         src="IMG_8199.JPG.jpeg"
         alt="XAEROVA SkyMind autonomous drone docking station"
       >
-
     </div>
 
     <section class="specs" id="specifications" aria-label="Product specifications">
-
-      <div class="spec">
-        <strong>4K</strong>
-        <span data-i18n="spec-camera">Camera type</span>
-      </div>
-
-      <div class="spec">
-        <strong>7Km</strong>
-        <span data-i18n="spec-range">Communication range</span>
-      </div>
-
-      <div class="spec">
-        <strong>72kph</strong>
-        <span data-i18n="spec-speed">Maximum speed</span>
-      </div>
-
-      <div class="spec">
-        <strong>30MIN</strong>
-        <span data-i18n="spec-flight">Minimum flight time</span>
-      </div>
-
+      <div class="spec"><strong>4K</strong><span data-i18n="spec-camera">Camera type</span></div>
+      <div class="spec"><strong>7Km</strong><span data-i18n="spec-range">Communication range</span></div>
+      <div class="spec"><strong>72kph</strong><span data-i18n="spec-speed">Maximum speed</span></div>
+      <div class="spec"><strong>30MIN</strong><span data-i18n="spec-flight">Minimum flight time</span></div>
     </section>
 
     <section class="signup" id="early-access">
-
       <h2 data-i18n="signup-title">BE AMONG THE FIRST</h2>
 
       <!-- FormSubmit sends early-access registrations to info@xaerova.com.
            FormSubmit may require the inbox to be activated once before first use. -->
-
-      <form class="signup-form"
-            id="earlyAccessForm"
-            action="https://formsubmit.co/ajax/info@xaerova.com"
-            method="POST">
-
-        <input type="hidden"
-               name="_subject"
-               value="XAEROVA — Early access registration">
-
-        <input type="hidden"
-               name="_template"
-               value="table">
-
-        <input type="hidden"
-               name="_replyto"
-               id="replyToEmail"
-               value="">
-
-        <input type="text"
-               name="_honey"
-               tabindex="-1"
-               autocomplete="off"
-               aria-hidden="true"
-               style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+      <form class="signup-form" id="earlyAccessForm" action="https://formsubmit.co/ajax/info@xaerova.com" method="POST">
+        <input type="hidden" name="_subject" value="XAEROVA — Early access registration">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_replyto" id="replyToEmail" value="">
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
 
         <label for="firstName" data-i18n="first-name">First name</label>
-
-        <input id="firstName"
-               name="First name"
-               type="text"
-               autocomplete="given-name"
-               required>
+        <input id="firstName" name="First name" type="text" autocomplete="given-name" required>
 
         <label for="lastName" data-i18n="last-name">Last name</label>
-
-        <input id="lastName"
-               name="Last name"
-               type="text"
-               autocomplete="family-name"
-               required>
+        <input id="lastName" name="Last name" type="text" autocomplete="family-name" required>
 
         <label for="email" data-i18n="email">Email address</label>
-
-        <input id="email"
-               name="Email"
-               type="email"
-               autocomplete="email"
-               required>
+        <input id="email" name="Email" type="email" autocomplete="email" required>
 
         <label for="country" data-i18n="country">Country</label>
+        <input id="country" name="Country" type="text" autocomplete="country-name" required>
 
-        <input id="country"
-               name="Country"
-               type="text"
-               autocomplete="country-name"
-               required>
-
-        <button class="submit-button"
-                id="submitButton"
-                type="submit"
-                data-i18n="submit">GET EARLY ACCESS →</button>
-
-        <p class="form-message"
-           id="formMessage"
-           role="status"
-           aria-live="polite"></p>
-
+        <button class="submit-button" id="submitButton" type="submit" data-i18n="submit">GET EARLY ACCESS →</button>
+        <p class="form-message" id="formMessage" role="status" aria-live="polite"></p>
       </form>
-
     </section>
 
     <section class="launch" id="launch">
-
       <h2 data-i18n="launch-title">COMING Q1 2027</h2>
-
-      <p data-i18n="launch-copy">
-        Get exclusive updates, early access and information about upcoming pre-orders.
-      </p>
-
+      <p data-i18n="launch-copy">Get exclusive updates, early access and information about upcoming pre-orders.</p>
     </section>
-
   </main>
 
   <script>
-
     const translations = {
-
       en: {
-
         "nav-investors": "INVESTORS",
         "nav-press": "PRESS",
         "nav-usecases": "USE CASES",
         "nav-agriculture": "AGRICULTURE",
         "nav-security": "SECURITY & DEFENSE",
         "nav-nature": "NATURE PROTECTION",
-
         "headline": "AUTONOMOUS DRONE INFRASTRUCTURE",
-
         "spec-camera": "Camera type",
         "spec-range": "Communication range",
         "spec-speed": "Maximum speed",
         "spec-flight": "Minimum flight time",
-
         "signup-title": "BE AMONG THE FIRST",
         "first-name": "First name",
         "last-name": "Last name",
         "email": "Email address",
         "country": "Country",
-
         "submit": "GET EARLY ACCESS →",
         "sending": "SENDING…",
-
         "success": "Thank you. Your early-access request has been received.",
-
         "error": "Something went wrong. Please try again or email info@xaerova.com.",
-
         "launch-title": "COMING Q1 2027",
-
         "launch-copy": "Get exclusive updates, early access and information about upcoming pre-orders."
-
       },
 
       fr: {
-
         "nav-investors": "INVESTISSEURS",
         "nav-press": "PRESSE",
         "nav-usecases": "APPLICATIONS",
         "nav-agriculture": "AGRICULTURE",
         "nav-security": "SÉCURITÉ & DÉFENSE",
         "nav-nature": "PROTECTION DE LA NATURE",
-
         "headline": "INFRASTRUCTURE DE DRONES AUTONOMES",
-
         "spec-camera": "Type de caméra",
         "spec-range": "Portée de communication",
         "spec-speed": "Vitesse maximale",
         "spec-flight": "Autonomie minimale",
-
         "signup-title": "SOYEZ PARMI LES PREMIERS",
         "first-name": "Prénom",
         "last-name": "Nom",
         "email": "Adresse e-mail",
         "country": "Pays",
-
         "submit": "ACCÉDER EN AVANT-PREMIÈRE →",
         "sending": "ENVOI EN COURS…",
-
         "success": "Merci. Votre demande d’accès anticipé a bien été reçue.",
-
         "error": "Une erreur s’est produite. Réessayez ou écrivez à info@xaerova.com.",
-
         "launch-title": "PRÉVU AU 1ER TRIMESTRE 2027",
-
         "launch-copy": "Recevez des actualités exclusives, un accès anticipé et des informations sur les prochaines précommandes."
-
       }
-
     };
 
-
-    /* LANGUAGE SWITCH */
-
     function setLanguage(lang) {
-
       const selected = translations[lang] ? lang : "en";
-
       document.documentElement.lang = selected;
-
       localStorage.setItem("xaerova-language", selected);
 
       document.querySelectorAll("[data-i18n]").forEach((element) => {
-
         const key = element.getAttribute("data-i18n");
-
         if (translations[selected][key]) {
-
           element.innerHTML = translations[selected][key];
-
         }
-
       });
 
-      document.getElementById("langENG")
-        .classList.toggle("active", selected === "en");
-
-      document.getElementById("langFR")
-        .classList.toggle("active", selected === "fr");
-
-      document.getElementById("langENG")
-        .setAttribute("aria-pressed", String(selected === "en"));
-
-      document.getElementById("langFR")
-        .setAttribute("aria-pressed", String(selected === "fr"));
-
+      document.getElementById("langENG").classList.toggle("active", selected === "en");
+      document.getElementById("langFR").classList.toggle("active", selected === "fr");
+      document.getElementById("langENG").setAttribute("aria-pressed", String(selected === "en"));
+      document.getElementById("langFR").setAttribute("aria-pressed", String(selected === "fr"));
     }
 
-
-    /* INITIALIZATION */
-
     document.addEventListener("DOMContentLoaded", () => {
-
-      const savedLanguage =
-        localStorage.getItem("xaerova-language") || "en";
-
+      const savedLanguage = localStorage.getItem("xaerova-language") || "en";
       setLanguage(savedLanguage);
 
+      const mobileMenuButton = document.getElementById("mobileMenuToggle");
+      const mainNavigation = document.getElementById("mainNavigation");
 
-      /* USE CASES DROPDOWN */
+      mobileMenuButton.addEventListener("click", () => {
+        const isOpen = mainNavigation.classList.toggle("mobile-open");
+        mobileMenuButton.classList.toggle("active", isOpen);
+        mobileMenuButton.setAttribute("aria-expanded", String(isOpen));
+        mobileMenuButton.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+      });
 
-      const dropdown =
-        document.getElementById("useCasesDropdown");
+      mainNavigation.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mainNavigation.classList.remove("mobile-open");
+          mobileMenuButton.classList.remove("active");
+          mobileMenuButton.setAttribute("aria-expanded", "false");
+          mobileMenuButton.setAttribute("aria-label", "Open navigation menu");
+        });
+      });
 
-      const dropdownButton =
-        document.getElementById("useCasesButton");
+      const dropdown = document.getElementById("useCasesDropdown");
+      const dropdownButton = document.getElementById("useCasesButton");
 
       dropdownButton.addEventListener("click", (event) => {
-
         event.stopPropagation();
-
         const isOpen = dropdown.classList.toggle("open");
-
-        dropdownButton.setAttribute(
-          "aria-expanded",
-          String(isOpen)
-        );
-
+        dropdownButton.setAttribute("aria-expanded", String(isOpen));
       });
 
       document.addEventListener("click", (event) => {
-
-        if (!dropdown.contains(event.target)) {
-
-          dropdown.classList.remove("open");
-
-          dropdownButton.setAttribute(
-            "aria-expanded",
-            "false"
-          );
-
+        if (!mainNavigation.contains(event.target) && !mobileMenuButton.contains(event.target)) {
+          mainNavigation.classList.remove("mobile-open");
+          mobileMenuButton.classList.remove("active");
+          mobileMenuButton.setAttribute("aria-expanded", "false");
         }
 
+        if (!dropdown.contains(event.target)) {
+          dropdown.classList.remove("open");
+          dropdownButton.setAttribute("aria-expanded", "false");
+        }
       });
 
       dropdown.querySelectorAll(".dropdown-menu a").forEach((link) => {
-
         link.addEventListener("click", () => {
-
           dropdown.classList.remove("open");
-
-          dropdownButton.setAttribute(
-            "aria-expanded",
-            "false"
-          );
-
+          dropdownButton.setAttribute("aria-expanded", "false");
         });
-
       });
 
-
-      /* EARLY ACCESS FORM */
-
-      const form =
-        document.getElementById("earlyAccessForm");
-
-      const button =
-        document.getElementById("submitButton");
-
-      const message =
-        document.getElementById("formMessage");
+      const form = document.getElementById("earlyAccessForm");
+      const button = document.getElementById("submitButton");
+      const message = document.getElementById("formMessage");
 
       form.addEventListener("submit", async (event) => {
-
         event.preventDefault();
 
         const lang = document.documentElement.lang || "en";
-
         message.textContent = "";
-
-        document.getElementById("replyToEmail").value =
-          document.getElementById("email").value.trim();
-
+        document.getElementById("replyToEmail").value = document.getElementById("email").value.trim();
         button.disabled = true;
-
         button.textContent = translations[lang].sending;
 
         try {
-
           const response = await fetch(form.action, {
-
             method: "POST",
-
             body: new FormData(form),
-
-            headers: {
-              "Accept": "application/json"
-            }
-
+            headers: { "Accept": "application/json" }
           });
 
-          const result =
-            await response.json().catch(() => ({}));
+          const result = await response.json().catch(() => ({}));
 
-          if (
-            !response.ok ||
-            !(result.success === true || result.success === "true")
-          ) {
-
+          if (!response.ok || !(result.success === true || result.success === "true")) {
             throw new Error("Form submission failed");
-
           }
 
           form.reset();
-
-          message.textContent =
-            translations[lang].success;
-
+          message.textContent = translations[lang].success;
         } catch (error) {
-
-          message.textContent =
-            translations[lang].error;
-
+          message.textContent = translations[lang].error;
         } finally {
-
           button.disabled = false;
-
-          button.textContent =
-            translations[lang].submit;
-
+          button.textContent = translations[lang].submit;
         }
-
       });
-
     });
-
   </script>
-
 </body>
 </html>
