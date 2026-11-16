@@ -28,8 +28,10 @@
       --muted: rgba(235,245,255,.72);
       --panel: rgba(0,93,145,.78);
     }
+
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
     body {
       isolation: isolate;
       margin: 0;
@@ -39,6 +41,7 @@
       font-family: "Rajdhani", sans-serif;
       overflow-x: hidden;
     }
+
     body::before {
       content: "";
       position: fixed;
@@ -49,6 +52,7 @@
         url("digital-world-banner-background-remixed-from-public-domain-by-nasa.jpg.jpeg") center center / cover no-repeat;
       transform: scale(1.015);
     }
+
     body::after {
       content: "";
       position: fixed;
@@ -57,7 +61,9 @@
       pointer-events: none;
       background: radial-gradient(ellipse at 50% 45%, transparent 20%, rgba(0,0,0,.25) 100%);
     }
+
     a { color: inherit; text-decoration: none; }
+
     .topbar {
       height: 62px;
       width: 100%;
@@ -71,8 +77,20 @@
       position: relative;
       z-index: 5;
     }
-    .brand { display: flex; align-items: center; width: fit-content; }
-    .brand img { width: 112px; height: auto; max-height: 34px; object-fit: contain; }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      width: fit-content;
+    }
+
+    .brand img {
+      width: 112px;
+      height: auto;
+      max-height: 34px;
+      object-fit: contain;
+    }
+
     .nav-links {
       display: flex;
       align-items: center;
@@ -85,9 +103,16 @@
       letter-spacing: .32em;
       color: rgba(255,255,255,.8);
     }
+
     .nav-links a { transition: color .2s ease; }
-    .nav-links a:hover, .dropdown-trigger:hover { color: var(--cyan); }
+
+    .nav-links a:hover,
+    .dropdown-trigger:hover {
+      color: var(--cyan);
+    }
+
     .dropdown { position: relative; }
+
     .dropdown-trigger {
       display: inline-flex;
       align-items: center;
@@ -100,7 +125,12 @@
       font: inherit;
       letter-spacing: inherit;
     }
-    .dropdown-arrow { font-size: 13px; transition: transform .2s ease; }
+
+    .dropdown-arrow {
+      font-size: 13px;
+      transition: transform .2s ease;
+    }
+
     .dropdown-menu {
       display: none;
       position: absolute;
@@ -117,6 +147,7 @@
       letter-spacing: .08em;
       white-space: normal;
     }
+
     .dropdown-menu a {
       display: block;
       padding: 12px 13px;
@@ -124,18 +155,56 @@
       font: 600 12px "Rajdhani", sans-serif;
       letter-spacing: .08em;
     }
+
     .dropdown-menu a:hover {
       color: var(--cyan);
       background: rgba(0,140,255,.14);
     }
+
     .dropdown.open .dropdown-menu { display: block; }
     .dropdown.open .dropdown-arrow { transform: rotate(180deg); }
+
     @media (hover: hover) and (pointer: fine) {
       .dropdown:hover .dropdown-menu,
-      .dropdown:focus-within .dropdown-menu { display: block; }
-      .dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
+      .dropdown:focus-within .dropdown-menu {
+        display: block;
+      }
+
+      .dropdown:hover .dropdown-arrow {
+        transform: rotate(180deg);
+      }
     }
-    .right-tools { display: flex; justify-content: flex-end; }
+
+    .right-tools {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 14px;
+    }
+
+    /* X social media link */
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      color: rgba(255,255,255,.9);
+      transition: color .2s ease, transform .2s ease;
+    }
+
+    .social-link:hover {
+      color: var(--cyan);
+      transform: translateY(-2px);
+    }
+
+    .social-link svg {
+      display: block;
+      width: 17px;
+      height: 17px;
+      fill: currentColor;
+    }
+
     .language-switch {
       display: inline-flex;
       align-items: center;
@@ -143,6 +212,7 @@
       border-radius: 3px;
       overflow: hidden;
     }
+
     .language-switch button {
       border: 0;
       min-width: 42px;
@@ -153,7 +223,12 @@
       font: 700 9px "Rajdhani", sans-serif;
       letter-spacing: .12em;
     }
-    .language-switch button.active { color: white; background: var(--blue); }
+
+    .language-switch button.active {
+      color: white;
+      background: var(--blue);
+    }
+
     main {
       width: min(1120px, 100%);
       min-height: calc(100vh - 62px);
@@ -164,6 +239,7 @@
       align-items: center;
       text-align: center;
     }
+
     h1 {
       margin: 0 0 clamp(12px, 2.2vh, 25px);
       font: 800 clamp(42px, 8.4vw, 104px)/.98 "Orbitron", sans-serif;
@@ -172,6 +248,7 @@
       color: #fff;
       text-shadow: 0 0 12px rgba(0,153,255,.35), 0 0 35px rgba(0,130,255,.18);
     }
+
     .product-visual {
       width: min(820px, 94%);
       height: clamp(190px, 34vh, 340px);
@@ -181,6 +258,7 @@
       margin: 0 auto clamp(20px, 3vh, 30px);
       position: relative;
     }
+
     .product-visual::before {
       content: "";
       position: absolute;
@@ -192,6 +270,7 @@
       filter: blur(48px);
       border-radius: 50%;
     }
+
     .product-visual img {
       position: relative;
       max-width: 100%;
@@ -201,6 +280,7 @@
       object-fit: contain;
       filter: drop-shadow(0 16px 28px rgba(0,0,0,.55));
     }
+
     .specs {
       width: min(800px, 100%);
       display: grid;
@@ -208,6 +288,7 @@
       gap: 12px;
       margin: 0 auto clamp(20px, 3vh, 30px);
     }
+
     .spec strong {
       display: block;
       color: var(--blue);
@@ -215,6 +296,7 @@
       letter-spacing: .02em;
       text-shadow: 0 0 14px rgba(0,139,255,.2);
     }
+
     .spec span {
       display: block;
       margin-top: 4px;
@@ -223,7 +305,9 @@
       font-weight: 500;
       line-height: 1.15;
     }
+
     .signup { width: min(680px, 100%); }
+
     .signup h2 {
       margin: 0 0 14px;
       color: var(--blue);
@@ -232,6 +316,7 @@
       text-transform: uppercase;
       text-shadow: 0 0 14px rgba(0,139,255,.22);
     }
+
     .signup-form {
       display: grid;
       grid-template-columns: 100px 1fr;
@@ -245,12 +330,14 @@
       backdrop-filter: blur(12px);
       text-align: left;
     }
+
     .signup-form label {
       color: rgba(255,255,255,.8);
       font-size: 12px;
       font-weight: 600;
       letter-spacing: .03em;
     }
+
     .signup-form input {
       width: 100%;
       min-width: 0;
@@ -263,7 +350,12 @@
       background: rgba(255,255,255,.97);
       font: 500 14px "Rajdhani", sans-serif;
     }
-    .signup-form input:focus { border-color: var(--cyan); box-shadow: 0 0 0 2px rgba(0,200,255,.2); }
+
+    .signup-form input:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 2px rgba(0,200,255,.2);
+    }
+
     .submit-button {
       grid-column: 2;
       min-height: 34px;
@@ -276,8 +368,17 @@
       letter-spacing: .12em;
       transition: background .2s, transform .2s;
     }
-    .submit-button:hover { background: #0799ed; transform: translateY(-1px); }
-    .submit-button:disabled { opacity: .65; cursor: wait; }
+
+    .submit-button:hover {
+      background: #0799ed;
+      transform: translateY(-1px);
+    }
+
+    .submit-button:disabled {
+      opacity: .65;
+      cursor: wait;
+    }
+
     .form-message {
       grid-column: 1 / -1;
       margin: 4px 0 0;
@@ -285,9 +386,11 @@
       font-size: 13px;
       color: #fff;
     }
+
     .launch {
       margin-top: clamp(22px, 3.5vh, 34px);
     }
+
     .launch h2 {
       margin: 0;
       color: var(--blue);
@@ -295,6 +398,7 @@
       text-transform: uppercase;
       text-shadow: 0 0 15px rgba(0,139,255,.22);
     }
+
     .launch p {
       margin: 0 auto;
       max-width: 620px;
@@ -302,11 +406,17 @@
       font-size: 12px;
       line-height: 1.35;
     }
-    .launch sup { font-size: .55em; vertical-align: super; }
+
+    .launch sup {
+      font-size: .55em;
+      vertical-align: super;
+    }
+
     @media (min-width: 900px) and (min-height: 850px) {
       main { padding-top: 55px; }
       .product-visual { height: 350px; }
     }
+
     @media (max-width: 760px) {
       .topbar {
         height: auto;
@@ -315,7 +425,9 @@
         grid-template-columns: 1fr auto;
         gap: 7px 12px;
       }
+
       .brand img { width: 100px; }
+
       .nav-links {
         grid-column: 1 / -1;
         grid-row: 2;
@@ -324,20 +436,56 @@
         justify-content: center;
         gap: 8px 18px;
         font-size: 7px;
-        letter-spacing: .2em;
-        padding: 5px 0 2px;
+        letter-spacing: .16em;
       }
-      .dropdown-menu { min-width: 190px; }
-      main { min-height: calc(100vh - 100px); padding: 42px 18px 28px; }
-      h1 { font-size: clamp(38px, 10vw, 68px); }
-      .product-visual { height: clamp(170px, 30vh, 260px); width: 100%; }
-      .specs { gap: 8px; }
+
+      .dropdown-menu {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      main {
+        min-height: calc(100vh - 90px);
+        padding: 40px 18px 28px;
+      }
+
+      h1 { font-size: clamp(39px, 10vw, 68px); }
+
+      .product-visual {
+        width: 100%;
+        height: clamp(180px, 30vh, 260px);
+      }
+
+      .specs { gap: 8px 4px; }
+
       .spec strong { font-size: clamp(21px, 6vw, 30px); }
-      .signup-form { padding: 15px; grid-template-columns: 1fr; gap: 5px; }
+
+      .spec span { font-size: 10px; }
+
+      .signup-form {
+        grid-template-columns: 82px 1fr;
+        padding: 16px;
+        gap: 7px 9px;
+        border-radius: 15px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .signup-form {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
+
       .signup-form label { margin-top: 5px; }
-      .submit-button { grid-column: 1; margin-top: 5px; }
+
+      .submit-button {
+        grid-column: 1;
+        margin-top: 5px;
+      }
+
       .spec span { font-size: 9px; }
     }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { transition-duration: .01ms !important; }
@@ -347,19 +495,23 @@
 
 <body>
   <header class="topbar">
+
     <a class="brand" href="#" aria-label="XAEROVA home">
       <img src="no bg.png" alt="XAEROVA">
     </a>
 
     <nav class="nav-links" aria-label="Main navigation">
       <a href="mailto:info@xaerova.com?subject=XAEROVA%20Investor%20Enquiry" data-i18n="nav-investors">INVESTORS</a>
+
       <a href="mailto:info@xaerova.com?subject=XAEROVA%20Press%20Enquiry" data-i18n="nav-press">PRESS</a>
+
       <div class="dropdown" id="useCasesDropdown">
         <button class="dropdown-trigger" type="button" id="useCasesButton"
           aria-expanded="false" aria-controls="useCasesMenu">
           <span data-i18n="nav-usecases">USE CASES</span>
           <span class="dropdown-arrow" aria-hidden="true">⌄</span>
         </button>
+
         <div class="dropdown-menu" id="useCasesMenu">
           <a href="#early-access" data-i18n="nav-agriculture">Agriculture</a>
           <a href="#early-access" data-i18n="nav-security">Security &amp; Defense</a>
@@ -369,41 +521,75 @@
     </nav>
 
     <div class="right-tools">
+
+      <!-- XAEROVA X PROFILE -->
+      <a class="social-link"
+         href="https://x.com/xaerova"
+         target="_blank"
+         rel="noopener noreferrer"
+         aria-label="Follow XAEROVA on X"
+         title="Follow XAEROVA on X">
+
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M18.9 2H22l-6.78 7.75L23.2 22h-6.25l-4.9-7.45L5.53 22H2.4l7.25-8.29L1.8 2h6.4l4.43 6.77L18.9 2Zm-1.1 18h1.73L7.27 3.9H5.41L17.8 20Z"/>
+        </svg>
+      </a>
+
       <div class="language-switch" role="group" aria-label="Select language">
         <button type="button" id="langENG" class="active" aria-pressed="true" onclick="setLanguage('en')">ENG</button>
         <button type="button" id="langFR" aria-pressed="false" onclick="setLanguage('fr')">FR</button>
       </div>
+
     </div>
   </header>
 
   <main>
     <h1 data-i18n="headline">EYES IN THE SKY</h1>
 
+    <!-- ACTUAL XAEROVA SKY MIND PRODUCT IMAGE -->
     <div class="product-visual">
-      <!-- Temporary stock drone image. Replace this src with your final XAEROVA product image. -->
       <img
-        src="https://images.unsplash.com/photo-1506947411487-a56738267384?auto=format&fit=crop&w=1600&q=85"
-        alt="Drone in flight — XAEROVA product preview"
+        src="IMG_8199.JPG.jpeg"
+        alt="XAEROVA SkyMind autonomous drone docking station"
       >
     </div>
 
     <section class="specs" id="specifications" aria-label="Product specifications">
-      <div class="spec"><strong>4K</strong><span data-i18n="spec-camera">Camera type</span></div>
-      <div class="spec"><strong>7Km</strong><span data-i18n="spec-range">Communication range</span></div>
-      <div class="spec"><strong>72kph</strong><span data-i18n="spec-speed">Maximum speed</span></div>
-      <div class="spec"><strong>30MIN</strong><span data-i18n="spec-flight">Minimum flight time</span></div>
+      <div class="spec">
+        <strong>4K</strong>
+        <span data-i18n="spec-camera">Camera type</span>
+      </div>
+
+      <div class="spec">
+        <strong>7Km</strong>
+        <span data-i18n="spec-range">Communication range</span>
+      </div>
+
+      <div class="spec">
+        <strong>72kph</strong>
+        <span data-i18n="spec-speed">Maximum speed</span>
+      </div>
+
+      <div class="spec">
+        <strong>30MIN</strong>
+        <span data-i18n="spec-flight">Minimum flight time</span>
+      </div>
     </section>
 
     <section class="signup" id="early-access">
       <h2 data-i18n="signup-title">BE AMONG THE FIRST</h2>
 
-      <!-- FormSubmit sends early-access registrations to info@xaerova.com.
-           FormSubmit may require the inbox to be activated once before first use. -->
-      <form class="signup-form" id="earlyAccessForm" action="https://formsubmit.co/ajax/info@xaerova.com" method="POST">
+      <form class="signup-form" id="earlyAccessForm"
+        action="https://formsubmit.co/ajax/info@xaerova.com"
+        method="POST">
+
         <input type="hidden" name="_subject" value="XAEROVA — Early access registration">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_replyto" id="replyToEmail" value="">
-        <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+
+        <input type="text" name="_honey" tabindex="-1"
+          autocomplete="off" aria-hidden="true"
+          style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
 
         <label for="firstName" data-i18n="first-name">First name</label>
         <input id="firstName" name="First name" type="text" autocomplete="given-name" required>
@@ -417,14 +603,19 @@
         <label for="country" data-i18n="country">Country</label>
         <input id="country" name="Country" type="text" autocomplete="country-name" required>
 
-        <button class="submit-button" id="submitButton" type="submit" data-i18n="submit">GET EARLY ACCESS →</button>
+        <button class="submit-button" id="submitButton" type="submit" data-i18n="submit">
+          GET EARLY ACCESS →
+        </button>
+
         <p class="form-message" id="formMessage" role="status" aria-live="polite"></p>
       </form>
     </section>
 
     <section class="launch" id="launch">
       <h2 data-i18n="launch-title">AVAILABLE ON NOVEMBER 27<sup>TH</sup></h2>
-      <p data-i18n="launch-copy">Get exclusive updates, early access and information about upcoming pre-orders.</p>
+      <p data-i18n="launch-copy">
+        Get exclusive updates, early access and information about upcoming pre-orders.
+      </p>
     </section>
   </main>
 
@@ -437,23 +628,29 @@
         "nav-agriculture": "AGRICULTURE",
         "nav-security": "SECURITY & DEFENSE",
         "nav-nature": "NATURE PROTECTION",
+
         "headline": "EYES IN THE SKY",
+
         "spec-camera": "Camera type",
         "spec-range": "Communication range",
         "spec-speed": "Maximum speed",
         "spec-flight": "Minimum flight time",
+
         "signup-title": "BE AMONG THE FIRST",
         "first-name": "First name",
         "last-name": "Last name",
         "email": "Email address",
         "country": "Country",
+
         "submit": "GET EARLY ACCESS →",
         "sending": "SENDING…",
         "success": "Thank you. Your early-access request has been received.",
         "error": "Something went wrong. Please try again or email info@xaerova.com.",
+
         "launch-title": "AVAILABLE ON NOVEMBER 27<sup>TH</sup>",
         "launch-copy": "Get exclusive updates, early access and information about upcoming pre-orders."
       },
+
       fr: {
         "nav-investors": "INVESTISSEURS",
         "nav-press": "PRESSE",
@@ -461,20 +658,25 @@
         "nav-agriculture": "AGRICULTURE",
         "nav-security": "SÉCURITÉ & DÉFENSE",
         "nav-nature": "PROTECTION DE LA NATURE",
+
         "headline": "LES YEUX DANS LE CIEL",
+
         "spec-camera": "Type de caméra",
         "spec-range": "Portée de communication",
         "spec-speed": "Vitesse maximale",
         "spec-flight": "Autonomie minimale",
+
         "signup-title": "SOYEZ PARMI LES PREMIERS",
         "first-name": "Prénom",
         "last-name": "Nom",
         "email": "Adresse e-mail",
         "country": "Pays",
+
         "submit": "ACCÉDER EN AVANT-PREMIÈRE →",
         "sending": "ENVOI EN COURS…",
         "success": "Merci. Votre demande d’accès anticipé a bien été reçue.",
         "error": "Une erreur s’est produite. Réessayez ou écrivez à info@xaerova.com.",
+
         "launch-title": "DISPONIBLE LE 27 NOVEMBRE",
         "launch-copy": "Recevez des actualités exclusives, un accès anticipé et des informations sur les prochaines précommandes."
       }
@@ -482,11 +684,13 @@
 
     function setLanguage(lang) {
       const selected = translations[lang] ? lang : "en";
+
       document.documentElement.lang = selected;
       localStorage.setItem("xaerova-language", selected);
 
       document.querySelectorAll("[data-i18n]").forEach((element) => {
         const key = element.getAttribute("data-i18n");
+
         if (translations[selected][key]) {
           element.innerHTML = translations[selected][key];
         }
@@ -494,27 +698,35 @@
 
       document.getElementById("langENG").classList.toggle("active", selected === "en");
       document.getElementById("langFR").classList.toggle("active", selected === "fr");
+
       document.getElementById("langENG").setAttribute("aria-pressed", String(selected === "en"));
       document.getElementById("langFR").setAttribute("aria-pressed", String(selected === "fr"));
     }
 
     document.addEventListener("DOMContentLoaded", () => {
+
       const savedLanguage = localStorage.getItem("xaerova-language") || "en";
       setLanguage(savedLanguage);
 
+      // USE CASES DROPDOWN
       const dropdown = document.getElementById("useCasesDropdown");
       const dropdownButton = document.getElementById("useCasesButton");
+
       dropdownButton.addEventListener("click", (event) => {
         event.stopPropagation();
+
         const isOpen = dropdown.classList.toggle("open");
+
         dropdownButton.setAttribute("aria-expanded", String(isOpen));
       });
+
       document.addEventListener("click", (event) => {
         if (!dropdown.contains(event.target)) {
           dropdown.classList.remove("open");
           dropdownButton.setAttribute("aria-expanded", "false");
         }
       });
+
       dropdown.querySelectorAll(".dropdown-menu a").forEach((link) => {
         link.addEventListener("click", () => {
           dropdown.classList.remove("open");
@@ -522,15 +734,21 @@
         });
       });
 
+      // EARLY ACCESS FORM
       const form = document.getElementById("earlyAccessForm");
       const button = document.getElementById("submitButton");
       const message = document.getElementById("formMessage");
 
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
+
         const lang = document.documentElement.lang || "en";
+
         message.textContent = "";
-        document.getElementById("replyToEmail").value = document.getElementById("email").value.trim();
+
+        document.getElementById("replyToEmail").value =
+          document.getElementById("email").value.trim();
+
         button.disabled = true;
         button.textContent = translations[lang].sending;
 
@@ -540,6 +758,7 @@
             body: new FormData(form),
             headers: { "Accept": "application/json" }
           });
+
           const result = await response.json().catch(() => ({}));
 
           if (!response.ok || !(result.success === true || result.success === "true")) {
@@ -548,13 +767,16 @@
 
           form.reset();
           message.textContent = translations[lang].success;
+
         } catch (error) {
           message.textContent = translations[lang].error;
+
         } finally {
           button.disabled = false;
           button.textContent = translations[lang].submit;
         }
       });
+
     });
   </script>
 </body>
