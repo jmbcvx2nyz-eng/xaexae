@@ -4,1303 +4,688 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#050914">
-
-  <title>XAEROVA | Autonomous Drone Infrastructure</title>
-  <meta name="description" content="XAEROVA is building autonomous drone infrastructure for agriculture, security and nature protection. Coming Q1 2027.">
-
+  <link rel="preload" as="image" href="digital-world-background.webp" fetchpriority="high">
+  <title>XAEROVA — Autonomous Drone Infrastructure</title>
+  <meta name="description" content="Be among the first to discover XAEROVA. Get early access and updates about our autonomous drone system.">
+  <link rel="canonical" href="https://xaerova.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="XAEROVA">
+  <meta property="og:title" content="XAEROVA — Autonomous Drone Infrastructure">
+  <meta property="og:description" content="Be among the first. Get exclusive updates and early access to XAEROVA.">
+  <meta property="og:url" content="https://xaerova.com/">
+  <meta property="og:image" content="https://xaerova.com/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/png" href="Favicon 3.PNG">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #050914;
-      --blue: #42baff;
-      --blue-light: #8bd7ff;
-      --white: #f5f8ff;
-      --muted: #9ba9bd;
-      --panel: rgba(8, 17, 34, .78);
+      --blue: #078cff;
+      --cyan: #00c8ff;
+      --white: #f7fbff;
+      --muted: rgba(235,245,255,.72);
+      --panel: rgba(0,93,145,.78);
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
+      isolation: isolate;
+      margin: 0;
       min-height: 100vh;
-      background: var(--bg);
       color: var(--white);
-      font-family: Inter, Arial, sans-serif;
+      background: #020811;
+      font-family: "Rajdhani", sans-serif;
       overflow-x: hidden;
     }
-
-    body.modal-open {
-      overflow: hidden;
-    }
-
-    button, input {
-      font: inherit;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .background {
+    body::before {
+      content: "";
       position: fixed;
       inset: 0;
-      z-index: -3;
+      z-index: -2;
       background:
-        linear-gradient(90deg, rgba(3, 8, 19, .94) 0%, rgba(3, 8, 19, .70) 48%, rgba(3, 8, 19, .40) 100%),
-        linear-gradient(0deg, rgba(3, 8, 19, .88), transparent 55%),
+        linear-gradient(180deg, rgba(0,7,17,.35) 0%, rgba(0,9,20,.18) 42%, rgba(0,5,14,.58) 100%),
         url("digital-world-background.webp") center center / cover no-repeat;
-      transform: scale(1.02);
+      transform: scale(1.015);
     }
-
-    .background::after {
+    body::after {
       content: "";
-      position: absolute;
+      position: fixed;
       inset: 0;
-      background: radial-gradient(circle at 75% 45%, rgba(31, 142, 255, .13), transparent 38%);
+      z-index: -1;
+      pointer-events: none;
+      background: radial-gradient(ellipse at 50% 45%, transparent 20%, rgba(0,0,0,.25) 100%);
     }
-
-    .site-header {
+    a { color: inherit; text-decoration: none; }
+    .topbar {
+      height: 62px;
       width: 100%;
-      min-height: 88px;
-      padding: 20px 6%;
-      display: flex;
+      padding: 0 clamp(18px, 4vw, 58px);
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      justify-content: space-between;
-      gap: 28px;
+      gap: 24px;
+      background: rgba(0,0,0,.88);
+      border-bottom: 1px solid rgba(255,255,255,.12);
       position: relative;
-      z-index: 20;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      background: rgba(4, 9, 20, .35);
-      backdrop-filter: blur(12px);
+      z-index: 5;
     }
-
-    .logo img {
-      display: block;
-      width: 155px;
-      max-height: 52px;
-      object-fit: contain;
-    }
-
-    .header-right {
+    .brand { display: flex; align-items: center; width: fit-content; }
+    .brand img { width: 112px; height: auto; max-height: 34px; object-fit: contain; }
+    .nav-links {
       display: flex;
       align-items: center;
-      gap: 38px;
-    }
-
-    .desktop-nav {
-      display: flex;
-      align-items: center;
-      gap: 34px;
-    }
-
-    .nav-link,
-    .dropdown-toggle {
-      border: 0;
-      background: transparent;
-      color: rgba(255,255,255,.82);
-      font-size: 11px;
+      justify-content: center;
+      gap: clamp(16px, 3vw, 44px);
+      white-space: nowrap;
+      font-family: "Orbitron", sans-serif;
+      font-size: 8px;
       font-weight: 700;
-      letter-spacing: 1.8px;
+      letter-spacing: .32em;
+      color: rgba(255,255,255,.8);
+    }
+    .nav-links a { transition: color .2s ease; }
+    .nav-links a:hover, .dropdown-trigger:hover { color: var(--cyan); }
+    .dropdown { position: relative; }
+    .dropdown-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 0;
+      border: 0;
+      color: inherit;
+      background: transparent;
       cursor: pointer;
-      transition: color .2s ease;
+      font: inherit;
+      letter-spacing: inherit;
     }
-
-    .nav-link:hover,
-    .dropdown-toggle:hover {
-      color: var(--blue-light);
-    }
-
-    .dropdown {
-      position: relative;
-    }
-
-    .dropdown-toggle::after {
-      content: "⌄";
-      margin-left: 8px;
-      color: var(--blue);
-      font-size: 14px;
-    }
-
+    .dropdown-arrow { font-size: 13px; transition: transform .2s ease; }
     .dropdown-menu {
       display: none;
       position: absolute;
-      top: calc(100% + 22px);
-      left: -18px;
+      top: 100%;
+      left: 0;
       min-width: 220px;
-      padding: 10px;
-      border: 1px solid rgba(92, 180, 255, .22);
-      border-radius: 10px;
-      background: rgba(5, 13, 29, .97);
-      box-shadow: 0 15px 45px rgba(0,0,0,.4);
+      padding: 8px;
+      background: rgba(2, 12, 25, .97);
+      border: 1px solid rgba(0, 150, 255, .42);
+      border-radius: 5px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.35);
+      backdrop-filter: blur(14px);
+      z-index: 20;
+      letter-spacing: .08em;
+      white-space: normal;
     }
-
-    .dropdown.open .dropdown-menu {
-      display: block;
-      animation: dropdownIn .2s ease both;
-    }
-
     .dropdown-menu a {
       display: block;
-      padding: 13px 12px;
-      color: #dbe9f8;
-      font-size: 12px;
-      letter-spacing: .5px;
-      border-radius: 6px;
+      padding: 12px 13px;
+      color: rgba(255,255,255,.9);
+      font: 600 12px "Rajdhani", sans-serif;
+      letter-spacing: .08em;
     }
-
     .dropdown-menu a:hover {
-      background: rgba(66,186,255,.12);
-      color: var(--blue-light);
+      color: var(--cyan);
+      background: rgba(0,140,255,.14);
     }
-
-    @keyframes dropdownIn {
-      from { opacity: 0; transform: translateY(7px); }
-      to { opacity: 1; transform: translateY(0); }
+    .dropdown.open .dropdown-menu { display: block; }
+    .dropdown.open .dropdown-arrow { transform: rotate(180deg); }
+    @media (hover: hover) and (pointer: fine) {
+      .dropdown:hover .dropdown-menu,
+      .dropdown:focus-within .dropdown-menu { display: block; }
+      .dropdown:hover .dropdown-arrow { transform: rotate(180deg); }
     }
-
-    .language-switch {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      white-space: nowrap;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-
-    .language-switch button {
-      padding: 5px 2px;
-      border: 0;
-      background: transparent;
-      color: rgba(255,255,255,.45);
-      cursor: pointer;
-    }
-
-    .language-switch button.active {
-      color: var(--blue-light);
-    }
-
-    .language-switch span {
-      color: rgba(255,255,255,.25);
-    }
-
-    .mobile-menu-button {
-      display: none;
-      width: 38px;
-      height: 38px;
-      border: 1px solid rgba(255,255,255,.2);
-      border-radius: 7px;
-      background: rgba(255,255,255,.04);
-      color: white;
-      font-size: 22px;
-      cursor: pointer;
-    }
-
-    main {
-      width: 100%;
-    }
-
-    .hero {
-      min-height: calc(100vh - 88px);
-      display: flex;
-      align-items: center;
-      padding: 70px 8% 90px;
-    }
-
-    .hero-content {
-      width: min(660px, 100%);
-      animation: heroIn 1s ease both;
-    }
-
-    @keyframes heroIn {
-      from { opacity: 0; transform: translateY(22px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 25px;
-      color: var(--blue-light);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-    }
-
-    .eyebrow::before {
-      content: "";
-      width: 32px;
-      height: 1px;
-      background: var(--blue);
-      box-shadow: 0 0 12px var(--blue);
-    }
-
-    h1 {
-      max-width: 750px;
-      font-size: clamp(42px, 6.2vw, 82px);
-      line-height: .99;
-      font-weight: 800;
-      letter-spacing: -4px;
-      text-transform: uppercase;
-    }
-
-    h1 span {
-      color: var(--blue-light);
-    }
-
-    .hero-description {
-      max-width: 510px;
-      margin-top: 26px;
-      color: #b8c6d8;
-      font-size: 15px;
-      line-height: 1.85;
-      font-weight: 300;
-    }
-
-    .launch-label {
+    .right-tools { display: flex; align-items: center; justify-content: flex-end; gap: 14px; }
+    .social-link {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      margin-top: 30px;
-      padding: 11px 15px;
-      border: 1px solid rgba(66,186,255,.35);
-      border-radius: 4px;
-      background: rgba(23, 105, 170, .12);
-      color: var(--blue-light);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2px;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      color: rgba(255,255,255,.9);
+      transition: color .2s ease, transform .2s ease;
     }
-
-    .launch-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--blue);
-      box-shadow: 0 0 12px var(--blue);
-      animation: pulse 1.8s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; box-shadow: 0 0 5px var(--blue); }
-      50% { opacity: .45; box-shadow: 0 0 15px var(--blue); }
-    }
-
-    .product-section {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    .social-link:hover { color: var(--cyan); transform: translateY(-2px); }
+    .social-link svg { display: block; width: 17px; height: 17px; fill: currentColor; }
+    .language-switch {
+      display: inline-flex;
       align-items: center;
-      gap: 55px;
-      padding: 70px 8% 100px;
-      background: linear-gradient(180deg, transparent, rgba(3,9,20,.92));
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 3px;
+      overflow: hidden;
     }
-
-    .product-image img {
-      width: 100%;
-      max-height: 470px;
-      object-fit: contain;
-      filter: drop-shadow(0 15px 45px rgba(0, 130, 255, .18));
+    .language-switch button {
+      border: 0;
+      min-width: 42px;
+      padding: 8px 10px;
+      color: rgba(255,255,255,.72);
+      background: transparent;
+      cursor: pointer;
+      font: 700 9px "Rajdhani", sans-serif;
+      letter-spacing: .12em;
     }
-
-    .section-kicker {
-      color: var(--blue-light);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      margin-bottom: 18px;
+    .language-switch button.active { color: white; background: var(--blue); }
+    main {
+      width: min(1120px, 100%);
+      min-height: calc(100vh - 62px);
+      margin: 0 auto;
+      padding: clamp(35px, 5.2vh, 62px) 24px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
-
-    .product-copy h2 {
-      font-size: clamp(27px, 3.5vw, 43px);
-      line-height: 1.12;
-      letter-spacing: -1.5px;
+    h1 {
+      margin: 0 0 clamp(12px, 2.2vh, 25px);
+      font: 800 clamp(42px, 8.4vw, 104px)/.98 "Orbitron", sans-serif;
+      letter-spacing: -.045em;
       text-transform: uppercase;
+      color: #fff;
+      text-shadow: 0 0 12px rgba(0,153,255,.35), 0 0 35px rgba(0,130,255,.18);
     }
-
-    .product-copy p {
-      max-width: 480px;
-      margin-top: 20px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.8;
+    .product-visual {
+      width: min(820px, 94%);
+      height: clamp(190px, 34vh, 340px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto clamp(20px, 3vh, 30px);
+      position: relative;
     }
-
+    .product-visual::before {
+      content: "";
+      position: absolute;
+      width: 72%;
+      height: 36%;
+      bottom: 12%;
+      left: 14%;
+      background: rgba(0,145,255,.23);
+      filter: blur(48px);
+      border-radius: 50%;
+    }
+    .product-visual img {
+      position: relative;
+      max-width: 100%;
+      max-height: 100%;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 16px 28px rgba(0,0,0,.55));
+    }
     .specs {
+      width: min(800px, 100%);
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 12px;
-      margin-top: 30px;
+      margin: 0 auto clamp(20px, 3vh, 30px);
     }
-
-    .spec {
-      padding: 15px 10px;
-      border-top: 1px solid rgba(66,186,255,.5);
-      background: rgba(255,255,255,.025);
-    }
-
     .spec strong {
       display: block;
-      color: var(--blue-light);
-      font-size: 19px;
-      letter-spacing: -.5px;
+      color: var(--blue);
+      font: 600 clamp(22px, 3vw, 38px)/1 "Rajdhani", sans-serif;
+      letter-spacing: .02em;
+      text-shadow: 0 0 14px rgba(0,139,255,.2);
     }
-
     .spec span {
       display: block;
-      margin-top: 7px;
-      color: #8998ad;
-      font-size: 9px;
-      letter-spacing: 1px;
+      margin-top: 4px;
+      color: rgba(255,255,255,.85);
+      font-size: clamp(11px, 1.2vw, 14px);
+      font-weight: 500;
+      line-height: 1.15;
     }
-
-    .signup-section {
-      padding: 90px 8%;
-      background: rgba(3, 8, 18, .93);
-      border-top: 1px solid rgba(255,255,255,.07);
-    }
-
-    .signup-inner {
-      width: min(720px, 100%);
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .signup-inner h2 {
-      font-size: clamp(30px, 4vw, 48px);
-      letter-spacing: -1.8px;
+    .signup { width: min(680px, 100%); }
+    .signup h2 {
+      margin: 0 0 14px;
+      color: var(--blue);
+      font: 500 clamp(21px, 2.6vw, 30px)/1.2 "Rajdhani", sans-serif;
+      letter-spacing: .035em;
       text-transform: uppercase;
+      text-shadow: 0 0 14px rgba(0,139,255,.22);
     }
-
-    .signup-inner > p {
-      max-width: 530px;
-      margin: 17px auto 35px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.8;
-    }
-
     .signup-form {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
+      grid-template-columns: 100px 1fr;
+      align-items: center;
+      gap: 7px 12px;
+      padding: 18px 24px;
+      background: var(--panel);
+      border: 1px solid rgba(76,190,255,.28);
+      border-radius: 20px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.08);
+      backdrop-filter: blur(12px);
       text-align: left;
     }
-
-    .form-field {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .form-field.full {
-      grid-column: 1 / -1;
-    }
-
-    .form-field label {
-      color: #b7c7d9;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1.4px;
-      text-transform: uppercase;
-    }
-
-    .form-field input {
-      width: 100%;
-      height: 49px;
-      padding: 0 15px;
-      border: 1px solid rgba(164,196,228,.2);
-      border-radius: 4px;
-      outline: none;
-      background: rgba(255,255,255,.045);
-      color: white;
-      font-size: 13px;
-      transition: border-color .2s, box-shadow .2s;
-    }
-
-    .form-field input:focus {
-      border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(66,186,255,.09);
-    }
-
-    .form-field input::placeholder {
-      color: #65748a;
-    }
-
-    .submit-button {
-      grid-column: 1 / -1;
-      height: 52px;
-      margin-top: 8px;
-      border: 1px solid var(--blue);
-      border-radius: 4px;
-      background: linear-gradient(100deg, #1688d5, #42baff);
-      color: #03101e;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      cursor: pointer;
-      transition: transform .2s, box-shadow .2s, opacity .2s;
-    }
-
-    .submit-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(45,164,255,.28);
-    }
-
-    .submit-button:disabled {
-      cursor: wait;
-      opacity: .65;
-      transform: none;
-    }
-
-    .form-status {
-      grid-column: 1 / -1;
-      min-height: 20px;
-      color: #ff9c9c;
-      text-align: center;
+    .signup-form label {
+      color: rgba(255,255,255,.8);
       font-size: 12px;
-      line-height: 1.5;
+      font-weight: 600;
+      letter-spacing: .03em;
     }
-
-    .privacy-note {
-      margin-top: 15px;
-      color: #75849a;
-      font-size: 10px;
-      line-height: 1.6;
-      text-align: center;
-    }
-
-    footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 25px 8%;
-      border-top: 1px solid rgba(255,255,255,.08);
-      background: #030711;
-      color: #74849a;
-      font-size: 10px;
-      letter-spacing: .7px;
-    }
-
-    footer a {
-      color: #9cb4cb;
-    }
-
-    footer a:hover {
-      color: var(--blue-light);
-    }
-
-    /* SUCCESS POP-UP */
-
-    .success-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 22px;
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transition: opacity .35s ease, visibility .35s ease;
-    }
-
-    .success-modal.visible {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-    }
-
-    .success-backdrop {
-      position: absolute;
-      inset: 0;
-      background: rgba(1, 5, 14, .82);
-      backdrop-filter: blur(12px);
-    }
-
-    .success-card {
-      position: relative;
-      width: min(480px, 100%);
-      padding: 48px 38px 40px;
-      overflow: hidden;
-      border: 1px solid rgba(83,190,255,.45);
-      border-radius: 13px;
-      background:
-        radial-gradient(circle at 50% 0%, rgba(38,145,255,.18), transparent 50%),
-        linear-gradient(145deg, #0c1a30, #050b18 75%);
-      box-shadow:
-        0 0 45px rgba(35,151,255,.15),
-        0 25px 90px rgba(0,0,0,.55);
-      text-align: center;
-      transform: translateY(25px) scale(.92);
-      opacity: 0;
-      transition: transform .5s cubic-bezier(.2,.8,.2,1), opacity .4s ease;
-    }
-
-    .success-modal.visible .success-card {
-      transform: translateY(0) scale(1);
-      opacity: 1;
-    }
-
-    .success-card::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 15%;
-      width: 70%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--blue), transparent);
-      box-shadow: 0 0 20px var(--blue);
-    }
-
-    .success-close {
-      position: absolute;
-      top: 13px;
-      right: 16px;
-      width: 34px;
-      height: 34px;
-      border: 1px solid rgba(255,255,255,.13);
-      border-radius: 50%;
-      background: transparent;
-      color: #aabbd0;
-      font-size: 21px;
-      cursor: pointer;
-    }
-
-    .success-close:hover {
-      color: white;
-      border-color: var(--blue);
-    }
-
-    .success-icon {
-      width: 65px;
-      height: 65px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 25px;
-      border: 1px solid rgba(77,194,255,.55);
-      border-radius: 50%;
-      background: rgba(43,163,255,.12);
-      color: var(--blue-light);
-      font-size: 31px;
-      box-shadow: 0 0 28px rgba(46,164,255,.2);
-      animation: successPulse 2s ease-in-out infinite;
-    }
-
-    @keyframes successPulse {
-      0%, 100% { box-shadow: 0 0 15px rgba(46,164,255,.15); }
-      50% { box-shadow: 0 0 35px rgba(46,164,255,.4); }
-    }
-
-    .success-overline {
-      color: var(--blue-light);
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 3px;
-    }
-
-    .success-card h2 {
-      margin-top: 18px;
-      color: white;
-      font-size: clamp(27px, 6vw, 36px);
-      line-height: 1.08;
-      letter-spacing: -1.2px;
-    }
-
-    .success-message {
-      margin-top: 17px;
-      color: #b6c6d9;
-      font-size: 13px;
-      line-height: 1.8;
-    }
-
-    .success-welcome {
-      margin-top: 24px;
-      color: var(--blue-light);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 2px;
-    }
-
-    .success-continue {
+    .signup-form input {
       width: 100%;
-      height: 47px;
-      margin-top: 32px;
-      border: 1px solid rgba(66,186,255,.65);
-      border-radius: 4px;
-      background: rgba(66,186,255,.1);
-      color: #dff4ff;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2px;
+      min-width: 0;
+      height: 31px;
+      padding: 5px 10px;
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 2px;
+      outline: none;
+      color: #111827;
+      background: rgba(255,255,255,.97);
+      font: 500 14px "Rajdhani", sans-serif;
+    }
+    .signup-form input:focus { border-color: var(--cyan); box-shadow: 0 0 0 2px rgba(0,200,255,.2); }
+    .submit-button {
+      grid-column: 2;
+      min-height: 34px;
+      border: 0;
+      border-radius: 2px;
+      color: #fff;
+      background: #087bbd;
       cursor: pointer;
-      transition: background .2s, box-shadow .2s;
+      font: 700 11px "Rajdhani", sans-serif;
+      letter-spacing: .12em;
+      transition: background .2s, transform .2s;
     }
-
-    .success-continue:hover {
-      background: rgba(66,186,255,.2);
-      box-shadow: 0 0 22px rgba(66,186,255,.15);
+    .submit-button:hover { background: #0799ed; transform: translateY(-1px); }
+    .submit-button:disabled { opacity: .65; cursor: wait; }
+    .form-message {
+      grid-column: 1 / -1;
+      margin: 4px 0 0;
+      text-align: center;
+      font-size: 13px;
+      color: #fff;
     }
-
-    @media (max-width: 850px) {
-      .site-header {
-        padding: 16px 5%;
-      }
-
-      .header-right {
-        gap: 20px;
-      }
-
-      .desktop-nav {
-        gap: 20px;
-      }
-
-      .product-section {
-        gap: 30px;
-        padding-left: 6%;
-        padding-right: 6%;
-      }
+    .launch {
+      margin-top: clamp(22px, 3.5vh, 34px);
     }
+    .launch h2 {
+      margin: 0;
+      color: var(--blue);
+      font: 500 clamp(22px, 2.8vw, 32px)/1.15 "Rajdhani", sans-serif;
+      text-transform: uppercase;
+      text-shadow: 0 0 15px rgba(0,139,255,.22);
+    }
+    .launch p {
+      margin: 0 auto;
+      max-width: 620px;
+      color: rgba(255,255,255,.82);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .launch sup { font-size: .55em; vertical-align: super; }
+    @media (min-width: 900px) and (min-height: 850px) {
+      main { padding-top: 55px; }
+      .product-visual { height: 350px; }
+    }
+    .mobile-menu-toggle { display: none; }
 
-    @media (max-width: 680px) {
-      .site-header {
-        min-height: 72px;
-        padding: 12px 5%;
+    @media (max-width: 760px) {
+      .topbar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        height: 64px;
+        min-height: 64px;
+        padding: 0 15px;
         gap: 12px;
       }
-
-      .logo img {
-        width: 118px;
-        max-height: 42px;
+      .brand { flex: 0 0 auto; }
+      .brand img { width: 88px; max-height: 32px; }
+      .mobile-menu-toggle {
+        display: flex;
+        flex: 0 0 38px;
+        width: 38px;
+        height: 38px;
+        padding: 9px 7px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        border: 1px solid rgba(0,153,255,.45);
+        border-radius: 5px;
+        background: rgba(0,100,180,.12);
+        cursor: pointer;
       }
-
-      .mobile-menu-button {
+      .mobile-menu-toggle span {
         display: block;
-        flex-shrink: 0;
+        width: 21px;
+        height: 2px;
+        border-radius: 2px;
+        background: #fff;
+        transition: transform .2s ease, opacity .2s ease;
       }
-
-      .header-right {
-        gap: 12px;
-      }
-
-      .desktop-nav {
+      .mobile-menu-toggle.active span:first-child { transform: translateY(7px) rotate(45deg); }
+      .mobile-menu-toggle.active span:nth-child(2) { opacity: 0; }
+      .mobile-menu-toggle.active span:last-child { transform: translateY(-7px) rotate(-45deg); }
+      .right-tools { flex: 0 0 auto; margin-left: auto; }
+      .language-switch button { min-width: 36px; padding: 8px 7px; }
+      .nav-links {
         display: none;
         position: absolute;
-        top: 100%;
+        top: 64px;
         left: 0;
         right: 0;
-        padding: 18px 5% 22px;
+        width: 100%;
+        padding: 18px 15px;
         flex-direction: column;
         align-items: stretch;
+        justify-content: flex-start;
         gap: 0;
-        background: rgba(4, 10, 23, .98);
-        border-bottom: 1px solid rgba(66,186,255,.2);
+        background: rgba(2,10,22,.98);
+        border-bottom: 1px solid rgba(0,153,255,.35);
+        box-shadow: 0 12px 25px rgba(0,0,0,.4);
+        font-size: 10px;
+        letter-spacing: .18em;
       }
-
-      .desktop-nav.mobile-open {
+      .nav-links.mobile-open { display: flex; }
+      .nav-links > a, .nav-links .dropdown-trigger {
         display: flex;
-      }
-
-      .desktop-nav > a,
-      .desktop-nav .dropdown-toggle {
-        display: block;
         width: 100%;
-        padding: 15px 0;
-        text-align: left;
+        padding: 15px 10px;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(255,255,255,.08);
       }
-
+      .dropdown { width: 100%; }
       .dropdown-menu {
         position: static;
-        margin: 0 0 10px;
+        width: 100%;
+        min-width: 0;
+        transform: none;
+        margin: 0;
+        padding: 5px 10px;
+        border: 0;
+        border-radius: 0;
+        background: rgba(0,100,180,.12);
         box-shadow: none;
       }
-
-      .dropdown.open .dropdown-menu {
-        display: block;
-      }
-
-      .language-switch {
-        gap: 6px;
-        font-size: 10px;
-      }
-
-      .hero {
-        min-height: 78vh;
-        padding: 65px 7% 75px;
-      }
-
-      h1 {
-        letter-spacing: -2.5px;
-      }
-
-      .hero-description {
-        font-size: 13px;
-      }
-
-      .product-section {
-        grid-template-columns: 1fr;
-        padding: 55px 7% 75px;
-      }
-
-      .product-image {
-        order: 2;
-      }
-
-      .product-copy {
-        order: 1;
-      }
-
-      .specs {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .signup-section {
-        padding: 70px 7%;
-      }
-
-      footer {
-        flex-direction: column;
-        text-align: center;
-      }
+      main { min-height: calc(100vh - 64px); padding: 38px 20px 32px; }
+      h1 { width: 100%; max-width: 540px; margin: 0 auto 18px; font-size: clamp(25px, 6.5vw, 42px); line-height: 1.15; letter-spacing: -.035em; text-wrap: balance; }
+      .product-visual { width: 78%; max-width: 430px; height: clamp(115px, 25vw, 190px); margin: 0 auto 22px; }
+      .product-visual img { width: 100%; height: 100%; max-width: 100%; max-height: 100%; object-fit: contain; filter: drop-shadow(0 9px 18px rgba(0,0,0,.5)); }
+      .product-visual::before { width: 65%; height: 30%; left: 17.5%; bottom: 5%; filter: blur(30px); }
+      .specs { width: 100%; max-width: 480px; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 8px; margin: 0 auto 26px; }
+      .spec { min-width: 0; text-align: center; }
+      .spec strong { font-size: clamp(19px,5.5vw,27px); line-height: 1.1; }
+      .spec span { font-size: clamp(9px,2.5vw,11px); line-height: 1.25; overflow-wrap: break-word; }
+      .signup { width: 100%; max-width: 480px; }
+      .signup h2 { font-size: 23px; margin-bottom: 15px; }
+      .signup-form { width: 100%; grid-template-columns: 1fr; gap: 7px; padding: 20px; border-radius: 15px; }
+      .signup-form label { margin-top: 7px; font-size: 13px; }
+      .signup-form input { width: 100%; height: 42px; padding: 8px 12px; font-size: 16px; border-radius: 4px; }
+      .submit-button { grid-column: 1; width: 100%; min-height: 44px; margin-top: 12px; font-size: 12px; border-radius: 4px; }
+      .form-message { grid-column: 1; font-size: 13px; }
+      .launch { width: 100%; margin-top: 28px; }
+      .launch h2 { font-size: clamp(23px,6vw,30px); letter-spacing: .04em; }
+      .launch p { max-width: 400px; padding: 0 8px; font-size: 13px; line-height: 1.5; }
     }
 
-    @media (max-width: 420px) {
-      .logo img {
-        width: 102px;
-      }
-
-      .header-right {
-        gap: 9px;
-      }
-
-      .mobile-menu-button {
-        width: 34px;
-        height: 34px;
-      }
-
-      .signup-form {
-        grid-template-columns: 1fr;
-      }
-
-      .form-field.full,
-      .submit-button,
-      .form-status {
-        grid-column: 1;
-      }
-
-      .success-card {
-        padding: 42px 25px 30px;
-      }
+    @media (max-width: 390px) {
+      main { padding: 30px 15px 26px; }
+      h1 { font-size: clamp(23px,6.3vw,29px); }
+      .product-visual { width: 75%; height: 120px; margin-bottom: 20px; }
+      .specs { gap: 5px; }
+      .spec strong { font-size: 19px; }
+      .spec span { font-size: 9px; }
+      .signup-form { padding: 16px; }
     }
 
+    @media (max-width: 340px) {
+      .product-visual { width: 72%; height: 105px; }
+      .spec strong { font-size: 17px; }
+      .spec span { font-size: 8px; }
+      .brand img { width: 78px; }
+      .topbar { padding: 0 10px; gap: 8px; }
+    }
+
+    @media (max-width: 900px) and (max-height: 500px) {
+      main { padding-top: 20px; }
+      .product-visual { height: 130px; width: 55%; }
+      h1 { font-size: 32px; }
+    }
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        scroll-behavior: auto !important;
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: .01ms !important;
-      }
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
     }
   </style>
-
-  <!-- Cloudflare Turnstile: invisible CAPTCHA -->
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 </head>
 
 <body>
-  <div class="background"></div>
-
-  <header class="site-header">
-    <a class="logo" href="#" aria-label="XAEROVA home">
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="XAEROVA home">
       <img src="no bg.png" alt="XAEROVA">
     </a>
 
-    <button class="mobile-menu-button" id="mobileMenuButton"
-      aria-label="Open navigation" aria-expanded="false">☰</button>
-
-    <div class="header-right">
-      <nav class="desktop-nav" id="mainNavigation">
-        <a class="nav-link" href="mailto:info@xaerova.com" data-i18n="investors">INVESTORS</a>
-        <a class="nav-link" href="mailto:info@xaerova.com" data-i18n="press">PRESS</a>
-
-        <div class="dropdown" id="useCasesDropdown">
-          <button class="dropdown-toggle" id="useCasesButton" aria-expanded="false" data-i18n="useCases">
-            USE CASES
-          </button>
-          <div class="dropdown-menu">
-            <a href="#agriculture" data-i18n="agriculture">Agriculture</a>
-            <a href="#security" data-i18n="security">Security &amp; Defense</a>
-            <a href="#nature" data-i18n="nature">Nature Protection</a>
-          </div>
+    <nav class="nav-links" id="mainNavigation" aria-label="Main navigation">
+      <a href="mailto:info@xaerova.com?subject=XAEROVA%20Investor%20Enquiry" data-i18n="nav-investors">INVESTORS</a>
+      <a href="mailto:info@xaerova.com?subject=XAEROVA%20Press%20Enquiry" data-i18n="nav-press">PRESS</a>
+      <div class="dropdown" id="useCasesDropdown">
+        <button class="dropdown-trigger" type="button" id="useCasesButton"
+          aria-expanded="false" aria-controls="useCasesMenu">
+          <span data-i18n="nav-usecases">USE CASES</span>
+          <span class="dropdown-arrow" aria-hidden="true">⌄</span>
+        </button>
+        <div class="dropdown-menu" id="useCasesMenu">
+          <a href="#early-access" data-i18n="nav-agriculture">Agriculture</a>
+          <a href="#early-access" data-i18n="nav-security">Security &amp; Defense</a>
+          <a href="#early-access" data-i18n="nav-nature">Nature Protection</a>
         </div>
-      </nav>
+      </div>
+    </nav>
 
-      <div class="language-switch" aria-label="Language">
-        <button type="button" class="active" id="englishButton">ENG</button>
-        <span>/</span>
-        <button type="button" id="frenchButton">FR</button>
+    <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button"
+      aria-label="Open navigation menu" aria-expanded="false" aria-controls="mainNavigation">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="right-tools">
+      <div class="language-switch" role="group" aria-label="Select language">
+        <button type="button" id="langENG" class="active" aria-pressed="true" onclick="setLanguage('en')">ENG</button>
+        <button type="button" id="langFR" aria-pressed="false" onclick="setLanguage('fr')">FR</button>
       </div>
     </div>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="hero-content">
-        <div class="eyebrow" data-i18n="eyebrow">THE NEXT GENERATION OF AERIAL OPERATIONS</div>
+    <h1 data-i18n="headline">AUTONOMOUS DRONE INFRASTRUCTURE</h1>
 
-        <h1 data-i18n="headline">
-          AUTONOMOUS<br>DRONE <span>INFRASTRUCTURE</span>
-        </h1>
+    <div class="product-visual">
+      <img
+        src="IMG_8199.JPG.jpeg"
+        alt="XAEROVA SkyMind autonomous drone docking station"
+      >
+    </div>
 
-        <p class="hero-description" data-i18n="heroDescription">
-          Building intelligent autonomous drone infrastructure to transform how industries monitor, protect and manage the world around them.
-        </p>
-
-        <div class="launch-label">
-          <span class="launch-dot"></span>
-          <span data-i18n="launch">COMING Q1 2027</span>
-        </div>
-      </div>
+    <section class="specs" id="specifications" aria-label="Product specifications">
+      <div class="spec"><strong>4K</strong><span data-i18n="spec-camera">Camera type</span></div>
+      <div class="spec"><strong>7Km</strong><span data-i18n="spec-range">Communication range</span></div>
+      <div class="spec"><strong>72kph</strong><span data-i18n="spec-speed">Maximum speed</span></div>
+      <div class="spec"><strong>30MIN</strong><span data-i18n="spec-flight">Minimum flight time</span></div>
     </section>
 
-    <section class="product-section" id="agriculture">
-      <div class="product-image">
-        <img src="IMG_8199.JPG.jpeg" alt="XAEROVA autonomous drone infrastructure">
-      </div>
+    <section class="signup" id="early-access">
+      <h2 data-i18n="signup-title">BE AMONG THE FIRST</h2>
 
-      <div class="product-copy">
-        <div class="section-kicker" data-i18n="productKicker">AUTONOMOUS TECHNOLOGY</div>
-        <h2 data-i18n="productHeadline">A NEW STANDARD FOR REMOTE OPERATIONS.</h2>
-        <p data-i18n="productDescription">
-          XAEROVA is developing autonomous drone infrastructure designed to support remote operations, intelligent monitoring and aerial data collection across multiple industries.
-        </p>
+      <!-- FormSubmit sends registrations to info@xaerova.com.
+           The first test submission may trigger an email verification request. -->
+      <form class="signup-form" id="earlyAccessForm" action="https://formsubmit.co/info@xaerova.com" method="POST">
+        <input type="hidden" name="_subject" value="New XAEROVA early-access registration">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://xaerova.com/?submitted=1">
+        <input type="hidden" name="_autoresponse" value="Hello! Thank you for your interest in XAEROVA. We have received your early-access registration and will keep you updated on our launch, product developments and upcoming opportunities. The XAEROVA Team">
+        <input type="hidden" name="_replyto" id="replyToEmail" value="">
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
 
-        <div class="specs">
-          <div class="spec">
-            <strong>4K</strong>
-            <span data-i18n="specCamera">IMAGING</span>
-          </div>
-          <div class="spec">
-            <strong>7Km</strong>
-            <span data-i18n="specRange">RANGE</span>
-          </div>
-          <div class="spec">
-            <strong>72kph</strong>
-            <span data-i18n="specSpeed">SPEED</span>
-          </div>
-          <div class="spec">
-            <strong>30MIN</strong>
-            <span data-i18n="specFlight">FLIGHT TIME</span>
-          </div>
-        </div>
-      </div>
+        <label for="firstName" data-i18n="first-name">First name</label>
+        <input id="firstName" name="First name" type="text" autocomplete="given-name" required>
+
+        <label for="lastName" data-i18n="last-name">Last name</label>
+        <input id="lastName" name="Last name" type="text" autocomplete="family-name" required>
+
+        <label for="email" data-i18n="email">Email address</label>
+        <input id="email" name="Email" type="email" autocomplete="email" required>
+
+        <label for="country" data-i18n="country">Country</label>
+        <input id="country" name="Country" type="text" autocomplete="country-name" required>
+
+        <button class="submit-button" id="submitButton" type="submit" data-i18n="submit">GET EARLY ACCESS →</button>
+        <p class="form-message" id="formMessage" role="status" aria-live="polite"></p>
+      </form>
     </section>
 
-    <section class="signup-section" id="early-access">
-      <div class="signup-inner">
-        <div class="section-kicker" data-i18n="signupKicker">BE PART OF WHAT'S NEXT</div>
-        <h2 data-i18n="signupHeadline">GET EARLY ACCESS.</h2>
-        <p data-i18n="signupDescription">
-          Register your interest to receive updates about XAEROVA, our technology and upcoming launch.
-        </p>
-
-        <form class="signup-form" id="earlyAccessForm">
-          <div class="form-field">
-            <label for="firstName" data-i18n="firstNameLabel">FIRST NAME</label>
-            <input id="firstName" name="firstName" type="text" autocomplete="given-name"
-              placeholder="Your first name" required>
-          </div>
-
-          <div class="form-field">
-            <label for="lastName" data-i18n="lastNameLabel">LAST NAME</label>
-            <input id="lastName" name="lastName" type="text" autocomplete="family-name"
-              placeholder="Your last name" required>
-          </div>
-
-          <div class="form-field full">
-            <label for="email" data-i18n="emailLabel">EMAIL ADDRESS</label>
-            <input id="email" name="email" type="email" autocomplete="email"
-              placeholder="name@example.com" required>
-          </div>
-
-          <div class="form-field full">
-            <label for="country" data-i18n="countryLabel">COUNTRY</label>
-            <input id="country" name="country" type="text" autocomplete="country-name"
-              placeholder="Your country" required>
-          </div>
-
-          <!-- CAPTCHA is invisible; no visitor checkbox is normally required. -->
-          <div id="turnstile-container"></div>
-
-          <button class="submit-button" id="submitButton" type="submit" data-i18n="submit">
-            SUBMIT REGISTRATION
-          </button>
-
-          <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
-        </form>
-
-        <p class="privacy-note" data-i18n="privacy">
-          By submitting, you agree to be contacted with relevant XAEROVA updates.
-        </p>
-      </div>
-    </section>
-
-    <section class="product-section" id="security">
-      <div class="product-copy">
-        <div class="section-kicker" data-i18n="securityKicker">SECURITY &amp; DEFENSE</div>
-        <h2 data-i18n="securityHeadline">INTELLIGENT AERIAL MONITORING.</h2>
-        <p data-i18n="securityDescription">
-          Supporting remote monitoring and situational awareness for infrastructure, private properties and critical sites.
-        </p>
-      </div>
-      <div class="product-image" id="nature">
-        <img src="IMG_8199.JPG.jpeg" alt="XAEROVA drone platform">
-      </div>
+    <section class="launch" id="launch">
+      <h2 data-i18n="launch-title">COMING Q1 2027</h2>
+      <p data-i18n="launch-copy">Get exclusive updates, early access and information about upcoming pre-orders.</p>
     </section>
   </main>
 
-  <footer>
-    <span>© <span id="year"></span> XAEROVA. ALL RIGHTS RESERVED.</span>
-    <a href="mailto:info@xaerova.com">INFO@XAEROVA.COM</a>
-  </footer>
-
-  <!-- Same-page animated success modal -->
-  <div class="success-modal" id="successModal" aria-hidden="true">
-    <div class="success-backdrop" id="successBackdrop"></div>
-
-    <section class="success-card" role="dialog" aria-modal="true" aria-labelledby="successTitle">
-      <button class="success-close" id="successClose" type="button" aria-label="Close">×</button>
-
-      <div class="success-icon">✓</div>
-      <div class="success-overline">XAEROVA / EARLY ACCESS</div>
-
-      <h2 id="successTitle" data-i18n="successTitle">YOU'RE ON THE LIST.</h2>
-
-      <p class="success-message" data-i18n="successMessage">
-        Your registration has been successfully received.
-      </p>
-
-      <div class="success-welcome" data-i18n="successWelcome">WELCOME TO XAEROVA.</div>
-
-      <button class="success-continue" id="successContinue" type="button" data-i18n="successContinue">
-        CONTINUE EXPLORING
-      </button>
-    </section>
-  </div>
-
   <script>
-    /*
-      REQUIRED CONFIGURATION:
-      1. Replace the Turnstile site key below.
-      2. Replace the Worker URL below.
-      The Worker must verify the Turnstile token and send the two emails.
-    */
-    const TURNSTILE_SITE_KEY = "YOUR_TURNSTILE_SITE_KEY";
-    const WORKER_URL = "YOUR_CLOUDFLARE_WORKER_URL";
-
     const translations = {
       en: {
-        investors: "INVESTORS",
-        press: "PRESS",
-        useCases: "USE CASES",
-        agriculture: "Agriculture",
-        security: "Security & Defense",
-        nature: "Nature Protection",
-        eyebrow: "THE NEXT GENERATION OF AERIAL OPERATIONS",
-        headline: 'AUTONOMOUS<br>DRONE <span>INFRASTRUCTURE</span>',
-        heroDescription: "Building intelligent autonomous drone infrastructure to transform how industries monitor, protect and manage the world around them.",
-        launch: "COMING Q1 2027",
-        productKicker: "AUTONOMOUS TECHNOLOGY",
-        productHeadline: "A NEW STANDARD FOR REMOTE OPERATIONS.",
-        productDescription: "XAEROVA is developing autonomous drone infrastructure designed to support remote operations, intelligent monitoring and aerial data collection across multiple industries.",
-        specCamera: "IMAGING",
-        specRange: "RANGE",
-        specSpeed: "SPEED",
-        specFlight: "FLIGHT TIME",
-        signupKicker: "BE PART OF WHAT'S NEXT",
-        signupHeadline: "GET EARLY ACCESS.",
-        signupDescription: "Register your interest to receive updates about XAEROVA, our technology and upcoming launch.",
-        firstNameLabel: "FIRST NAME",
-        lastNameLabel: "LAST NAME",
-        emailLabel: "EMAIL ADDRESS",
-        countryLabel: "COUNTRY",
-        submit: "SUBMIT REGISTRATION",
-        privacy: "By submitting, you agree to be contacted with relevant XAEROVA updates.",
-        securityKicker: "SECURITY & DEFENSE",
-        securityHeadline: "INTELLIGENT AERIAL MONITORING.",
-        securityDescription: "Supporting remote monitoring and situational awareness for infrastructure, private properties and critical sites.",
-        successTitle: "YOU'RE ON THE LIST.",
-        successMessage: "Your registration has been successfully received.",
-        successWelcome: "WELCOME TO XAEROVA.",
-        successContinue: "CONTINUE EXPLORING",
-        sending: "SUBMITTING YOUR REGISTRATION...",
-        error: "Something went wrong. Please try again in a moment.",
-        captchaError: "Security verification could not be completed. Please try again."
+        "nav-investors": "INVESTORS",
+        "nav-press": "PRESS",
+        "nav-usecases": "USE CASES",
+        "nav-agriculture": "AGRICULTURE",
+        "nav-security": "SECURITY & DEFENSE",
+        "nav-nature": "NATURE PROTECTION",
+        "headline": "AUTONOMOUS DRONE INFRASTRUCTURE",
+        "spec-camera": "Camera type",
+        "spec-range": "Communication range",
+        "spec-speed": "Maximum speed",
+        "spec-flight": "Minimum flight time",
+        "signup-title": "BE AMONG THE FIRST",
+        "first-name": "First name",
+        "last-name": "Last name",
+        "email": "Email address",
+        "country": "Country",
+        "submit": "GET EARLY ACCESS →",
+        "sending": "SENDING…",
+        "success": "Thank you. Your early-access request has been received.",
+        "error": "Something went wrong. Please try again or email info@xaerova.com.",
+        "launch-title": "COMING Q1 2027",
+        "launch-copy": "Get exclusive updates, early access and information about upcoming pre-orders."
       },
       fr: {
-        investors: "INVESTISSEURS",
-        press: "PRESSE",
-        useCases: "APPLICATIONS",
-        agriculture: "Agriculture",
-        security: "Sécurité & Défense",
-        nature: "Protection de la nature",
-        eyebrow: "LA NOUVELLE GÉNÉRATION DES OPÉRATIONS AÉRIENNES",
-        headline: 'INFRASTRUCTURE<br>DE DRONES <span>AUTONOMES</span>',
-        heroDescription: "Nous développons une infrastructure intelligente de drones autonomes pour transformer la surveillance, la protection et la gestion des activités sur le terrain.",
-        launch: "LANCEMENT T1 2027",
-        productKicker: "TECHNOLOGIE AUTONOME",
-        productHeadline: "UNE NOUVELLE NORME POUR LES OPÉRATIONS À DISTANCE.",
-        productDescription: "XAEROVA développe une infrastructure de drones autonomes conçue pour les opérations à distance, la surveillance intelligente et la collecte de données aériennes dans plusieurs secteurs.",
-        specCamera: "IMAGERIE",
-        specRange: "PORTÉE",
-        specSpeed: "VITESSE",
-        specFlight: "AUTONOMIE",
-        signupKicker: "FAITES PARTIE DE LA SUITE",
-        signupHeadline: "ACCÈS ANTICIPÉ.",
-        signupDescription: "Inscrivez-vous pour recevoir les actualités de XAEROVA, découvrir notre technologie et suivre notre lancement.",
-        firstNameLabel: "PRÉNOM",
-        lastNameLabel: "NOM",
-        emailLabel: "ADRESSE E-MAIL",
-        countryLabel: "PAYS",
-        submit: "ENVOYER L'INSCRIPTION",
-        privacy: "En envoyant ce formulaire, vous acceptez de recevoir les actualités pertinentes de XAEROVA.",
-        securityKicker: "SÉCURITÉ & DÉFENSE",
-        securityHeadline: "SURVEILLANCE AÉRIENNE INTELLIGENTE.",
-        securityDescription: "Des solutions de surveillance à distance et de connaissance de la situation pour les infrastructures, les propriétés privées et les sites sensibles.",
-        successTitle: "VOUS ÊTES SUR LA LISTE.",
-        successMessage: "Votre inscription a bien été reçue.",
-        successWelcome: "BIENVENUE CHEZ XAEROVA.",
-        successContinue: "CONTINUER À EXPLORER",
-        sending: "ENVOI DE VOTRE INSCRIPTION...",
-        error: "Une erreur s'est produite. Veuillez réessayer dans un instant.",
-        captchaError: "La vérification de sécurité a échoué. Veuillez réessayer."
+        "nav-investors": "INVESTISSEURS",
+        "nav-press": "PRESSE",
+        "nav-usecases": "APPLICATIONS",
+        "nav-agriculture": "AGRICULTURE",
+        "nav-security": "SÉCURITÉ & DÉFENSE",
+        "nav-nature": "PROTECTION DE LA NATURE",
+        "headline": "INFRASTRUCTURE DE DRONES AUTONOMES",
+        "spec-camera": "Type de caméra",
+        "spec-range": "Portée de communication",
+        "spec-speed": "Vitesse maximale",
+        "spec-flight": "Autonomie minimale",
+        "signup-title": "SOYEZ PARMI LES PREMIERS",
+        "first-name": "Prénom",
+        "last-name": "Nom",
+        "email": "Adresse e-mail",
+        "country": "Pays",
+        "submit": "ACCÉDER EN AVANT-PREMIÈRE →",
+        "sending": "ENVOI EN COURS…",
+        "success": "Merci. Votre demande d’accès anticipé a bien été reçue.",
+        "error": "Une erreur s’est produite. Réessayez ou écrivez à info@xaerova.com.",
+        "launch-title": "PRÉVU AU 1ER TRIMESTRE 2027",
+        "launch-copy": "Recevez des actualités exclusives, un accès anticipé et des informations sur les prochaines précommandes."
       }
     };
 
-    let currentLanguage = "en";
-    let turnstileWidgetId = null;
-    let pendingFormData = null;
+    function setLanguage(lang) {
+      const selected = translations[lang] ? lang : "en";
+      document.documentElement.lang = selected;
+      localStorage.setItem("xaerova-language", selected);
 
-    const form = document.getElementById("earlyAccessForm");
-    const submitButton = document.getElementById("submitButton");
-    const formStatus = document.getElementById("formStatus");
-    const successModal = document.getElementById("successModal");
-
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    function setLanguage(language) {
-      currentLanguage = language;
-      document.documentElement.lang = language;
-
-      document.querySelectorAll("[data-i18n]").forEach(element => {
-        const key = element.dataset.i18n;
-        if (translations[language][key]) {
-          element.innerHTML = translations[language][key];
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.getAttribute("data-i18n");
+        if (translations[selected][key]) {
+          element.innerHTML = translations[selected][key];
         }
       });
 
-      document.getElementById("englishButton").classList.toggle("active", language === "en");
-      document.getElementById("frenchButton").classList.toggle("active", language === "fr");
-
-      document.getElementById("firstName").placeholder =
-        language === "en" ? "Your first name" : "Votre prénom";
-      document.getElementById("lastName").placeholder =
-        language === "en" ? "Your last name" : "Votre nom";
-      document.getElementById("email").placeholder =
-        language === "en" ? "name@example.com" : "nom@exemple.com";
-      document.getElementById("country").placeholder =
-        language === "en" ? "Your country" : "Votre pays";
+      document.getElementById("langENG").classList.toggle("active", selected === "en");
+      document.getElementById("langFR").classList.toggle("active", selected === "fr");
+      document.getElementById("langENG").setAttribute("aria-pressed", String(selected === "en"));
+      document.getElementById("langFR").setAttribute("aria-pressed", String(selected === "fr"));
     }
 
-    document.getElementById("englishButton").addEventListener("click", () => setLanguage("en"));
-    document.getElementById("frenchButton").addEventListener("click", () => setLanguage("fr"));
+    document.addEventListener("DOMContentLoaded", () => {
+      const savedLanguage = localStorage.getItem("xaerova-language") || "en";
+      setLanguage(savedLanguage);
 
-    // Mobile navigation
-    const mobileMenuButton = document.getElementById("mobileMenuButton");
-    const mainNavigation = document.getElementById("mainNavigation");
+      const mobileMenuButton = document.getElementById("mobileMenuToggle");
+      const mainNavigation = document.getElementById("mainNavigation");
 
-    mobileMenuButton.addEventListener("click", () => {
-      const isOpen = mainNavigation.classList.toggle("mobile-open");
-      mobileMenuButton.setAttribute("aria-expanded", String(isOpen));
-      mobileMenuButton.textContent = isOpen ? "×" : "☰";
-    });
-
-    // Use Cases dropdown
-    const dropdown = document.getElementById("useCasesDropdown");
-    const dropdownButton = document.getElementById("useCasesButton");
-
-    dropdownButton.addEventListener("click", () => {
-      const isOpen = dropdown.classList.toggle("open");
-      dropdownButton.setAttribute("aria-expanded", String(isOpen));
-    });
-
-    document.addEventListener("click", event => {
-      if (!dropdown.contains(event.target)) {
-        dropdown.classList.remove("open");
-        dropdownButton.setAttribute("aria-expanded", "false");
-      }
-    });
-
-    document.querySelectorAll(".dropdown-menu a").forEach(link => {
-      link.addEventListener("click", () => {
-        mainNavigation.classList.remove("mobile-open");
-        mobileMenuButton.setAttribute("aria-expanded", "false");
-        mobileMenuButton.textContent = "☰";
-        dropdown.classList.remove("open");
+      mobileMenuButton.addEventListener("click", () => {
+        const isOpen = mainNavigation.classList.toggle("mobile-open");
+        mobileMenuButton.classList.toggle("active", isOpen);
+        mobileMenuButton.setAttribute("aria-expanded", String(isOpen));
+        mobileMenuButton.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
       });
-    });
 
-    // Success modal
-    function showSuccessModal() {
-      successModal.classList.add("visible");
-      successModal.setAttribute("aria-hidden", "false");
-      document.body.classList.add("modal-open");
-      document.getElementById("successClose").focus();
-    }
-
-    function closeSuccessModal() {
-      successModal.classList.remove("visible");
-      successModal.setAttribute("aria-hidden", "true");
-      document.body.classList.remove("modal-open");
-    }
-
-    document.getElementById("successClose").addEventListener("click", closeSuccessModal);
-    document.getElementById("successContinue").addEventListener("click", closeSuccessModal);
-    document.getElementById("successBackdrop").addEventListener("click", closeSuccessModal);
-
-    document.addEventListener("keydown", event => {
-      if (event.key === "Escape" && successModal.classList.contains("visible")) {
-        closeSuccessModal();
-      }
-    });
-
-    // Invisible Turnstile setup
-    function initializeTurnstile() {
-      if (!window.turnstile || turnstileWidgetId !== null) return;
-
-      if (!TURNSTILE_SITE_KEY || TURNSTILE_SITE_KEY === "YOUR_TURNSTILE_SITE_KEY") {
-        console.warn("Add your Cloudflare Turnstile site key before enabling registrations.");
-        return;
-      }
-
-      turnstileWidgetId = turnstile.render("#turnstile-container", {
-        sitekey: TURNSTILE_SITE_KEY,
-        size: "invisible",
-        execution: "execute",
-        callback: handleVerifiedToken,
-        "error-callback": handleCaptchaError,
-        "expired-callback": handleCaptchaError
-      });
-    }
-
-    function handleCaptchaError() {
-      submitButton.disabled = false;
-      submitButton.textContent = translations[currentLanguage].submit;
-      formStatus.textContent = translations[currentLanguage].captchaError;
-      pendingFormData = null;
-
-      if (window.turnstile && turnstileWidgetId !== null) {
-        turnstile.reset(turnstileWidgetId);
-      }
-    }
-
-    async function handleVerifiedToken(token) {
-      if (!pendingFormData) return;
-
-      const data = Object.fromEntries(pendingFormData.entries());
-      data.turnstileToken = token;
-
-      try {
-        const response = await fetch(WORKER_URL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(data)
+      mainNavigation.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mainNavigation.classList.remove("mobile-open");
+          mobileMenuButton.classList.remove("active");
+          mobileMenuButton.setAttribute("aria-expanded", "false");
+          mobileMenuButton.setAttribute("aria-label", "Open navigation menu");
         });
+      });
 
-        const result = await response.json();
+      const dropdown = document.getElementById("useCasesDropdown");
+      const dropdownButton = document.getElementById("useCasesButton");
 
-        if (!response.ok || !result.success) {
-          throw new Error(result.message || "Submission failed");
+      dropdownButton.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const isOpen = dropdown.classList.toggle("open");
+        dropdownButton.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!mainNavigation.contains(event.target) && !mobileMenuButton.contains(event.target)) {
+          mainNavigation.classList.remove("mobile-open");
+          mobileMenuButton.classList.remove("active");
+          mobileMenuButton.setAttribute("aria-expanded", "false");
         }
 
+        if (!dropdown.contains(event.target)) {
+          dropdown.classList.remove("open");
+          dropdownButton.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      dropdown.querySelectorAll(".dropdown-menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          dropdown.classList.remove("open");
+          dropdownButton.setAttribute("aria-expanded", "false");
+        });
+      });
+
+      const form = document.getElementById("earlyAccessForm");
+      const message = document.getElementById("formMessage");
+      const button = document.getElementById("submitButton");
+
+      // FormSubmit autoresponders require a standard HTML POST, not AJAX.
+      // Set Reply-To to the visitor's email before the browser submits the form.
+      form.addEventListener("submit", () => {
+        document.getElementById("replyToEmail").value =
+          document.getElementById("email").value.trim();
+        button.disabled = true;
+        button.textContent = translations[document.documentElement.lang || "en"].sending;
+      });
+
+      // FormSubmit redirects back to the landing page after a successful submission.
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("submitted") === "1") {
+        const lang = document.documentElement.lang || "en";
+        message.textContent = translations[lang].success;
         form.reset();
-        formStatus.textContent = "";
-        showSuccessModal();
-
-      } catch (error) {
-        console.error("Registration error:", error);
-        formStatus.textContent = translations[currentLanguage].error;
-      } finally {
-        pendingFormData = null;
-        submitButton.disabled = false;
-        submitButton.textContent = translations[currentLanguage].submit;
-
-        if (window.turnstile && turnstileWidgetId !== null) {
-          turnstile.reset(turnstileWidgetId);
-        }
-      }
-    }
-
-    form.addEventListener("submit", event => {
-      event.preventDefault();
-
-      if (!form.reportValidity()) return;
-
-      if (!WORKER_URL || WORKER_URL === "YOUR_CLOUDFLARE_WORKER_URL") {
-        formStatus.textContent = "Registration is not configured yet. Please add your Cloudflare Worker URL.";
-        return;
-      }
-
-      if (!window.turnstile || turnstileWidgetId === null) {
-        initializeTurnstile();
-
-        if (turnstileWidgetId === null) {
-          formStatus.textContent = translations[currentLanguage].captchaError;
-          return;
-        }
-      }
-
-      pendingFormData = new FormData(form);
-      submitButton.disabled = true;
-      submitButton.textContent = translations[currentLanguage].sending;
-      formStatus.textContent = "";
-
-      try {
-        turnstile.execute(turnstileWidgetId);
-      } catch (error) {
-        handleCaptchaError();
+        window.history.replaceState({}, document.title, window.location.pathname + window.location.hash);
       }
     });
-
-    // The Turnstile script loads asynchronously.
-    const turnstileLoader = setInterval(() => {
-      if (window.turnstile) {
-        initializeTurnstile();
-        clearInterval(turnstileLoader);
-      }
-    }, 300);
-
-    setTimeout(() => clearInterval(turnstileLoader), 15000);
   </script>
 </body>
 </html>
