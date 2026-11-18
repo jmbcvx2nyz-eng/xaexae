@@ -489,18 +489,40 @@
       min-height: calc(100vh - var(--header-height));
       min-height: calc(100svh - var(--header-height));
     }
+    .hero-summary {
+      max-width: 54ch;
+      margin: 26px 0 0;
+      color: #d4e2ec;
+      font-size: clamp(17px, 1.7vw, 23px);
+      font-weight: 500;
+      line-height: 1.5;
+      text-wrap: balance;
+    }
     .hero-link {
       display: inline-flex;
       align-items: center;
-      gap: 18px;
-      margin-top: 38px;
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(255,255,255,.38);
-      color: #dceaf1;
+      justify-content: center;
+      gap: 9px;
+      min-height: 44px;
+      margin-top: 22px;
+      padding: 10px 14px;
+      border-radius: 4px;
+      color: #c7d7e2;
       font-size: 16px;
-      letter-spacing: .04em;
+      letter-spacing: .025em;
     }
-    .hero-link:hover { color: var(--cyan); border-color: currentColor; }
+    .hero-link:hover { color: var(--cyan); }
+    .scroll-chevron {
+      width: 12px;
+      height: 12px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform .2s ease;
+    }
+    .hero-link:hover .scroll-chevron { transform: translateY(2px); }
     .content-section {
       width: min(1056px, calc(100% - 48px));
       margin: 0 auto 32px;
@@ -553,19 +575,6 @@
     .feature-number { color: #b9cedb; font-size: 13px; letter-spacing: .08em; }
     .product-features h3 { margin: 16px 0 8px; font-size: 22px; font-weight: 600; line-height: 1.25; }
     .product-features p { margin: 0; color: #dde7ee; font-size: 17px; line-height: 1.6; }
-    .certification-block {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      margin-top: 40px;
-      padding-top: 28px;
-      border-top: 1px solid rgba(185,215,234,.2);
-    }
-    .certification-block h3 { margin: 0 0 8px; font-size: 22px; font-weight: 600; line-height: 1.3; }
-    .certification-block p { max-width: 55ch; margin: 0; color: #dde7ee; font-size: 16px; line-height: 1.6; }
-    .section-link { display: inline-flex; align-items: center; gap: 12px; flex: 0 0 auto; padding: 10px 0; color: #e1f2fc; border-bottom: 1px solid #8badbf; font-size: 16px; }
-    .section-link:hover { color: var(--cyan); }
     .contact-section {
       display: flex;
       flex-direction: column;
@@ -576,7 +585,41 @@
     }
     .contact-section .signup { margin-top: 0; }
     .contact-intro { max-width: 52ch; margin: 0 auto 22px; color: #bacbd5; font-size: 17px; line-height: 1.5; }
-    html[data-theme="light"] .hero-link { color: #514d45; border-color: #999286; }
+    .signup-privacy { max-width: 66ch; margin: 16px auto 0; color: #c7d7e2; font-size: 14px; line-height: 1.55; }
+    .signup-privacy a { text-decoration: underline; text-underline-offset: 3px; }
+    .signup-privacy a:hover { color: var(--cyan); }
+    .site-footer {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto auto;
+      align-items: center;
+      gap: 12px 28px;
+      width: min(1056px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 20px 0 26px;
+      border-top: 1px solid rgba(185,215,234,.22);
+      color: #c7d7e2;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .footer-copyright { margin: 0; }
+    .footer-email { display: inline-flex; align-items: center; min-height: 44px; }
+    .footer-email:hover { color: var(--cyan); }
+    .footer-privacy { justify-self: end; }
+    .footer-privacy summary { padding: 11px 0; cursor: pointer; }
+    .footer-privacy summary:hover { color: var(--cyan); }
+    .footer-privacy[open] { grid-column: 1 / -1; justify-self: stretch; margin-top: 8px; }
+    .privacy-copy { max-width: 78ch; padding: 8px 0 10px; color: #d4e2ec; font-size: 16px; line-height: 1.6; text-align: left; }
+    .privacy-copy p { margin: 0 0 14px; }
+    .privacy-copy p:last-child { margin-bottom: 0; }
+    .privacy-copy a { text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+    html[data-theme="light"] .hero-summary { color: #514d45; }
+    html[data-theme="light"] .hero-link { color: #615d55; }
+    html[data-theme="light"] .signup-privacy,
+    html[data-theme="light"] .site-footer,
+    html[data-theme="light"] .privacy-copy { color: #57524a; }
+    html[data-theme="light"] .site-footer { border-color: #c9c3b8; }
     html[data-theme="light"] .content-section {
       color: #302e2a;
       background: rgba(249,248,245,.95);
@@ -588,12 +631,9 @@
     html[data-theme="light"] .section-lead { color: #302e2a; }
     html[data-theme="light"] .section-copy,
     html[data-theme="light"] .product-features p,
-    html[data-theme="light"] .certification-block p,
     html[data-theme="light"] .contact-intro { color: #57524a; }
     html[data-theme="light"] .mission-block,
-    html[data-theme="light"] .product-features article,
-    html[data-theme="light"] .certification-block { border-color: #d5d0c6; }
-    html[data-theme="light"] .section-link { color: #514d45; border-color: #999286; }
+    html[data-theme="light"] .product-features article { border-color: #d5d0c6; }
     @media (max-width: 760px) {
       .content-section { width: calc(100% - 32px); margin-bottom: 24px; padding: 28px 22px; border-radius: 14px; }
       .about-grid, .product-intro { grid-template-columns: 1fr; gap: 22px; }
@@ -603,15 +643,23 @@
       .mission-block { margin-top: 28px; padding-top: 24px; }
       .product-features { grid-template-columns: 1fr; gap: 24px; margin-top: 30px; }
       .product-features h3 { margin-top: 10px; }
-      .certification-block { flex-direction: column; align-items: flex-start; gap: 16px; margin-top: 28px; padding-top: 24px; }
       .contact-section { padding: 42px 18px 56px; }
       .contact-intro { font-size: 16px; }
+      .hero-summary { max-width: 38ch; margin-top: 22px; }
+      .site-footer { width: calc(100% - 36px); grid-template-columns: 1fr; justify-items: center; gap: 2px; padding: 22px 0 28px; text-align: center; }
+      .footer-privacy { justify-self: center; }
+      .footer-privacy[open] { justify-self: stretch; margin-top: 0; }
+      .privacy-copy { font-size: 15px; }
     }
     @media (max-width: 340px) {
       .content-section { width: calc(100% - 24px); padding: 26px 18px; }
       .section-lead { font-size: 24px; }
     }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .scroll-chevron { transition: none; }
+      .hero-link:hover .scroll-chevron { transform: none; }
+    }
 
   </style>
   <style id="font-display-600">
@@ -764,7 +812,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
   <main class="site-main" id="mainContent">
     <section class="hero" id="home" aria-labelledby="mainHeadline">
       <h1 id="mainHeadline" data-i18n="headline">EYES IN THE SKY</h1>
-      <a class="hero-link" href="#about-us"><span data-i18n="hero-discover">Discover XAerova</span><span aria-hidden="true">↓</span></a>
+      <p class="hero-summary" data-i18n="hero-summary">Fly drones remotely and plan autonomous flights from a laptop browser with SkyMind.</p>
+      <a class="hero-link" href="#about-us"><span data-i18n="hero-discover">Explore</span><svg class="scroll-chevron" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.25 6 7.75 9.5 4.25"></path></svg></a>
     </section>
 
     <section class="content-section" id="about-us" aria-labelledby="aboutTitle">
@@ -812,14 +861,6 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
           <p data-i18n="feature-return-copy">AI-assisted landing and a coordinated return-to-dock process, designed to prepare the drone for its next mission.</p>
         </article>
       </div>
-      <!-- Add specific certification claims only after the referenced supporting document is supplied. -->
-      <div class="certification-block">
-        <div>
-          <h3 data-i18n="cert-title">Certifications</h3>
-          <p data-i18n="cert-copy">Contact the XAerova team to discuss product certification and the documentation needed for your project.</p>
-        </div>
-        <a class="section-link" href="#early-access"><span data-i18n="cert-link">Talk to our team</span><span aria-hidden="true">→</span></a>
-      </div>
     </section>
 
     <div class="contact-section">
@@ -851,12 +892,26 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         <p class="form-message" id="formMessage" role="status" aria-live="polite" aria-atomic="true"></p>
         <noscript><p class="form-message">Please enable JavaScript to register for early access.</p></noscript>
       </form>
+      <p class="signup-privacy"><span data-i18n="signup-privacy">We use your details for SkyMind product updates, early access news and pre-order information.</span> <a href="#privacy" data-privacy-link data-i18n="privacy-link">Privacy notice</a>.</p>
     </section>
     <section class="launch" id="launch">
       <h2 data-i18n="launch-title">AVAILABLE Q1 2027</h2>
     </section>
     </div>
   </main>
+  <footer class="site-footer">
+    <p class="footer-copyright">© 2026 XAerova. <span data-i18n="footer-rights">All rights reserved.</span></p>
+    <a class="footer-email" href="mailto:info@xaerova.com">info@xaerova.com</a>
+    <details class="footer-privacy" id="privacy">
+      <summary id="privacySummary" data-i18n="privacy-link">Privacy notice</summary>
+      <div class="privacy-copy">
+        <p data-i18n="privacy-use">XAerova uses the name, company or sector, email address and country you provide to manage early-access interest and send SkyMind product updates, early access news and upcoming pre-order information.</p>
+        <p><span data-i18n="privacy-service">FormSubmit processes your submission and delivers it by email to our team.</span> <a href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener noreferrer" data-i18n="privacy-provider-link">FormSubmit privacy policy</a>.</p>
+        <p data-i18n="privacy-preferences">Your language and display preferences are saved in your browser.</p>
+        <p><span data-i18n="privacy-rights">To stop receiving updates, ask a question about your information, or request access, correction or deletion, email</span> <a href="mailto:info@xaerova.com">info@xaerova.com</a>.</p>
+      </div>
+    </details>
+  </footer>
   <script>
 
     const translations = {
@@ -877,7 +932,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     "nav-about": "ABOUT US",
     "nav-skymind": "SKYMIND",
     "nav-contact": "CONTACT",
-    "hero-discover": "Discover XAerova",
+    "hero-discover": "Explore",
+    "hero-summary": "Fly drones remotely and plan autonomous flights from a laptop browser with SkyMind.",
     "about-title": "About Us",
     "about-lead": "A better view of the places that matter.",
     "about-copy": "XAerova is developing drone docks and browser-based tools that make aerial observation more practical for the teams on the ground.",
@@ -894,10 +950,15 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     "feature-browser-copy": "A connected interface for live viewing, site status and the remote flight workflow, accessible from a laptop.",
     "feature-return-title": "The return",
     "feature-return-copy": "AI-assisted landing and a coordinated return-to-dock process, designed to prepare the drone for its next mission.",
-    "cert-title": "Certifications",
-    "cert-copy": "Contact the XAerova team to discuss product certification and the documentation needed for your project.",
-    "cert-link": "Talk to our team",
-    "contact-intro": "Tell us a little about yourself to receive product updates, early access news and upcoming pre-order information."
+    "contact-intro": "Tell us a little about yourself to receive product updates, early access news and upcoming pre-order information.",
+    "signup-privacy": "We use your details for SkyMind product updates, early access news and pre-order information.",
+    "privacy-link": "Privacy notice",
+    "footer-rights": "All rights reserved.",
+    "privacy-use": "XAerova uses the name, company or sector, email address and country you provide to manage early-access interest and send SkyMind product updates, early access news and upcoming pre-order information.",
+    "privacy-service": "FormSubmit processes your submission and delivers it by email to our team.",
+    "privacy-provider-link": "FormSubmit privacy policy",
+    "privacy-preferences": "Your language and display preferences are saved in your browser.",
+    "privacy-rights": "To stop receiving updates, ask a question about your information, or request access, correction or deletion, email"
   },
   "fr": {
     "headline": "DES YEUX DANS LE CIEL",
@@ -916,7 +977,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     "nav-about": "À PROPOS",
     "nav-skymind": "SKYMIND",
     "nav-contact": "CONTACT",
-    "hero-discover": "Découvrir XAerova",
+    "hero-discover": "Explorer",
+    "hero-summary": "Pilotez des drones à distance et planifiez des vols autonomes depuis le navigateur d’un ordinateur portable avec SkyMind.",
     "about-title": "À propos",
     "about-lead": "Mieux voir les lieux qui comptent.",
     "about-copy": "XAerova développe des stations d’accueil pour drones et des outils accessibles depuis un navigateur, afin de rendre l’observation aérienne plus pratique pour les équipes sur le terrain.",
@@ -933,10 +995,15 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     "feature-browser-copy": "Une interface connectée pour la vidéo en direct, l’état du site et les opérations de vol à distance, accessible depuis un ordinateur portable.",
     "feature-return-title": "Le retour",
     "feature-return-copy": "Un atterrissage assisté par IA et un retour à la station coordonné, conçus pour préparer le drone à sa prochaine mission.",
-    "cert-title": "Certifications",
-    "cert-copy": "Contactez l’équipe XAerova pour échanger sur la certification du produit et la documentation nécessaire à votre projet.",
-    "cert-link": "Échanger avec notre équipe",
-    "contact-intro": "Présentez-vous en quelques mots pour recevoir les actualités du produit, les informations sur l’accès anticipé et les prochaines précommandes."
+    "contact-intro": "Présentez-vous en quelques mots pour recevoir les actualités du produit, les informations sur l’accès anticipé et les prochaines précommandes.",
+    "signup-privacy": "Nous utilisons vos informations pour vous envoyer les actualités de SkyMind, les annonces d’accès anticipé et les informations sur les précommandes.",
+    "privacy-link": "Notice de confidentialité",
+    "footer-rights": "Tous droits réservés.",
+    "privacy-use": "XAerova utilise votre nom, votre entreprise ou secteur d’activité, votre adresse e-mail et votre pays pour gérer les demandes d’accès anticipé et vous informer sur SkyMind, l’accès anticipé et les prochaines précommandes.",
+    "privacy-service": "FormSubmit traite votre demande et la transmet par e-mail à notre équipe.",
+    "privacy-provider-link": "Politique de confidentialité de FormSubmit",
+    "privacy-preferences": "Vos préférences de langue et d’affichage sont enregistrées dans votre navigateur.",
+    "privacy-rights": "Pour ne plus recevoir d’actualités, poser une question sur vos informations ou demander leur accès, leur rectification ou leur suppression, écrivez à"
   }
 };
     function updateThemeButton() {
@@ -1046,6 +1113,29 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       const layoutChanged = () => { if (!mobileLayout.matches) menuOpen(false); };
       if (mobileLayout.addEventListener) mobileLayout.addEventListener('change', layoutChanged);
       else mobileLayout.addListener(layoutChanged);
+    })();
+
+    (() => {
+      const notice = document.getElementById('privacy');
+      const summary = document.getElementById('privacySummary');
+      const revealLinkedNotice = () => {
+        if (window.location.hash === '#privacy') notice.open = true;
+      };
+      document.querySelectorAll('[data-privacy-link]').forEach(link => {
+        link.addEventListener('click', event => {
+          if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+          notice.open = true;
+          try {
+            if (window.location.hash !== '#privacy') history.pushState(history.state, '', '#privacy');
+          } catch (_) { return; }
+          event.preventDefault();
+          summary.focus({ preventScroll: true });
+          notice.scrollIntoView({ block: 'start',
+            behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+        });
+      });
+      addEventListener('hashchange', revealLinkedNotice);
+      revealLinkedNotice();
     })();
 
     function updateSignupState() {
